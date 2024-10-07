@@ -1,0 +1,61 @@
+//key value pairs for US state name normalizing. Each line is defined as pattern|replacement such as tex*|texas where the wildcard * can be used at front or back
+pattern|state
+alab*|Alabama
+*lask*|Alaska
+ariz*|Arizona
+ark*|Arkansas
+cal*|California
+colo*|Colorado
+con*|Connecticut
+del*|Delaware
+dist*|District of Columbia
+fl*|Florida
+ge*|Georgia
+ha*|Hawaii
+id*|Idaho
+ill*|Illinois
+ind*|Indiana
+io*|Iowa
+kan*|Kansas
+ken*|Kentucky
+lou*|Louisiana
+mai*|Maine
+mar*|Maryland
+mas*|Massachusetts
+mic*|Michigan
+min*|Minnesota
+*pi|Mississippi
+miss*|Mississippi
+*uri|Missouri
+mon*|Montana
+neb*|Nebraska
+nev*|Nevada
+*hamp*|New Hampshire
+*jer*|New Jersey
+*mex*|New Mexico
+*york|New York
+north c*|North Carolina
+north d*|North Dakota
+oh*|Ohio
+ok*|Oklahoma
+ore*|Oregon
+pen*|Pennsylvania
+rhod*|Rhode Island
+south c*|South Carolina
+south d*|South Dakota
+ten*|Tennessee
+tex*|Texas
+tx*|Texas
+ut*|Utah
+ver*|Vermont
+vir*|Virginia
+wash*|Washington
+west v*|West Virginia
+wis*|Wisconsin
+wy*|Wyoming
+*samoa|American Samoa
+*guam*|Guam
+*mariana*|Northern Mariana Islands
+*rico|Puerto Rico
+*minor*|U.S. Minor Outlying Islands
+*virgin*|U.S. Virgin Islands
