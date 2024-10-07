@@ -31,6 +31,44 @@ DATA SYSTEMS, OR FREE FROM HARMFUL EFFECTS WHETHER UNINTENTIONAL OR INTENTIONAL.
 
 |
 
+* IRSMigration_WithErrors_Hdr.csv : This is a comma separated value text file. It has a header line with the titles 
+of the fields. It has been compiled from the full IRS data into a small sample file that contains the type of errors 
+commonly encountered. Some of the initial lines in the file::
+  
+  y2_statefips,y1_statefips,y1_state,y1_state_name,n1,n2,AGI
+  01,96,AL,AL Total Migration-US and Foreign,33716,67747,1515297
+  01,97,AL,AL Total Migration-US,32868,x65647,1467218
+  01,98,AL,"AL Total Migration,Foreign",848,2100,48079
+  01,97,AL,AL Total Migration-Same 
+  State,46630,95832,1.871804e+6
+  01,01,AL,AL 
+  Non-
+  migrants,1598458,3579600,96406319
+  01,13,GA,Georgia,5972,12269,249108
+  01,12,FL,Florida,4489,8446,1.85502e+5
+  01,48,TX,Texas,3435,7041,135165
+  01,47,TN,Tennessee,2608,5304,124203
+  01,28,MS,Mississippi,2212,4562,90723
+  01,06,CA,California,1169,2274,55689
+  01,37,NC,North Carolina,1056,2158,49972
+  01,22,LA,Louisiana,883,1671,40723
+  01,57,FR,Foreign,848,$2100,48079
+  1,51,VA,Virginia,819,1624,$48796
+  01,36,ny,New York,772,1518,(34582)
+  01,17,il,Illinois,717,1443,-34167
+  01,39,oh,Ohio,713,1430,29911
+  01,45,sc,South Carolina,637,1220,31594
+  01,26,mi,Michigan,594,1125,22176
+  01,21,KY,Kentucky,574,1213,27082ê
+  01,08,CO,Colorado,473,932,24958‼
+  01,29,MO,Missouri,459,901,20884§
+  01,18,IN,Indiana,457,895,21821►
+
+
+
+
+|
+
 License
 -----------
 
