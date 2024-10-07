@@ -3,7 +3,7 @@ Readme
 
 **Better Data = Better Outcomes.** 
 
-**VerityPy &amp; VerityDotNet** libraries combine curated human expertise with Machine Learning (ML) 
+**VerityPy and VerityDotNet** libraries combine curated human expertise with Machine Learning (ML) 
 into software components to accelerate development and signficantly lower the level of effort needed 
 to make data ready for high quality Data Science, Machine Learning, and predictive models.
 
@@ -15,8 +15,6 @@ useful to enable faster and more accurate data processing.
 
 The functions enable coding labor-intensive, complicated tasks to improve data quality, remediate errors, 
 normalize data across sources, and enrich data for AI/ML, Data Science, scenario modeling, and database modernization.
-
-
 
 |
 
