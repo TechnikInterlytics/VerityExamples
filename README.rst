@@ -32,8 +32,8 @@ DATA SYSTEMS, OR FREE FROM HARMFUL EFFECTS WHETHER UNINTENTIONAL OR INTENTIONAL.
 |
 
 * IRSMigration_WithErrors_Hdr.csv : This is a comma separated value text file. It has a header line with the titles 
-of the fields. It has been compiled from the full IRS data into a small sample file that contains the type of errors 
-commonly encountered. Some of the initial lines in the file::
+  of the fields. It has been compiled from the full IRS data into a small sample file that contains the type of errors 
+  commonly encountered. Some of the initial lines in the file::
   
   y2_statefips,y1_statefips,y1_state,y1_state_name,n1,n2,AGI
   01,96,AL,AL Total Migration-US and Foreign,33716,67747,1515297
