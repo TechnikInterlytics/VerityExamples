@@ -34,8 +34,4 @@ DATA SYSTEMS, OR FREE FROM HARMFUL EFFECTS WHETHER UNINTENTIONAL OR INTENTIONAL.
 License
 -----------
 
-This is not open source software and cannot be included in an open source project as its license will break the open source license. 
-However, there is a license allowing free use for non-commercial, personal applications. 
-Read the license file for full details about allowed scope of free use. 
-Paid licenses are required for commercial products either distributed or web hosted (e.g. SaaS), as well as enterprise applications with multiple users. 
-There are licenses for developers, royalty inclusion in other products, and support.
+VerityX products are not open source software and cannot be included in an open source project as its license will break the open source license. Read the full license file for more information.
