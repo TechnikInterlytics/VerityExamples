@@ -170,6 +170,22 @@ DATA SYSTEMS, OR FREE FROM HARMFUL EFFECTS WHETHER UNINTENTIONAL OR INTENTIONAL.
 	Med*-and-*ary*-and-*-1-not- Sum-not-*#1*|BL*-and-*ue*-and-* paper-not-S*-not-*#|123*-and-*9A-not-*care |REC1
 	Med*-and-*ary*-and-*-1-not- Sum-not-*#0*|BL*-and-*ue*-and-* paper|123*-and-*9A-not-*care *|REC2
 
+
+* Jupyter_CompareVerity.zip : Zip archive containing Jupyter notebook file and folders with the data from 
+  VerityPy and VerityDotNet to use in Jupyter. Note that you must install VerityPy into the Jupyter Python environment 
+  (using its terminal window) and also ensure all referenced modules are properly installed and available. 
+
+* VerityPy_compare_DotNet.html and VerityPy_compare_Python.html : html output pages of the Jupyter Notebook report
+
+* VerityPy_Examples.zip : Zip archive of a Visual Studio Code project with test methods and functional examples. 
+  Note you must install VerityPy into a .venv (not included in Zip) and ensure all references and dependencies are 
+  installed and referenced properly before this code will work. 
+  
+* VerityDotNet_Examples.zip : Zip archive of a Visual Studio 2022 solution with test methods and functional examples. 
+  Note you must install VerityDotNet and ensure all references and dependencies are 
+  installed and referenced properly before this code will work. 
+  
+
 |
 
 License
