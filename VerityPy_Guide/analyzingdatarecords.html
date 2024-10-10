@@ -1,0 +1,1286 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Analyze Data Records &#8212; VerityPy</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=1e62c520"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'analyzingdatarecords';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Normalize &amp; Enrich Data Records" href="normalizeenrichdatarecords.html" />
+    <link rel="prev" title="Functions" href="functions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">VerityPy</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="README.html">
+                        Readme
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="transforms.html">
+                        Transforms
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="objects.html">
+                        Objects
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="functions.html">
+                        Functions
+                      </a>
+                    </li>
+                
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+                    <li class="nav-item current active">
+                      <a class="nav-link dropdown-item nav-internal" href="#">
+                        Analyze Data Records
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link dropdown-item nav-internal" href="normalizeenrichdatarecords.html">
+                        Normalize & Enrich Data Records
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link dropdown-item nav-internal" href="compareresults.html">
+                        Compare Results in Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link dropdown-item nav-internal" href="license.html">
+                        License
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link dropdown-item nav-internal" href="support.html">
+                        Support
+                      </a>
+                    </li>
+                
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="README.html">
+                        Readme
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="transforms.html">
+                        Transforms
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="objects.html">
+                        Objects
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="functions.html">
+                        Functions
+                      </a>
+                    </li>
+                
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links-2">
+                    More
+                </button>
+                <ul id="pst-nav-more-links-2" class="dropdown-menu">
+                    
+                    <li class="nav-item current active">
+                      <a class="nav-link dropdown-item nav-internal" href="#">
+                        Analyze Data Records
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link dropdown-item nav-internal" href="normalizeenrichdatarecords.html">
+                        Normalize & Enrich Data Records
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link dropdown-item nav-internal" href="compareresults.html">
+                        Compare Results in Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link dropdown-item nav-internal" href="license.html">
+                        License
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link dropdown-item nav-internal" href="support.html">
+                        Support
+                      </a>
+                    </li>
+                
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Analyze Data Records</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="analyze-data-records">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Analyze Data Records</a><a class="headerlink" href="#analyze-data-records" title="Link to this heading">#</a></h1>
+<p>Perform a deep inspection of data sets and use the muiti-faceted results to evaluate the
+quality, conformance and presence of errors.</p>
+<nav class="contents" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#analyze-data-records" id="id1">Analyze Data Records</a></p>
+<ul>
+<li><p><a class="reference internal" href="#goal" id="id2">Goal</a></p></li>
+<li><p><a class="reference internal" href="#objectives" id="id3">Objectives</a></p></li>
+<li><p><a class="reference internal" href="#practice-continual-improvement" id="id4">Practice Continual Improvement</a></p></li>
+<li><p><a class="reference internal" href="#python-example" id="id5">Python Example</a></p></li>
+<li><p><a class="reference internal" href="#review-results" id="id6">Review Results</a></p></li>
+<li><p><a class="reference internal" href="#next" id="id7">Next</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="goal">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Goal</a><a class="headerlink" href="#goal" title="Link to this heading">#</a></h2>
+<p>The goal of analysis is to characterize data to know its structure, range of values,
+and presence of anomalies in relation to what it should be as defined by its architecture.
+Ideally, the documentation would describe the details of how it was collected, stored, and
+the meaning of the data in the context of its intended use. In this ideal case, unit tests could be
+made to automatically measure quality metrics both as the data is received and processed, and
+as it is distributed and used. Unfortunately, this ideal situation rarely exists and we are forced
+to manage data with uncertain quality, pedigree, and trustworthiness. When the use can tolerate
+imperfect data then this is not much of a problem. However, we now have increasingly stringent needs for
+better data to feed Artificial Intelligence (AI), Data Science (DataSci), and more sophisticated
+forecasting models in financial markets, global supply chain, consumer activity, and many others.</p>
+</section>
+<section id="objectives">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Objectives</a><a class="headerlink" href="#objectives" title="Link to this heading">#</a></h2>
+<p>We have learned from in-depth analysis and thorough reconstruction of data sets across many fields
+and types of data systems that there are several specific types of anomalies that frequenetly exist and
+go undetected by even the most modern tools. Part of this expert assessment included following and measuring
+the impact of the imperfect data on the end-use business activities for how outcome errors impacted
+decision making, audit, compliance, analytics, forecast accuracy, etc. From this we created a combined
+human expert and big data Machine Learning (ML) technology to filter through all data to find several types
+of problems and reliable approaches to correcting them automatically. This led to the following key objectives
+of the VerityX (X denotes both the Python and DotNet libraries) analysis process:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>capture details of field datatype and format for all records and visibly showcase even infrequent variations.</dt><dd><ul>
+<li><p>many tools limit the depth and breadth of records analyzed and variations captured due to processing, memory, and storage limitations.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>capture complete range of values for each field and emphasize low frequency instances since this is how anomalies can be quickly discovered.</p></li>
+<li><p>capture complete range of values for combinations of several fields</p></li>
+<li><p>track number of field values parsed per record as key indicator of presence of extra delimiters and line feeds
+that are not apparent during human review but which cause parsing code to break what should be a single record
+into multiple partial records or generate more field values than there are fields. This is surprisingly common
+in many mid and large size data systems.</p></li>
+<li><p>provide automated correction algorithms that repair all of the above problems with minimal required data
+architecture and engineering which tends to be so complicated and labor intensive that it often lags
+actual data causing serious ‘technical debt’.</p></li>
+<li><p>provide multiple views and types of results into data quality and problems since real world data teams are typically
+too constrained in time and personnel to probe every data set, system, and operation in detail.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="practice-continual-improvement">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Practice Continual Improvement</a><a class="headerlink" href="#practice-continual-improvement" title="Link to this heading">#</a></h2>
+<p>VerityX is designed for iteratively improving data set quality and enriching. It is counter-productive to attempt
+to define every detail of a data set’s structure, meaning, and use case rules in one lengthy requirements gathering process.
+It is too complicated, laborious and prone to error. Instead, characterize data with an initial deep assessment and use
+the results to discover what is correct, what is a problem, and what needs to be clarified. Adjusting the VerityX job
+with ever increasing specificity is purposefully easy to do, and a core design principle to allow all team members including
+non-technical business workers and managers to review the business rules and resulting outcomes.</p>
+<p>A typical workflow will be:</p>
+<ol class="arabic">
+<li><p>Organize source data file(s) and use a text editor to view the top of the file to determine its basic structure for:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>is there a header line of field titles</p></li>
+<li><p>what delimiter is used</p></li>
+<li><p>are there comment lines starting with either # or //</p></li>
+<li><p>are there empty lines</p></li>
+<li><p>are there any obvious problems like lines that are much too short or long, odd characters that do not belong in the type of data, values that are inconsistent compared to most records</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Create a small application (Python or C# DotNet depending on library used) to read in the file’s records,
+provide settings, define fields. See examples on support web site and the Python sample below.</p></li>
+<li><p>Iterate: Analyze, Review, Adjust</p>
+<ol class="arabic simple">
+<li><p>submit data to analysis function</p></li>
+<li><p>review results: datatype and format distributions per field, unique values per field, record size distribution, special characters</p></li>
+<li><p>adjust Field definitions to include datatypes and formats based on results to improve granularity of analysis results</p></li>
+</ol>
+</li>
+<li><p>Iterate: Remediate, Normalize, Enrich</p>
+<ol class="arabic simple">
+<li><p>define transforms, add enrichment fields, normalize value ranges</p></li>
+<li><p>submit data to remediation function</p></li>
+<li><p>review result statistics and corrected, normalized, enriched output data: view with text editor, load into Excel, use Jupyter Notebook template</p></li>
+</ol>
+</li>
+<li><p>Use new data in end use case and assess results</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>analytics: pick a few samples and thoroughly review to see if values and category and numeric aggregations make sense and agree with known outcomes</p></li>
+<li><p>Data Science: check statistical scalars and distributions to predictions and historical data</p></li>
+<li><p>AI/ML: include in models and review changes, sensitivities, calibration to prior known test cases, reasonableness of future predictions</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<section id="python-example">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Python Example</a><a class="headerlink" href="#python-example" title="Link to this heading">#</a></h2>
+<p>For this example, we use Visual Studio Code (VSC) on Windows 11. The first step is to open VSC, create a new folder, create a new file,
+save the empty file as a .py file which we do as ‘analyze.py’. Then we create a virtual environment
+using the Command Palette.</p>
+<aside class="topic">
+<p class="topic-title">Sample Code</p>
+<p>Various sample code files including this one are available at the Technik Interlytics
+support web site</p>
+</aside>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<img alt="_images/VSC_cmd_createpyenv.png" src="_images/VSC_cmd_createpyenv.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Note that we must install VerityPy in this virtual environment. To do so, open a Terminal in
+VSC and change to the .venv folder.</p>
+<img alt="_images/VSC_terminal_venv.png" src="_images/VSC_terminal_venv.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Run the pip install command: pip install –upgrade VerityPy</p>
+<p>If successful, you will see it recognized when you enter an import statement.</p>
+<img alt="_images/VSC_import_VerityPy_known.png" src="_images/VSC_import_VerityPy_known.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>We start adding the basics to the py file including docstring, imports, defining constants,
+creating __main__ function, and creating a function to run when we debug.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Example using VerityPy to analyze data set</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">from</span> <span class="nn">VerityPy.processing</span> <span class="kn">import</span> <span class="n">datefuncs</span><span class="p">,</span> <span class="n">qualityanalysis</span><span class="p">,</span> <span class="n">analyzequality</span><span class="p">,</span> <span class="n">field</span>
+
+<span class="n">DQ</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
+
+<span class="k">def</span> <span class="nf">runtest</span><span class="p">()</span><span class="o">-&gt;</span><span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Runtest performs example analysis on sample data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">runtest</span><span class="p">()</span>
+</pre></div>
+</div>
+<section id="read-data-file">
+<h3>Read Data File<a class="headerlink" href="#read-data-file" title="Link to this heading">#</a></h3>
+<p>We read in the sample data file thats has a header line from which we
+make a list of fields. We use the Field object defined in the VerityPy.field module.
+Also, we set up variables for key data items.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>delim: delimiter character for records in data file</p></li>
+<li><p>title: working variable for conditional assignment of field details</p></li>
+<li><p>temp: working list</p></li>
+<li><p>flds: list of field.Field objects that are the source data fields and include their datatypes and formats</p></li>
+<li><p>rec: list of strings which are the lines read from data file</p></li>
+<li><p>covalues: list of strings defining joint fields to capture their unique value combinations</p></li>
+<li><p>settings: dict object with keys = parameter names for the analyzequality.do_qualityinspect function</p></li>
+<li><p>report: a qualityanalysis.QualityAnalysis object containing analysis results</p></li>
+<li><p>nline: working integer variable counting lines read from data file</p></li>
+</ul>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">delim</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;,&quot;</span>
+<span class="n">title</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="n">temp</span><span class="p">:</span><span class="nb">list</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">flds</span><span class="p">:</span><span class="nb">list</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">recs</span><span class="p">:</span><span class="nb">list</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">covalues</span><span class="p">:</span><span class="nb">list</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">settings</span><span class="p">:</span><span class="nb">dict</span><span class="o">=</span><span class="p">{}</span>
+<span class="n">report</span><span class="p">:</span><span class="n">qualityanalysis</span><span class="o">.</span><span class="n">QualityAnalysis</span><span class="o">=</span> <span class="n">qualityanalysis</span><span class="o">.</span><span class="n">QualityAnalysis</span><span class="p">()</span>
+<span class="n">nline</span><span class="p">:</span><span class="nb">int</span><span class="o">=-</span><span class="mi">1</span>
+<span class="n">txt</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="n">txt1</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting runtest at &quot;</span> <span class="o">+</span> <span class="n">datefuncs</span><span class="o">.</span><span class="n">get_current_iso_datetime</span><span class="p">(</span><span class="kc">True</span><span class="p">))</span>
+    <span class="c1"># read in sample data records and make fields from header line</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;files\IRSMigration_WithErrors_Hdr.csv&quot;</span><span class="p">,</span><span class="s2">&quot;r&quot;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">nline</span><span class="o">=</span><span class="mi">0</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">line</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\r\n</span><span class="s2">&quot;</span><span class="p">):</span>
+                <span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\r</span><span class="s2">&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">line</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
+                <span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;//&quot;</span><span class="p">):</span>
+                <span class="c1"># we ignore empty and comment lines</span>
+                <span class="n">nline</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">nline</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="c1"># 1st line is header of delimited field names</span>
+                    <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">DQ</span><span class="p">)</span><span class="o">&gt;-</span><span class="mi">1</span><span class="p">:</span>
+                        <span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">DQ</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                    <span class="n">temp</span><span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">delim</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">temp</span><span class="p">:</span>
+                        <span class="c1"># create list of Field objects</span>
+                        <span class="n">flds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">()))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># make list of data records after we handled header</span>
+                    <span class="n">recs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="p">(</span><span class="ne">RuntimeError</span><span class="p">,</span> <span class="ne">OSError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">)</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ERROR! &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="specify-field-characteristics">
+<h3>Specify Field Characteristics<a class="headerlink" href="#specify-field-characteristics" title="Link to this heading">#</a></h3>
+<p>With the basic Field objects defined, we add more detail about each one that we gathered
+from documentation. Also, we define one coValue to collect as a joint value distribution for
+fields ‘y1_state’ and ‘y1_state_name’ which are the code and name of a state in
+each record. If the joint value distribution shows variation in these combinations then that is
+a direct indicator of errors needing further investigation.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># add detail to the Field objects using information from documentation: assign datatypes and formats</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">flds</span><span class="p">)):</span>
+    <span class="n">title</span><span class="o">=</span> <span class="n">flds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">title</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;y2_statefips&quot;</span><span class="p">,</span><span class="s2">&quot;y1_statefips&quot;</span><span class="p">]:</span>
+        <span class="n">flds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">datatype</span><span class="o">=</span><span class="s2">&quot;string&quot;</span>
+        <span class="n">flds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">fmt_strlen</span><span class="o">=</span><span class="mi">2</span> <span class="c1"># this specifies that the value should be 2 characters</span>
+    <span class="k">elif</span> <span class="n">title</span><span class="o">==</span><span class="s2">&quot;y1_state&quot;</span><span class="p">:</span>
+        <span class="n">flds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">datatype</span><span class="o">=</span><span class="s2">&quot;string&quot;</span>
+        <span class="n">flds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">fmt_strcase</span><span class="o">=</span><span class="s2">&quot;upper&quot;</span> <span class="c1"># this specifies that the value should be uppercase</span>
+        <span class="n">flds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">fmt_strlen</span><span class="o">=</span><span class="mi">2</span>
+    <span class="k">elif</span> <span class="n">title</span><span class="o">==</span><span class="s2">&quot;y1_state_name&quot;</span><span class="p">:</span>
+        <span class="n">flds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">datatype</span><span class="o">=</span><span class="s2">&quot;string&quot;</span>
+    <span class="k">elif</span> <span class="n">title</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;n1&quot;</span><span class="p">,</span><span class="s2">&quot;n2&quot;</span><span class="p">]:</span>
+        <span class="n">flds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">datatype</span><span class="o">=</span><span class="s2">&quot;int&quot;</span>
+    <span class="k">elif</span> <span class="n">title</span><span class="o">==</span><span class="s2">&quot;agi&quot;</span><span class="p">:</span>
+        <span class="n">flds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">datatype</span><span class="o">=</span><span class="s2">&quot;real&quot;</span>
+        <span class="n">flds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">fmt_decimal</span><span class="o">=</span><span class="mi">0</span>
+
+<span class="n">covalues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;y1_state,y1_state_name&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We make the settings dict to pass into the analysis function. Since we separated the
+header from the records as we read the data file we set this parameter to False. Also, we set
+parameters for:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>case sensitivity False</p></li>
+<li><p>values possibly enclosed in double quotes True</p></li>
+<li><p>option to extract fields from data set False</p></li>
+<li><p>delimiter is comma</p></li>
+<li><p>maximum number of unique values to collect per field to 100</p></li>
+</ul>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;is_case_sens&#39;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;false&quot;</span>
+<span class="n">settings</span><span class="p">[</span><span class="s1">&#39;is_quoted&#39;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
+<span class="n">settings</span><span class="p">[</span><span class="s1">&#39;has_header&#39;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;false&quot;</span>
+<span class="n">settings</span><span class="p">[</span><span class="s1">&#39;extract_fields&#39;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;false&quot;</span>
+<span class="n">settings</span><span class="p">[</span><span class="s1">&#39;delim&#39;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;comma&quot;</span>
+    <span class="n">settings</span><span class="p">[</span><span class="s2">&quot;delim_out&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;pipe&quot;</span>
+<span class="n">settings</span><span class="p">[</span><span class="s1">&#39;maxuv&#39;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;100&quot;</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="perform-analysis">
+<h3>Perform Analysis<a class="headerlink" href="#perform-analysis" title="Link to this heading">#</a></h3>
+<p>Now we can call the analysis function and receive the report (a qualityanalysis.QualityAnalysis object) as result.
+All VerityPy functions trap exceptions and supply a formatted error message if they occur that has the
+form ‘notok:xxxxx’. Function responses should always be checked for this situation.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">report</span><span class="o">=</span><span class="n">analyzequality</span><span class="o">.</span><span class="n">do_qualityinspect</span><span class="p">(</span><span class="n">flds</span><span class="p">,</span> <span class="n">covalues</span><span class="p">,</span> <span class="n">recs</span><span class="p">,</span> <span class="n">settings</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">report</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;notok:&quot;</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;error from report:&quot;</span> <span class="o">+</span> <span class="n">report</span><span class="o">.</span><span class="n">status</span><span class="p">[</span><span class="mi">6</span><span class="p">:])</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</section>
+</section>
+<section id="review-results">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Review Results</a><a class="headerlink" href="#review-results" title="Link to this heading">#</a></h2>
+<p>We explore some of the results available in the report object. The full range of analysis results is
+described in the FUNCTIONS and OBJECTS pages of this guide. Look through the information
+with special notice of the following items which indicate problems, what they look like, and
+where they occur in the source data. Summary information highlights existence of problems with:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>number records with errors (overall, datatype, format)</p></li>
+<li><p>some field qualities less than 100</p></li>
+<li><p>Specific datatype errors per field such as n2 having some non-numeric values</p></li>
+<li><p>Specific format errors especially the examples</p></li>
+<li><p>Parsing error small2 examples</p></li>
+</ul>
+</div></blockquote>
+<p>From these, we get more detailed insight into the characteristics of problems with:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>bottom unique values</dt><dd><ul>
+<li><p>y2_statefips clearly has non-FIPS values such as ‘migrants’ and ‘non-’</p></li>
+<li><p>y1_statefips clearly has non-FIPS values such as ‘1598458’</p></li>
+<li><dl class="simple">
+<dt>y1_state_name is the most obvious that there are problems not just with the structure of the data</dt><dd><p>but also the specification of the fields and the actual values within these fields that violate the specification
+such as ‘dc total migration-foreign’</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>covalue unique values</dt><dd><ul>
+<li><p>value of ‘de_de total migration-same state’ similarly indicates design problem of data set</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>special character unicode_9658 should not be in this type of data at all and is not merely a low</dt><dd><p>occurence value error but demonstrates underlying problems with the processes of QC managing the data</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<section id="summary-information">
+<h3>Summary information<a class="headerlink" href="#summary-information" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of fields = </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">fields</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;field titles:</span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">title</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">report</span><span class="o">.</span><span class="n">fields</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of records = </span><span class="si">{</span><span class="n">report</span><span class="o">.</span><span class="n">numrecs</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of records with errors = </span><span class="si">{</span><span class="n">report</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;numrecs_err&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of records with datatype errors = </span><span class="si">{</span><span class="n">report</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;numrecs_err_datatype&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of records with format errors = </span><span class="si">{</span><span class="n">report</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;numrecs_err_fmt&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Field Quality:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">fields</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;field </span><span class="si">{</span><span class="n">report</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2"> has </span><span class="si">{</span><span class="n">report</span><span class="o">.</span><span class="n">field_quality</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2"> quality metric&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This generates information to the Terminal window. Not all of the results are displayed just a sample
+for this guide’s. We see there are errors detected with datatypes and formats, and which fields have
+reduced quality.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Starting</span> <span class="n">runtest</span> <span class="n">at</span> <span class="mi">20240709</span><span class="n">T201655</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">fields</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">field</span> <span class="n">titles</span><span class="p">:</span><span class="n">y2_statefips</span><span class="p">,</span><span class="n">y1_statefips</span><span class="p">,</span><span class="n">y1_state</span><span class="p">,</span><span class="n">y1_state_name</span><span class="p">,</span><span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">,</span><span class="n">AGI</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">records</span> <span class="o">=</span> <span class="mi">1003</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">records</span> <span class="k">with</span> <span class="n">errors</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">records</span> <span class="k">with</span> <span class="n">datatype</span> <span class="n">errors</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">records</span> <span class="k">with</span> <span class="nb">format</span> <span class="n">errors</span> <span class="o">=</span> <span class="mi">12</span>
+
+<span class="n">Field</span> <span class="n">Quality</span><span class="p">:</span>
+<span class="n">field</span> <span class="n">y2_statefips</span> <span class="n">has</span> <span class="mf">95.2</span> <span class="n">quality</span> <span class="n">metric</span>
+<span class="n">field</span> <span class="n">y1_statefips</span> <span class="n">has</span> <span class="mf">95.2</span> <span class="n">quality</span> <span class="n">metric</span>
+<span class="n">field</span> <span class="n">y1_state</span> <span class="n">has</span> <span class="mf">90.7</span> <span class="n">quality</span> <span class="n">metric</span>
+<span class="n">field</span> <span class="n">y1_state_name</span> <span class="n">has</span> <span class="mi">100</span> <span class="n">quality</span> <span class="n">metric</span>
+<span class="n">field</span> <span class="n">n1</span> <span class="n">has</span> <span class="mf">99.5</span> <span class="n">quality</span> <span class="n">metric</span>
+<span class="n">field</span> <span class="n">n2</span> <span class="n">has</span> <span class="mf">99.3</span> <span class="n">quality</span> <span class="n">metric</span>
+<span class="n">field</span> <span class="n">AGI</span> <span class="n">has</span> <span class="mf">93.3</span> <span class="n">quality</span> <span class="n">metric</span>
+</pre></div>
+</div>
+</section>
+<section id="errors-in-fields-with-examples">
+<h3>Errors in Fields with Examples<a class="headerlink" href="#errors-in-fields-with-examples" title="Link to this heading">#</a></h3>
+<p>Looking deeper into the datatype and formats errors we see both the reasons per field
+and examples of the data line as read from file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">report</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;numrecs_err_datatype&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Datatype Errors per Field:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">fldname</span> <span class="ow">in</span> <span class="n">report</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">field </span><span class="si">{</span><span class="n">fldname</span><span class="si">}</span><span class="s2"> had </span><span class="si">{</span><span class="n">report</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">][</span><span class="n">fldname</span><span class="p">][</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> datatype errors&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">reason</span> <span class="ow">in</span> <span class="n">report</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">][</span><span class="n">fldname</span><span class="p">][</span><span class="s1">&#39;reasons&#39;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    reason=</span><span class="si">{</span><span class="n">reason</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">report</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">][</span><span class="n">fldname</span><span class="p">][</span><span class="s1">&#39;reasons&#39;</span><span class="p">][</span><span class="n">reason</span><span class="p">]</span><span class="si">}</span><span class="s2"> times&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">10 Datatype Error Examples as: (nline)[field:reason:value]|[field:reason:value].....  &quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">err_datatype_examples</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">10</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">err_datatype_examples</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="k">if</span> <span class="n">report</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;numrecs_err_fmt&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Format Error Details:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">fldname</span> <span class="ow">in</span> <span class="n">report</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_fmt&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">field </span><span class="si">{</span><span class="n">fldname</span><span class="si">}</span><span class="s2"> had </span><span class="si">{</span><span class="n">report</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_fmt&#39;</span><span class="p">][</span><span class="n">fldname</span><span class="p">][</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> format errors&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">reason</span> <span class="ow">in</span> <span class="n">report</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_fmt&#39;</span><span class="p">][</span><span class="n">fldname</span><span class="p">][</span><span class="s1">&#39;reasons&#39;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    reason=</span><span class="si">{</span><span class="n">reason</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">report</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_fmt&#39;</span><span class="p">][</span><span class="n">fldname</span><span class="p">][</span><span class="s1">&#39;reasons&#39;</span><span class="p">][</span><span class="n">reason</span><span class="p">]</span><span class="si">}</span><span class="s2"> times&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">10 Format Error Examples as (nline)[field:reason:value]|[field:reason:value].....&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">err_fmt_examples</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">10</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">err_fmt_examples</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Datatype Errors per Field:
+
+field n2 had 7 datatype errors
+    reason=non-numeric 2 times
+    reason=empty 5 times
+
+field n1 had 5 datatype errors
+    reason=empty 5 times
+
+field agi had 10 datatype errors
+    reason=empty 5 times
+    reason=non-numeric 5 times
+
+
+10 Datatype Error Examples as (nline)[field:reason:value]|[field:reason:value].....
+(2)[n2:non-numeric:x65647]
+(4)[n1:empty:-empty-]|[n2:empty:-empty-]|[agi:empty:-empty-]
+(5)[n1:empty:-empty-]|[n2:empty:-empty-]|[agi:empty:-empty-]
+(6)[n1:empty:-empty-]|[n2:empty:-empty-]|[agi:empty:-empty-]
+(7)[n1:empty:-empty-]|[n2:empty:-empty-]|[agi:empty:-empty-]
+(8)[n1:empty:-empty-]|[n2:empty:-empty-]|[agi:empty:-empty-]
+(17)[n2:non-numeric:$2100]
+(18)[agi:non-numeric:$48796]
+(24)[agi:non-numeric:27082ê]
+(25)[agi:non-numeric:24958‼]
+(26)[agi:non-numeric:20884§]
+
+
+
+Format Error Details:
+
+field y2_statefips had 4 format errors
+    reason=string incorrect length 4 times
+
+field y1_statefips had 3 format errors
+    reason=string incorrect length 3 times
+
+field y1_state had 8 format errors
+    reason=string incorrect length 3 times
+    reason=string not uppercase 5 times
+
+field agi had 3 format errors
+    reason=real incorrect decimals 3 times
+
+
+10 Format Error Examples as (nline)[field:reason:value]|[field:reason:value].....
+(5)[y2_statefips:string incorrect length:State]|[y1_statefips:string incorrect length:46630]|[y1_state:string incorrect length:95832]
+(7)[y2_statefips:string incorrect length:Non-]|[y1_statefips:string incorrect length:-empty-]|[y1_state:string incorrect length:-empty-]
+(8)[y2_statefips:string incorrect length:migrants]|[y1_statefips:string incorrect length:1598458]|[y1_state:string incorrect length:3579600]
+(10)[agi:real incorrect decimals:1.85502e+5]
+(18)[y2_statefips:string incorrect length:1]
+(19)[y1_state:string not uppercase:ny]
+(20)[y1_state:string not uppercase:il]
+(21)[y1_state:string not uppercase:oh]
+(22)[y1_state:string not uppercase:sc]
+(23)[y1_state:string not uppercase:mi]
+(36)[agi:real incorrect decimals:9052.00]
+</pre></div>
+</div>
+</section>
+<section id="parsing-problems">
+<h3>Parsing Problems<a class="headerlink" href="#parsing-problems" title="Link to this heading">#</a></h3>
+<p>Parsing problems are one of the most serious issues to deal with and one of the
+most pernicious if not discovered. These usually cause errors with many outcomes
+if the data is used in downstream applications. Here, we see the type, quanitity, file location,
+and example of several problem source records.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Parsing Errors- examples are (nRec)linein:&quot;</span><span class="p">)</span>
+<span class="c1"># limit to 4 examples</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Small1= </span><span class="si">{</span><span class="n">report</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;small1&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;small1_recs&#39;</span><span class="p">])</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;small1_recs&#39;</span><span class="p">])):</span>
+        <span class="k">if</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">4</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    example:</span><span class="si">{</span><span class="n">report</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;small1_recs&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Small2= </span><span class="si">{</span><span class="n">report</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;small2&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;small2_recs&#39;</span><span class="p">])</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;small2_recs&#39;</span><span class="p">])):</span>
+        <span class="k">if</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">4</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    example:</span><span class="si">{</span><span class="n">report</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;small2_recs&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Big= </span><span class="si">{</span><span class="n">report</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;big&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;big_recs&#39;</span><span class="p">])</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;big_recs&#39;</span><span class="p">])):</span>
+        <span class="k">if</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">4</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    example:</span><span class="si">{</span><span class="n">report</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;big_recs&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Parsing</span> <span class="n">Errors</span><span class="o">-</span> <span class="n">examples</span> <span class="n">are</span> <span class="p">(</span><span class="n">nRec</span><span class="p">)</span><span class="n">linein</span><span class="p">:</span>
+<span class="n">Small1</span><span class="o">=</span> <span class="mi">0</span>
+<span class="n">Small2</span><span class="o">=</span> <span class="mi">5</span>
+    <span class="n">example</span><span class="p">:(</span><span class="mi">4</span><span class="p">)</span><span class="mi">01</span><span class="p">,</span><span class="mi">97</span><span class="p">,</span><span class="n">AL</span><span class="p">,</span><span class="n">AL</span> <span class="n">Total</span> <span class="n">Migration</span><span class="o">-</span><span class="n">Same</span>
+    <span class="n">example</span><span class="p">:(</span><span class="mi">5</span><span class="p">)</span><span class="n">State</span><span class="p">,</span><span class="mi">46630</span><span class="p">,</span><span class="mi">95832</span><span class="p">,</span><span class="mf">1.871804e+6</span>
+    <span class="n">example</span><span class="p">:(</span><span class="mi">6</span><span class="p">)</span><span class="mi">01</span><span class="p">,</span><span class="mi">01</span><span class="p">,</span><span class="n">AL</span><span class="p">,</span><span class="n">AL</span>
+    <span class="n">example</span><span class="p">:(</span><span class="mi">7</span><span class="p">)</span><span class="n">Non</span><span class="o">-</span>
+    <span class="n">example</span><span class="p">:(</span><span class="mi">8</span><span class="p">)</span><span class="n">migrants</span><span class="p">,</span><span class="mi">1598458</span><span class="p">,</span><span class="mi">3579600</span><span class="p">,</span><span class="mi">96406319</span>
+<span class="n">Big</span><span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</section>
+<section id="unique-values">
+<h3>Unique Values<a class="headerlink" href="#unique-values" title="Link to this heading">#</a></h3>
+<p>Unique Values are a core component of any data profile. It provides awareness of the actual
+structure and value ranges of fields, as well as enabling quantitative comparsion to expected
+and possibly documented architecture information. Also, it is a very rapid view into errors
+for even those with a very small occurence in very large data sets. This example only shows
+a few of the top and bottom values for each field. The bottom values clearly show errors for
+fields y2_statefips, y1_statefips, y1_state, y1_state_name.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Top 5 Unique Values per Field (excluding -other-):&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">fields</span><span class="p">)):</span>
+    <span class="n">nline</span><span class="o">=</span><span class="mi">0</span> <span class="c1"># counter</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">field </span><span class="si">{</span><span class="n">report</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2"> has </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">field_uniqvals</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="si">}</span><span class="s2"> unique values&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">field_uniqvals</span><span class="p">[</span><span class="n">i</span><span class="p">])):</span>
+        <span class="n">title</span><span class="o">=</span> <span class="n">report</span><span class="o">.</span><span class="n">field_uniqvals</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">title</span> <span class="o">!=</span> <span class="s2">&quot;-other-&quot;</span><span class="p">:</span>
+            <span class="n">nline</span> <span class="o">+=</span><span class="mi">1</span>
+            <span class="k">if</span> <span class="n">nline</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2"> has </span><span class="si">{</span><span class="n">report</span><span class="o">.</span><span class="n">field_uniqvals</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> instances&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Bottom 5 Unique Values per Field (excluding -other-):&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">fields</span><span class="p">)):</span>
+    <span class="n">nline</span><span class="o">=</span><span class="mi">0</span> <span class="c1"># counter</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">field </span><span class="si">{</span><span class="n">report</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">field_uniqvals</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">title</span><span class="o">=</span> <span class="n">report</span><span class="o">.</span><span class="n">field_uniqvals</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">title</span> <span class="o">!=</span> <span class="s2">&quot;-other-&quot;</span><span class="p">:</span>
+            <span class="n">nline</span> <span class="o">+=</span><span class="mi">1</span>
+            <span class="k">if</span> <span class="n">nline</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2"> has </span><span class="si">{</span><span class="n">report</span><span class="o">.</span><span class="n">field_uniqvals</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> instances&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Top</span> <span class="mi">5</span> <span class="n">Unique</span> <span class="n">Values</span> <span class="n">per</span> <span class="n">Field</span> <span class="p">(</span><span class="n">excluding</span> <span class="o">-</span><span class="n">other</span><span class="o">-</span><span class="p">):</span>
+
+<span class="n">field</span> <span class="n">y2_statefips</span> <span class="n">has</span> <span class="mi">22</span> <span class="n">unique</span> <span class="n">values</span>
+<span class="mi">02</span> <span class="n">has</span> <span class="mi">56</span> <span class="n">instances</span>
+<span class="mi">04</span> <span class="n">has</span> <span class="mi">56</span> <span class="n">instances</span>
+<span class="mi">05</span> <span class="n">has</span> <span class="mi">56</span> <span class="n">instances</span>
+<span class="mi">06</span> <span class="n">has</span> <span class="mi">56</span> <span class="n">instances</span>
+<span class="mi">08</span> <span class="n">has</span> <span class="mi">56</span> <span class="n">instances</span>
+
+<span class="n">field</span> <span class="n">y1_statefips</span> <span class="n">has</span> <span class="mi">58</span> <span class="n">unique</span> <span class="n">values</span>
+<span class="mi">97</span> <span class="n">has</span> <span class="mi">35</span> <span class="n">instances</span>
+<span class="mi">96</span> <span class="n">has</span> <span class="mi">18</span> <span class="n">instances</span>
+<span class="mi">98</span> <span class="n">has</span> <span class="mi">18</span> <span class="n">instances</span>
+<span class="mi">01</span> <span class="n">has</span> <span class="mi">18</span> <span class="n">instances</span>
+<span class="mi">13</span> <span class="n">has</span> <span class="mi">18</span> <span class="n">instances</span>
+
+<span class="n">field</span> <span class="n">y1_state</span> <span class="n">has</span> <span class="mi">55</span> <span class="n">unique</span> <span class="n">values</span>
+<span class="n">al</span> <span class="n">has</span> <span class="mi">22</span> <span class="n">instances</span>
+<span class="n">ga</span> <span class="n">has</span> <span class="mi">22</span> <span class="n">instances</span>
+<span class="n">fl</span> <span class="n">has</span> <span class="mi">22</span> <span class="n">instances</span>
+<span class="n">ca</span> <span class="n">has</span> <span class="mi">22</span> <span class="n">instances</span>
+<span class="n">il</span> <span class="n">has</span> <span class="mi">22</span> <span class="n">instances</span>
+
+<span class="n">field</span> <span class="n">y1_state_name</span> <span class="n">has</span> <span class="mi">101</span> <span class="n">unique</span> <span class="n">values</span>
+<span class="n">texas</span> <span class="n">has</span> <span class="mi">18</span> <span class="n">instances</span>
+<span class="n">tennessee</span> <span class="n">has</span> <span class="mi">18</span> <span class="n">instances</span>
+<span class="n">mississippi</span> <span class="n">has</span> <span class="mi">18</span> <span class="n">instances</span>
+<span class="n">north</span> <span class="n">carolina</span> <span class="n">has</span> <span class="mi">18</span> <span class="n">instances</span>
+<span class="n">louisiana</span> <span class="n">has</span> <span class="mi">18</span> <span class="n">instances</span>
+
+<span class="n">field</span> <span class="n">n1</span> <span class="n">has</span> <span class="mi">101</span> <span class="n">unique</span> <span class="n">values</span>
+<span class="mi">97</span> <span class="n">has</span> <span class="mi">8</span> <span class="n">instances</span>
+<span class="o">-</span><span class="n">empty</span><span class="o">-</span> <span class="n">has</span> <span class="mi">5</span> <span class="n">instances</span>
+<span class="mi">130</span> <span class="n">has</span> <span class="mi">5</span> <span class="n">instances</span>
+<span class="mi">52</span> <span class="n">has</span> <span class="mi">5</span> <span class="n">instances</span>
+<span class="mi">76</span> <span class="n">has</span> <span class="mi">5</span> <span class="n">instances</span>
+
+<span class="n">field</span> <span class="n">n2</span> <span class="n">has</span> <span class="mi">101</span> <span class="n">unique</span> <span class="n">values</span>
+<span class="o">-</span><span class="n">empty</span><span class="o">-</span> <span class="n">has</span> <span class="mi">5</span> <span class="n">instances</span>
+<span class="mi">33</span> <span class="n">has</span> <span class="mi">5</span> <span class="n">instances</span>
+<span class="mi">235</span> <span class="n">has</span> <span class="mi">3</span> <span class="n">instances</span>
+<span class="mi">205</span> <span class="n">has</span> <span class="mi">3</span> <span class="n">instances</span>
+<span class="mi">100</span> <span class="n">has</span> <span class="mi">3</span> <span class="n">instances</span>
+
+<span class="n">field</span> <span class="n">AGI</span> <span class="n">has</span> <span class="mi">101</span> <span class="n">unique</span> <span class="n">values</span>
+<span class="o">-</span><span class="n">empty</span><span class="o">-</span> <span class="n">has</span> <span class="mi">5</span> <span class="n">instances</span>
+<span class="mi">48079</span> <span class="n">has</span> <span class="mi">2</span> <span class="n">instances</span>
+<span class="mi">1885</span> <span class="n">has</span> <span class="mi">2</span> <span class="n">instances</span>
+<span class="mi">40848</span> <span class="n">has</span> <span class="mi">2</span> <span class="n">instances</span>
+<span class="mi">6008</span> <span class="n">has</span> <span class="mi">2</span> <span class="n">instances</span>
+
+<span class="n">Bottom</span> <span class="mi">5</span> <span class="n">Unique</span> <span class="n">Values</span> <span class="n">per</span> <span class="n">Field</span> <span class="p">(</span><span class="n">excluding</span> <span class="o">-</span><span class="n">other</span><span class="o">-</span><span class="p">):</span>
+
+<span class="n">field</span> <span class="n">y2_statefips</span>
+<span class="mi">1</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="n">migrants</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="n">non</span><span class="o">-</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="n">state</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="mi">21</span> <span class="n">has</span> <span class="mi">49</span> <span class="n">instances</span>
+
+<span class="n">field</span> <span class="n">y1_statefips</span>
+<span class="mi">1598458</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="o">-</span><span class="n">empty</span><span class="o">-</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="mi">46630</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="mi">50</span> <span class="n">has</span> <span class="mi">17</span> <span class="n">instances</span>
+<span class="mi">44</span> <span class="n">has</span> <span class="mi">17</span> <span class="n">instances</span>
+
+<span class="n">field</span> <span class="n">y1_state</span>
+<span class="mi">3579600</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="o">-</span><span class="n">empty</span><span class="o">-</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="mi">95832</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="n">vt</span> <span class="n">has</span> <span class="mi">17</span> <span class="n">instances</span>
+<span class="n">ri</span> <span class="n">has</span> <span class="mi">17</span> <span class="n">instances</span>
+
+<span class="n">field</span> <span class="n">y1_state_name</span>
+<span class="n">dc</span> <span class="n">total</span> <span class="n">migration</span><span class="o">-</span><span class="n">foreign</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="n">dc</span> <span class="n">total</span> <span class="n">migration</span><span class="o">-</span><span class="n">us</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="n">dc</span> <span class="n">total</span> <span class="n">migration</span><span class="o">-</span><span class="n">us</span> <span class="ow">and</span> <span class="n">foreign</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="n">de</span> <span class="n">non</span><span class="o">-</span><span class="n">migrants</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="n">de</span> <span class="n">total</span> <span class="n">migration</span><span class="o">-</span><span class="n">same</span> <span class="n">state</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+
+<span class="n">field</span> <span class="n">n1</span>
+<span class="mi">71861</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="mi">73817</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="mi">57</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="mi">79</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="mi">139</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+
+<span class="n">field</span> <span class="n">n2</span>
+<span class="mi">153</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="mi">146</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="mi">197</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="mi">246</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="mi">196</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+
+<span class="n">field</span> <span class="n">AGI</span>
+<span class="mi">3227</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="mi">3047</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="mi">3216</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="mi">3234</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="mi">3807</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+</pre></div>
+</div>
+</section>
+<section id="covalues">
+<h3>CoValues<a class="headerlink" href="#covalues" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Top 5 Unique Values per CoValue (excluding -other-):&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">covalues</span><span class="p">)):</span>
+    <span class="n">nline</span><span class="o">=</span><span class="mi">0</span> <span class="c1"># counter</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CoValue </span><span class="si">{</span><span class="n">report</span><span class="o">.</span><span class="n">covalues</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2"> has </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">covalue_uniqvals</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="si">}</span><span class="s2"> unique values&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">covalue_uniqvals</span><span class="p">[</span><span class="n">i</span><span class="p">])):</span>
+        <span class="n">title</span><span class="o">=</span> <span class="n">report</span><span class="o">.</span><span class="n">covalue_uniqvals</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">title</span> <span class="o">!=</span> <span class="s2">&quot;-other-&quot;</span><span class="p">:</span>
+            <span class="n">nline</span> <span class="o">+=</span><span class="mi">1</span>
+            <span class="k">if</span> <span class="n">nline</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2"> has </span><span class="si">{</span><span class="n">report</span><span class="o">.</span><span class="n">covalue_uniqvals</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> instances&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Bottom 5 Unique Values per CoValue (excluding -other-):&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">covalues</span><span class="p">)):</span>
+    <span class="n">nline</span><span class="o">=</span><span class="mi">0</span> <span class="c1"># counter</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CoValue </span><span class="si">{</span><span class="n">report</span><span class="o">.</span><span class="n">covalues</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="n">covalue_uniqvals</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">title</span><span class="o">=</span> <span class="n">report</span><span class="o">.</span><span class="n">covalue_uniqvals</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">title</span> <span class="o">!=</span> <span class="s2">&quot;-other-&quot;</span><span class="p">:</span>
+            <span class="n">nline</span> <span class="o">+=</span><span class="mi">1</span>
+            <span class="k">if</span> <span class="n">nline</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2"> has </span><span class="si">{</span><span class="n">report</span><span class="o">.</span><span class="n">covalue_uniqvals</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> instances&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Top</span> <span class="mi">5</span> <span class="n">Unique</span> <span class="n">Values</span> <span class="n">per</span> <span class="n">CoValue</span> <span class="p">(</span><span class="n">excluding</span> <span class="o">-</span><span class="n">other</span><span class="o">-</span><span class="p">):</span>
+<span class="n">CoValue</span> <span class="n">y1_state</span><span class="p">,</span><span class="n">y1_state_name</span> <span class="n">has</span> <span class="mi">101</span> <span class="n">unique</span> <span class="n">values</span>
+<span class="n">tx_texas</span> <span class="n">has</span> <span class="mi">18</span> <span class="n">instances</span>
+<span class="n">tn_tennessee</span> <span class="n">has</span> <span class="mi">18</span> <span class="n">instances</span>
+<span class="n">ms_mississippi</span> <span class="n">has</span> <span class="mi">18</span> <span class="n">instances</span>
+<span class="n">nc_north</span> <span class="n">carolina</span> <span class="n">has</span> <span class="mi">18</span> <span class="n">instances</span>
+<span class="n">la_louisiana</span> <span class="n">has</span> <span class="mi">18</span> <span class="n">instances</span>
+
+<span class="n">Bottom</span> <span class="mi">5</span> <span class="n">Unique</span> <span class="n">Values</span> <span class="n">per</span> <span class="n">CoValue</span> <span class="p">(</span><span class="n">excluding</span> <span class="o">-</span><span class="n">other</span><span class="o">-</span><span class="p">):</span>
+<span class="n">CoValue</span> <span class="n">y1_state</span><span class="p">,</span><span class="n">y1_state_name</span>
+<span class="n">dc_dc</span> <span class="n">total</span> <span class="n">migration</span><span class="o">-</span><span class="n">foreign</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="n">dc_dc</span> <span class="n">total</span> <span class="n">migration</span><span class="o">-</span><span class="n">us</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="n">dc_dc</span> <span class="n">total</span> <span class="n">migration</span><span class="o">-</span><span class="n">us</span> <span class="ow">and</span> <span class="n">foreign</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="n">de_de</span> <span class="n">non</span><span class="o">-</span><span class="n">migrants</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+<span class="n">de_de</span> <span class="n">total</span> <span class="n">migration</span><span class="o">-</span><span class="n">same</span> <span class="n">state</span> <span class="n">has</span> <span class="mi">1</span> <span class="n">instances</span>
+</pre></div>
+</div>
+</section>
+<section id="special-characters">
+<h3>Special Characters<a class="headerlink" href="#special-characters" title="Link to this heading">#</a></h3>
+<p>Special characters do not always indicate an error since they often valid data values. However,
+in some cases they are problems when they appear similar to standard ASCII characters in an
+application but are treated differently in code leading to failed lookups, sums, coding, etc.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Special Characters:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">sc</span><span class="p">,</span><span class="n">n</span> <span class="ow">in</span> <span class="n">report</span><span class="o">.</span><span class="n">spec_char_dist</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;special character </span><span class="si">{</span><span class="n">sc</span><span class="si">}</span><span class="s2"> has </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> instances&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Special Character Examples:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">report</span><span class="o">.</span><span class="n">spec_char_examples</span><span class="p">:</span>
+    <span class="n">txt</span><span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">s</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;)&quot;</span><span class="p">)]</span>
+    <span class="n">txt1</span><span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;[&quot;</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">s</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;]&quot;</span><span class="p">)]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;nline=</span><span class="si">{</span><span class="n">txt</span><span class="si">}</span><span class="s2">, spchars=</span><span class="si">{</span><span class="n">txt1</span><span class="si">}</span><span class="s2">, linein=</span><span class="si">{</span><span class="n">s</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;]&#39;</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Special Characters:
+special character ascii_234 has 1 instances
+special character unicode_8252 has 1 instances
+special character ascii_167 has 1 instances
+special character unicode_9658 has 1 instances
+
+Special Character Examples:
+nline=24, spchars=AGI:ascii_234, linein=01,21,KY,Kentucky,574,1213,27082ê
+nline=25, spchars=AGI:unicode_8252, linein=01,08,CO,Colorado,473,932,24958‼
+nline=26, spchars=AGI:ascii_167, linein=01,29,MO,Missouri,459,901,20884§
+nline=27, spchars=AGI:unicode_9658, linein=01,18,IN,Indiana,457,895,21821►
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+</section>
+<section id="next">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Next</a><a class="headerlink" href="#next" title="Link to this heading">#</a></h2>
+<p>See Normalize &amp; Enrich Data Records for examples of how to use the analysis
+results to remediate, normalize, and enrich the data.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="functions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Functions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="normalizeenrichdatarecords.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Normalize &amp; Enrich Data Records</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goal">Goal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-continual-improvement">Practice Continual Improvement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-example">Python Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-data-file">Read Data File</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specify-field-characteristics">Specify Field Characteristics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perform-analysis">Perform Analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-results">Review Results</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-information">Summary information</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#errors-in-fields-with-examples">Errors in Fields with Examples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parsing-problems">Parsing Problems</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unique-values">Unique Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#covalues">CoValues</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#special-characters">Special Characters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next">Next</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Technik Interlytics.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><!--show release-->
+20240922</div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

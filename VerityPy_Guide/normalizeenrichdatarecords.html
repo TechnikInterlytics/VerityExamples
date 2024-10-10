@@ -1,0 +1,1263 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Normalize &amp; Enrich Data Records &#8212; VerityPy</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=1e62c520"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'normalizeenrichdatarecords';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Compare Results in Jupyter" href="compareresults.html" />
+    <link rel="prev" title="Analyze Data Records" href="analyzingdatarecords.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">VerityPy</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="README.html">
+                        Readme
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="transforms.html">
+                        Transforms
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="objects.html">
+                        Objects
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="functions.html">
+                        Functions
+                      </a>
+                    </li>
+                
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link dropdown-item nav-internal" href="analyzingdatarecords.html">
+                        Analyze Data Records
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link dropdown-item nav-internal" href="#">
+                        Normalize & Enrich Data Records
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link dropdown-item nav-internal" href="compareresults.html">
+                        Compare Results in Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link dropdown-item nav-internal" href="license.html">
+                        License
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link dropdown-item nav-internal" href="support.html">
+                        Support
+                      </a>
+                    </li>
+                
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="README.html">
+                        Readme
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="installation.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="transforms.html">
+                        Transforms
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="objects.html">
+                        Objects
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="functions.html">
+                        Functions
+                      </a>
+                    </li>
+                
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links-2">
+                    More
+                </button>
+                <ul id="pst-nav-more-links-2" class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link dropdown-item nav-internal" href="analyzingdatarecords.html">
+                        Analyze Data Records
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link dropdown-item nav-internal" href="#">
+                        Normalize & Enrich Data Records
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link dropdown-item nav-internal" href="compareresults.html">
+                        Compare Results in Jupyter
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link dropdown-item nav-internal" href="license.html">
+                        License
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link dropdown-item nav-internal" href="support.html">
+                        Support
+                      </a>
+                    </li>
+                
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Normalize...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="normalize-enrich-data-records">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Normalize &amp; Enrich Data Records</a><a class="headerlink" href="#normalize-enrich-data-records" title="Link to this heading">#</a></h1>
+<p>Correct errors, make consistent, and add in-record metadata for downstream analytics and modeling.</p>
+<nav class="contents" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#normalize-enrich-data-records" id="id1">Normalize &amp; Enrich Data Records</a></p>
+<ul>
+<li><p><a class="reference internal" href="#goal" id="id2">Goal</a></p></li>
+<li><p><a class="reference internal" href="#objectives" id="id3">Objectives</a></p></li>
+<li><p><a class="reference internal" href="#practice-continual-improvement" id="id4">Practice Continual Improvement</a></p></li>
+<li><p><a class="reference internal" href="#remediation-example" id="id5">Remediation Example</a></p></li>
+<li><p><a class="reference internal" href="#normalize-and-enrich-example" id="id6">Normalize and Enrich Example</a></p></li>
+<li><p><a class="reference internal" href="#analysis-of-final-data" id="id7">Analysis of Final Data</a></p></li>
+<li><p><a class="reference internal" href="#saved-files" id="id8">Saved Files</a></p></li>
+<li><p><a class="reference internal" href="#next" id="id9">Next</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="goal">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Goal</a><a class="headerlink" href="#goal" title="Link to this heading">#</a></h2>
+<p>Use the analysis results to define datatype, format, and value characteristics
+of the fields in the data set to correct errors and improve consistency and quality.
+Add enriching metadata fields into records to enable precise analytics,
+and granular models.</p>
+</section>
+<section id="objectives">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Objectives</a><a class="headerlink" href="#objectives" title="Link to this heading">#</a></h2>
+<p>With knowledge of discovered problems and data characteristics, we can more
+thoroughly specify rules and transformations for the data
+to be in a high quality and trusted state.
+This state feeds end uses such as analytics and computational modeling which are
+sensitive to even small amounts of errors and inconsistencies thereby significantly
+improving the accuracy and validity of their results.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Define datatypes and formats for fields based on actual values and documented architecture</p></li>
+<li><p>Define correction rules for records with incorrect datatypes or formats</p></li>
+<li><p>Normalize data with transformation operations to encode/decode, or modify field values</p></li>
+<li><p>Fix records broken into multiple partial records with VerityX algorithm</p></li>
+<li><p>Add new fields to records to enrich analytic and modeling meaning and granularity</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="practice-continual-improvement">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Practice Continual Improvement</a><a class="headerlink" href="#practice-continual-improvement" title="Link to this heading">#</a></h2>
+<p>VerityX is designed for iteratively improving data set quality and enriching. It is counter-productive to attempt
+to define every detail of a data set’s structure, meaning, and use case rules in one lengthy requirements gathering process.
+It is too complicated, laborious and prone to error. Instead, characterize data with an initial deep assessment and use
+the results to discover what is correct, what is a problem, and what needs to be clarified. Adjusting the VerityX job
+with ever increasing specificity is purposefully easy to do, and a core design principle to allow all team members including
+non-technical business workers and managers to review the business rules and resulting outcomes.</p>
+<p>A typical workflow will be:</p>
+<ol class="arabic">
+<li><p>Organize source data file(s) and use a text editor to view the top of the file to determine its basic structure for:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>is there a header line of field titles</p></li>
+<li><p>what delimiter is used</p></li>
+<li><p>are there comment lines starting with either # or //</p></li>
+<li><p>are there empty lines</p></li>
+<li><p>are there any obvious problems like lines that are much too short or long, odd characters that do not belong in the type of data, values that are inconsistent compared to most records</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Create a small application (Python or C# DotNet depending on library used) to read in the file’s records,
+provide settings, define fields. See examples on support web site and the Python sample below.</p></li>
+<li><p>Iterate: Analyze, Review, Adjust</p>
+<ol class="arabic simple">
+<li><p>submit data to analysis function</p></li>
+<li><p>review results: datatype and format distributions per field, unique values per field, record size distribution, special characters</p></li>
+<li><p>adjust Field definitions to include datatypes and formats based on results to improve granularity of analysis results</p></li>
+</ol>
+</li>
+<li><p>Iterate: Remediate, Normalize, Enrich</p>
+<ol class="arabic simple">
+<li><p>define transforms, add enrichment fields, normalize value ranges</p></li>
+<li><p>submit data to remediation function</p></li>
+<li><p>review result statistics and corrected, normalized, enriched output data: view with text editor, load into Excel, use Jupyter Notebook template</p></li>
+</ol>
+</li>
+<li><p>Use new data in end use case and assess results</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>analytics: pick a few samples and thoroughly review to see if values and category and numeric aggregations make sense and agree with known outcomes</p></li>
+<li><p>Data Science: check statistical scalars and distributions to predictions and historical data</p></li>
+<li><p>AI/ML: include in models and review changes, sensitivities, calibration to prior known test cases, reasonableness of future predictions</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<section id="remediation-example">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Remediation Example</a><a class="headerlink" href="#remediation-example" title="Link to this heading">#</a></h2>
+<p>For this example, we use Visual Studio Code (VSC) on Windows 11. This follows the setup described in
+‘<strong>Analyze Data Records</strong>’.</p>
+<aside class="topic">
+<p class="topic-title">Sample Code</p>
+<p>Various sample code files including this one are available at the Technik Interlytics
+support web site</p>
+</aside>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>From the analysis, we discovered that there were errors in several fields as well as
+a serious problem with incorrect parsing due to records broken across multiple source
+file lines. We also saw that there are records with values violating the documentation and
+semantics of the schema that must be removed or annotated with enriching metadata.</p>
+<p>We use several VerityPy features to remediate the data.</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>analyze as-is data set</p></li>
+<li><p>remediate parsing errors by rebuilding broken records</p></li>
+<li><p>analyze remediated data set</p></li>
+<li><p>adjust field datatypes and formats based on analysis results</p></li>
+<li><p>define enrichment fields to add to output data for analytic and ML downstream applications</p></li>
+<li><p>define transformations to normalize field values, decode some fields into new enrichment fields, populate enrichment fields
+with conditional rules based on multi-field joint values in each record</p></li>
+<li><p>analyze final data set</p></li>
+</ol>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Steps 1-3 use the same setup code in analyze.py. The code to get the reports and remediate is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">report_asis</span> <span class="o">=</span><span class="n">analyzequality</span><span class="o">.</span><span class="n">do_qualityinspect</span><span class="p">(</span><span class="n">flds</span><span class="p">,</span> <span class="n">covalues</span><span class="p">,</span> <span class="n">recs</span><span class="p">,</span> <span class="n">settings</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">report_asis</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;notok:&quot;</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;error from as-is report:&quot;</span> <span class="o">+</span> <span class="n">report_asis</span><span class="o">.</span><span class="n">status</span><span class="p">[</span><span class="mi">6</span><span class="p">:])</span>
+
+
+<span class="n">data_uris</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file_uri</span><span class="p">)</span>  <span class="c1"># uses URI as set in analyze.py</span>
+<span class="n">file_uri</span><span class="o">=</span> <span class="n">curdir</span> <span class="o">+</span> <span class="n">file_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.csv&quot;</span><span class="p">,</span><span class="s2">&quot;_report.dat&quot;</span><span class="p">)</span>
+<span class="n">report_uris</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file_uri</span><span class="p">)</span>
+<span class="n">txt</span><span class="o">=</span> <span class="n">reportfuncs</span><span class="o">.</span><span class="n">save_report_to_file</span><span class="p">(</span><span class="n">file_uri</span><span class="p">,</span> <span class="n">report_asis</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">txt</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;notok:&quot;</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;error from saving as-is report:&quot;</span> <span class="o">+</span> <span class="n">txt</span><span class="p">[</span><span class="mi">6</span><span class="p">:])</span>
+
+<span class="n">recs_remediated</span><span class="o">=</span> <span class="n">remediateparsing</span><span class="o">.</span><span class="n">fix_record_field_split</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span> <span class="n">flds</span><span class="p">,</span> <span class="n">recs</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">recs_remediated</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">recs_remediated</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;notok:&quot;</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;error remediating:&quot;</span> <span class="o">+</span> <span class="n">recs_remediated</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">6</span><span class="p">:])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Remediated stats: </span><span class="si">{</span><span class="n">stats</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Remediated fields: </span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">flds_hdr</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">report_remediated</span><span class="o">=</span> <span class="n">analyzequality</span><span class="o">.</span><span class="n">do_qualityinspect</span><span class="p">(</span><span class="n">flds</span><span class="p">,</span> <span class="n">covalues</span><span class="p">,</span> <span class="n">recs_remediated</span><span class="p">,</span> <span class="n">settings</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">report_remediated</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;notok:&quot;</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;error from remediated report:&quot;</span> <span class="o">+</span> <span class="n">report_remediated</span><span class="o">.</span><span class="n">status</span><span class="p">[</span><span class="mi">6</span><span class="p">:])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Number records: as-is=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">recs</span><span class="p">)</span><span class="si">}</span><span class="s2">, remediated=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">recs_remediated</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">);</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parsing errors: as-is: small1=</span><span class="si">{</span><span class="n">report_asis</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;small1&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, small2=</span><span class="si">{</span><span class="n">report_asis</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;small2&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, big=</span><span class="si">{</span><span class="n">report_asis</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;big&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parsing errors: remediated: small1=</span><span class="si">{</span><span class="n">report_remediated</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;small1&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, small2=</span><span class="si">{</span><span class="n">report_remediated</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;small2&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, big=</span><span class="si">{</span><span class="n">report_remediated</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;big&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number records with errors: as-is=</span><span class="si">{</span><span class="n">report_asis</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;numrecs_err&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, remediated=</span><span class="si">{</span><span class="n">report_remediated</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;numrecs_err&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">);</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number records with datatype errors: as-is=</span><span class="si">{</span><span class="n">report_asis</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;numrecs_err_datatype&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, remediated=</span><span class="si">{</span><span class="n">report_remediated</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;numrecs_err_datatype&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">);</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number records with format errors: as-is=</span><span class="si">{</span><span class="n">report_asis</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;numrecs_err_fmt&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, remediated=</span><span class="si">{</span><span class="n">report_remediated</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;numrecs_err_fmt&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">);</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">As-is fields with datatype errors: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">report_asis</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">);</span>
+<span class="n">temp</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">report_asis</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">temp</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  field: </span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">, count=</span><span class="si">{</span><span class="n">report_asis</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">][</span><span class="n">s</span><span class="p">][</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">report_asis</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">][</span><span class="n">s</span><span class="p">][</span><span class="s1">&#39;reasons&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;      reason=</span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">, count=</span><span class="si">{</span><span class="n">report_asis</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">][</span><span class="n">s</span><span class="p">][</span><span class="s1">&#39;reasons&#39;</span><span class="p">][</span><span class="n">r</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Remediated fields with datatype errors: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">report_remediated</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">);</span>
+<span class="n">temp</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">report_remediated</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">temp</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  field: </span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">, count=</span><span class="si">{</span><span class="n">report_remediated</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">][</span><span class="n">s</span><span class="p">][</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">report_remediated</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">][</span><span class="n">s</span><span class="p">][</span><span class="s1">&#39;reasons&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;      reason=</span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">, count=</span><span class="si">{</span><span class="n">report_remediated</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">][</span><span class="n">s</span><span class="p">][</span><span class="s1">&#39;reasons&#39;</span><span class="p">][</span><span class="n">r</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">rec_parse</span><span class="o">=</span><span class="p">[]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Record Parsing Problems: Small2&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">report_asis</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;small2_recs&#39;</span><span class="p">])):</span>
+    <span class="n">txt</span><span class="o">=</span><span class="n">report_asis</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;small2_recs&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">txt</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;(&quot;</span><span class="p">):</span>
+        <span class="n">txt1</span><span class="o">=</span><span class="n">txt</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">txt</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;)&quot;</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">numfuncs</span><span class="o">.</span><span class="n">is_int</span><span class="p">(</span><span class="n">txt1</span><span class="p">):</span>
+            <span class="n">rec_parse</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">txt1</span><span class="p">))</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rec_parse</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+    <span class="n">rec_parse</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">rec_parse</span><span class="p">:</span>
+        <span class="c1"># ensure proper indexing per record number (1 based) and array (0-based) by subtracting 1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">asis record </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">recs</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;remediated record </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">recs_remediated</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># save to files</span>
+<span class="n">file_uri</span><span class="o">=</span> <span class="n">curdir</span> <span class="o">+</span> <span class="n">file_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.csv&quot;</span><span class="p">,</span><span class="s2">&quot;_remediated_report.dat&quot;</span><span class="p">)</span>
+<span class="n">report_uris</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file_uri</span><span class="p">)</span>
+<span class="n">txt</span><span class="o">=</span> <span class="n">reportfuncs</span><span class="o">.</span><span class="n">save_report_to_file</span><span class="p">(</span><span class="n">file_uri</span><span class="p">,</span> <span class="n">report_remediated</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">txt</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;notok:&quot;</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;error from saving remediated report:&quot;</span> <span class="o">+</span> <span class="n">txt</span><span class="p">[</span><span class="mi">6</span><span class="p">:])</span>
+
+<span class="n">file_uri</span><span class="o">=</span> <span class="n">curdir</span> <span class="o">+</span> <span class="n">file_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.csv&quot;</span><span class="p">,</span><span class="s2">&quot;_remediated_data.dat&quot;</span><span class="p">)</span>
+<span class="n">data_uris</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file_uri</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_uri</span><span class="p">,</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">flds_hdr</span><span class="p">)</span> <span class="o">+</span> <span class="n">LF</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">recs_remediated</span><span class="p">)):</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">recs_remediated</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">LF</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<section id="remediation-results">
+<h3>Remediation Results<a class="headerlink" href="#remediation-results" title="Link to this heading">#</a></h3>
+<p>Comparing results before and after remediation shows:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Remediation found 5 source records that were too small2</p></li>
+<li><p>There are 3 fewer records after remediating as-is since they were joined to create fixed records</p></li>
+<li><p>The joining results are clearly seen in the example records listed</p></li>
+<li><p>There are no parsing errors in the remediated records</p></li>
+<li><p>The characteristics of datatype and format errors have changed</p></li>
+</ul>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Starting</span> <span class="n">runtest</span> <span class="n">at</span> <span class="mi">20240715</span><span class="n">T104723</span>
+<span class="n">Remediated</span> <span class="n">stats</span><span class="p">:</span> <span class="n">recin</span><span class="o">=</span><span class="mi">1003</span><span class="p">,</span><span class="n">recout</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">big</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">small1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">small2</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">join</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">fix</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">notfix</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">Remediated</span> <span class="n">fields</span><span class="p">:</span> <span class="n">y2_statefips</span><span class="p">,</span><span class="n">y1_statefips</span><span class="p">,</span><span class="n">y1_state</span><span class="p">,</span><span class="n">y1_state_name</span><span class="p">,</span><span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">,</span><span class="n">AGI</span>
+
+<span class="n">Number</span> <span class="n">records</span><span class="p">:</span> <span class="k">as</span><span class="o">-</span><span class="ow">is</span><span class="o">=</span><span class="mi">1003</span><span class="p">,</span> <span class="n">remediated</span><span class="o">=</span><span class="mi">1000</span>
+<span class="n">Parsing</span> <span class="n">errors</span><span class="p">:</span> <span class="k">as</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span> <span class="n">small1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">small2</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">big</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">Parsing</span> <span class="n">errors</span><span class="p">:</span> <span class="n">remediated</span><span class="p">:</span> <span class="n">small1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">small2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">big</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">Number</span> <span class="n">records</span> <span class="k">with</span> <span class="n">errors</span><span class="p">:</span> <span class="k">as</span><span class="o">-</span><span class="ow">is</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">remediated</span><span class="o">=</span><span class="mi">16</span>
+<span class="n">Number</span> <span class="n">records</span> <span class="k">with</span> <span class="n">datatype</span> <span class="n">errors</span><span class="p">:</span> <span class="k">as</span><span class="o">-</span><span class="ow">is</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">remediated</span><span class="o">=</span><span class="mi">7</span>
+<span class="n">Number</span> <span class="n">records</span> <span class="k">with</span> <span class="nb">format</span> <span class="n">errors</span><span class="p">:</span> <span class="k">as</span><span class="o">-</span><span class="ow">is</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">remediated</span><span class="o">=</span><span class="mi">10</span>
+
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span> <span class="n">fields</span> <span class="k">with</span> <span class="n">datatype</span> <span class="n">errors</span><span class="p">:</span> <span class="mi">3</span>
+<span class="n">field</span><span class="p">:</span> <span class="n">agi</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">10</span>
+    <span class="n">reason</span><span class="o">=</span><span class="n">empty</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">5</span>
+    <span class="n">reason</span><span class="o">=</span><span class="n">non</span><span class="o">-</span><span class="n">numeric</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">5</span>
+<span class="n">field</span><span class="p">:</span> <span class="n">n1</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">5</span>
+    <span class="n">reason</span><span class="o">=</span><span class="n">empty</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">5</span>
+<span class="n">field</span><span class="p">:</span> <span class="n">n2</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">7</span>
+    <span class="n">reason</span><span class="o">=</span><span class="n">non</span><span class="o">-</span><span class="n">numeric</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">2</span>
+    <span class="n">reason</span><span class="o">=</span><span class="n">empty</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">5</span>
+
+<span class="n">Remediated</span> <span class="n">fields</span> <span class="k">with</span> <span class="n">datatype</span> <span class="n">errors</span><span class="p">:</span> <span class="mi">2</span>
+<span class="n">field</span><span class="p">:</span> <span class="n">agi</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">5</span>
+    <span class="n">reason</span><span class="o">=</span><span class="n">non</span><span class="o">-</span><span class="n">numeric</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">5</span>
+<span class="n">field</span><span class="p">:</span> <span class="n">n2</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">2</span>
+    <span class="n">reason</span><span class="o">=</span><span class="n">non</span><span class="o">-</span><span class="n">numeric</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">2</span>
+
+<span class="n">Record</span> <span class="n">Parsing</span> <span class="n">Problems</span><span class="p">:</span> <span class="n">Small2</span>
+
+<span class="n">asis</span> <span class="n">record</span> <span class="mi">4</span><span class="p">:</span> <span class="mi">01</span><span class="p">,</span><span class="mi">97</span><span class="p">,</span><span class="n">AL</span><span class="p">,</span><span class="n">AL</span> <span class="n">Total</span> <span class="n">Migration</span><span class="o">-</span><span class="n">Same</span>
+<span class="n">remediated</span> <span class="n">record</span> <span class="mi">4</span><span class="p">:</span> <span class="mi">01</span><span class="p">,</span><span class="mi">97</span><span class="p">,</span><span class="n">AL</span><span class="p">,</span><span class="n">AL</span> <span class="n">Total</span> <span class="n">Migration</span><span class="o">-</span><span class="n">Same</span> <span class="n">State</span><span class="p">,</span><span class="mi">46630</span><span class="p">,</span><span class="mi">95832</span><span class="p">,</span><span class="mf">1.871804e+6</span>
+
+<span class="n">asis</span> <span class="n">record</span> <span class="mi">5</span><span class="p">:</span> <span class="n">State</span><span class="p">,</span><span class="mi">46630</span><span class="p">,</span><span class="mi">95832</span><span class="p">,</span><span class="mf">1.871804e+6</span>
+<span class="n">remediated</span> <span class="n">record</span> <span class="mi">5</span><span class="p">:</span> <span class="mi">01</span><span class="p">,</span><span class="mi">01</span><span class="p">,</span><span class="n">AL</span><span class="p">,</span><span class="n">AL</span> <span class="n">Non</span><span class="o">-</span><span class="n">migrants</span><span class="p">,</span><span class="mi">1598458</span><span class="p">,</span><span class="mi">3579600</span><span class="p">,</span><span class="mi">96406319</span>
+
+<span class="n">asis</span> <span class="n">record</span> <span class="mi">6</span><span class="p">:</span> <span class="mi">01</span><span class="p">,</span><span class="mi">01</span><span class="p">,</span><span class="n">AL</span><span class="p">,</span><span class="n">AL</span>
+<span class="n">remediated</span> <span class="n">record</span> <span class="mi">6</span><span class="p">:</span> <span class="mi">01</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="n">GA</span><span class="p">,</span><span class="n">Georgia</span><span class="p">,</span><span class="mi">5972</span><span class="p">,</span><span class="mi">12269</span><span class="p">,</span><span class="mi">249108</span>
+
+<span class="n">asis</span> <span class="n">record</span> <span class="mi">7</span><span class="p">:</span> <span class="n">Non</span><span class="o">-</span>
+<span class="n">remediated</span> <span class="n">record</span> <span class="mi">7</span><span class="p">:</span> <span class="mi">01</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="n">FL</span><span class="p">,</span><span class="n">Florida</span><span class="p">,</span><span class="mi">4489</span><span class="p">,</span><span class="mi">8446</span><span class="p">,</span><span class="mf">1.85502e+5</span>
+
+<span class="n">asis</span> <span class="n">record</span> <span class="mi">8</span><span class="p">:</span> <span class="n">migrants</span><span class="p">,</span><span class="mi">1598458</span><span class="p">,</span><span class="mi">3579600</span><span class="p">,</span><span class="mi">96406319</span>
+<span class="n">remediated</span> <span class="n">record</span> <span class="mi">8</span><span class="p">:</span> <span class="mi">01</span><span class="p">,</span><span class="mi">48</span><span class="p">,</span><span class="n">TX</span><span class="p">,</span><span class="n">Texas</span><span class="p">,</span><span class="mi">3435</span><span class="p">,</span><span class="mi">7041</span><span class="p">,</span><span class="mi">135165</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+</section>
+<section id="normalize-and-enrich-example">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Normalize and Enrich Example</a><a class="headerlink" href="#normalize-and-enrich-example" title="Link to this heading">#</a></h2>
+<p>Now that we have fixed parsing errors, we can generate the final data set that is normalized and
+has enrichment fields. We do the following steps:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>adjust field datatypes and formats based on analysis results</p></li>
+<li><p>define enrichment fields to add to output data for analytic and ML downstream applications</p></li>
+<li><p>define transformations to normalize field values, decode some fields into new enrichment fields, populate enrichment fields
+with conditional rules based on multi-field joint values in each record</p></li>
+<li><p>analyze final data set</p></li>
+</ol>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>We need to use additional parts of the VerityX library.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">VerityPy.processing</span> <span class="kn">import</span> <span class="n">datefuncs</span><span class="p">,</span> <span class="n">qualityanalysis</span><span class="p">,</span> <span class="n">analyzequality</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">numfuncs</span><span class="p">,</span> <span class="n">remediateparsing</span><span class="p">,</span> <span class="n">refinedata</span>
+<span class="kn">from</span> <span class="nn">VerityPy.transforms</span> <span class="kn">import</span> <span class="n">lookup</span><span class="p">,</span> <span class="n">transform</span>
+<span class="kn">from</span> <span class="nn">VerityPy.utils</span> <span class="kn">import</span> <span class="n">reportfuncs</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<section id="output-fields">
+<h3>Output Fields<a class="headerlink" href="#output-fields" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p>Use results to adjust specifications and create output fields that include enrichment. Notice how
+we use many of the optional properties of the Field object now to get more precise and granular results.</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">flds</span><span class="p">)):</span>
+    <span class="n">txt</span><span class="o">=</span><span class="n">flds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">txt</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;fips&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">txt</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;y1_state&quot;</span><span class="p">):</span>
+        <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;string&quot;</span>
+    <span class="k">elif</span> <span class="n">txt</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;n1&quot;</span><span class="p">,</span><span class="s2">&quot;n2&quot;</span><span class="p">]:</span>
+        <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;int&quot;</span>
+    <span class="k">elif</span> <span class="n">txt</span><span class="o">==</span><span class="s2">&quot;agi&quot;</span><span class="p">:</span>
+        <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;real&quot;</span>
+    <span class="n">mapto</span><span class="o">=</span><span class="n">txt</span>
+    <span class="n">strcase</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+    <span class="n">strcut</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+    <span class="n">strpad</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+    <span class="n">strpadchar</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+    <span class="n">strlen</span><span class="o">=-</span><span class="mi">1</span>
+    <span class="n">fmtdate</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+    <span class="n">numdec</span><span class="o">=-</span><span class="mi">1</span>
+    <span class="k">if</span> <span class="n">txt</span><span class="o">==</span><span class="s2">&quot;y2_statefips&quot;</span><span class="p">:</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;DestStateCode&quot;</span>
+        <span class="n">strlen</span><span class="o">=</span><span class="mi">2</span>
+        <span class="n">strcut</span><span class="o">=</span><span class="s2">&quot;back&quot;</span>
+        <span class="n">strpad</span><span class="o">=</span><span class="s2">&quot;front&quot;</span>
+        <span class="n">strpadchar</span><span class="o">=</span><span class="s2">&quot;0&quot;</span>
+    <span class="k">elif</span> <span class="n">txt</span><span class="o">==</span><span class="s2">&quot;y1_statefips&quot;</span><span class="p">:</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;OrigStateCode&quot;</span>
+        <span class="n">strlen</span><span class="o">=</span><span class="mi">2</span>
+        <span class="n">strcut</span><span class="o">=</span><span class="s2">&quot;back&quot;</span>
+        <span class="n">strpad</span><span class="o">=</span><span class="s2">&quot;front&quot;</span>
+        <span class="n">strpadchar</span><span class="o">=</span><span class="s2">&quot;0&quot;</span>
+    <span class="k">elif</span> <span class="n">txt</span><span class="o">==</span><span class="s2">&quot;y1_state&quot;</span><span class="p">:</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;OrigStateAbbr&quot;</span>
+        <span class="n">strlen</span><span class="o">=</span><span class="mi">2</span>
+        <span class="n">strcase</span><span class="o">=</span><span class="s2">&quot;upper&quot;</span>
+        <span class="n">strcut</span><span class="o">=</span><span class="s2">&quot;back&quot;</span>
+        <span class="n">strpad</span><span class="o">=</span><span class="s2">&quot;front&quot;</span>
+        <span class="n">strpadchar</span><span class="o">=</span><span class="s2">&quot;hyphen&quot;</span>
+    <span class="k">elif</span> <span class="n">txt</span><span class="o">==</span><span class="s2">&quot;y1_state_name&quot;</span><span class="p">:</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;OrigStateName&quot;</span>
+    <span class="k">elif</span> <span class="n">txt</span><span class="o">==</span><span class="s2">&quot;n1&quot;</span><span class="p">:</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;NumReturn&quot;</span>
+    <span class="k">elif</span> <span class="n">txt</span><span class="o">==</span><span class="s2">&quot;n2&quot;</span><span class="p">:</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;NumExempt&quot;</span>
+    <span class="k">elif</span> <span class="n">txt</span><span class="o">==</span><span class="s2">&quot;agi&quot;</span><span class="p">:</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;GrossIncome&quot;</span>
+        <span class="n">numdec</span><span class="o">=</span><span class="mi">2</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">title</span><span class="o">=</span><span class="n">flds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">title</span>
+
+    <span class="n">outfields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="n">title</span><span class="p">))</span>
+    <span class="n">nfld</span><span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">outfields</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+    <span class="n">outfields</span><span class="p">[</span><span class="n">nfld</span><span class="p">]</span><span class="o">.</span><span class="n">mapto</span><span class="o">=</span><span class="n">mapto</span>
+    <span class="n">outfields</span><span class="p">[</span><span class="n">nfld</span><span class="p">]</span><span class="o">.</span><span class="n">datatype</span><span class="o">=</span><span class="n">dtype</span>
+    <span class="n">outfields</span><span class="p">[</span><span class="n">nfld</span><span class="p">]</span><span class="o">.</span><span class="n">fmt_strlen</span><span class="o">=</span><span class="n">strlen</span>
+    <span class="n">outfields</span><span class="p">[</span><span class="n">nfld</span><span class="p">]</span><span class="o">.</span><span class="n">fmt_strcase</span><span class="o">=</span><span class="n">strcase</span>
+    <span class="n">outfields</span><span class="p">[</span><span class="n">nfld</span><span class="p">]</span><span class="o">.</span><span class="n">fmt_strcut</span><span class="o">=</span><span class="n">strcut</span>
+    <span class="n">outfields</span><span class="p">[</span><span class="n">nfld</span><span class="p">]</span><span class="o">.</span><span class="n">fmt_strpad</span><span class="o">=</span><span class="n">strpad</span>
+    <span class="n">outfields</span><span class="p">[</span><span class="n">nfld</span><span class="p">]</span><span class="o">.</span><span class="n">fmt_strpadchar</span><span class="o">=</span><span class="n">strpadchar</span>
+    <span class="n">outfields</span><span class="p">[</span><span class="n">nfld</span><span class="p">]</span><span class="o">.</span><span class="n">fmt_date</span><span class="o">=</span><span class="n">fmtdate</span>
+    <span class="n">outfields</span><span class="p">[</span><span class="n">nfld</span><span class="p">]</span><span class="o">.</span><span class="n">fmt_decimal</span><span class="o">=</span><span class="n">numdec</span>
+    <span class="n">hash_outfields</span><span class="p">[</span><span class="n">title</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span><span class="o">=</span><span class="n">nfld</span>
+
+<span class="c1"># ADD ENRICHMENT FIELDS (not in source records but will be in output records)</span>
+<span class="n">outfields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="s2">&quot;useAGI&quot;</span><span class="p">))</span>
+<span class="n">nfld</span><span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">outfields</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">outfields</span><span class="p">[</span><span class="n">nfld</span><span class="p">]</span><span class="o">.</span><span class="n">datatype</span><span class="o">=</span> <span class="s2">&quot;bool&quot;</span>
+<span class="n">hash_outfields</span><span class="p">[</span><span class="n">outfields</span><span class="p">[</span><span class="n">nfld</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span><span class="o">=</span><span class="n">nfld</span>
+
+<span class="n">outfields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="s2">&quot;DestStateAbbr&quot;</span><span class="p">))</span>
+<span class="n">nfld</span><span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">outfields</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">outfields</span><span class="p">[</span><span class="n">nfld</span><span class="p">]</span><span class="o">.</span><span class="n">datatype</span><span class="o">=</span> <span class="s2">&quot;string&quot;</span>
+<span class="n">outfields</span><span class="p">[</span><span class="n">nfld</span><span class="p">]</span><span class="o">.</span><span class="n">fmt_strlen</span><span class="o">=</span> <span class="mi">2</span>
+<span class="n">outfields</span><span class="p">[</span><span class="n">nfld</span><span class="p">]</span><span class="o">.</span><span class="n">fmt_strcase</span><span class="o">=</span> <span class="s2">&quot;upper&quot;</span>
+<span class="n">hash_outfields</span><span class="p">[</span><span class="n">outfields</span><span class="p">[</span><span class="n">nfld</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span><span class="o">=</span><span class="n">nfld</span>
+
+<span class="n">outfields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="s2">&quot;DestStateName&quot;</span><span class="p">))</span>
+<span class="n">nfld</span><span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">outfields</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">outfields</span><span class="p">[</span><span class="n">nfld</span><span class="p">]</span><span class="o">.</span><span class="n">datatype</span><span class="o">=</span> <span class="s2">&quot;string&quot;</span>
+<span class="n">hash_outfields</span><span class="p">[</span><span class="n">outfields</span><span class="p">[</span><span class="n">nfld</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span><span class="o">=</span><span class="n">nfld</span>
+
+<span class="n">outfields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">Field</span><span class="p">(</span><span class="s2">&quot;isSubTotal&quot;</span><span class="p">))</span>
+<span class="n">nfld</span><span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">outfields</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">outfields</span><span class="p">[</span><span class="n">nfld</span><span class="p">]</span><span class="o">.</span><span class="n">datatype</span><span class="o">=</span> <span class="s2">&quot;bool&quot;</span>
+<span class="n">hash_outfields</span><span class="p">[</span><span class="n">outfields</span><span class="p">[</span><span class="n">nfld</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span><span class="o">=</span><span class="n">nfld</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="lookup-dictionaries">
+<h3>Lookup Dictionaries<a class="headerlink" href="#lookup-dictionaries" title="Link to this heading">#</a></h3>
+<p>Lookup dictionaries are a flexible way to encode or decode values using multiple dictionaries. It
+is common in large data systems for fields to contain values that span multiple versions of
+code lists and both the business rules to know which is appropriate and the code to execute
+these rules tend to become complex and prone to errors in traditional data processing. VerityX
+elevates the visibility of these rules to simple conditional logic and references.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;StateAbbr&quot;</span>
+<span class="n">nkeys</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">iscasesens</span><span class="o">=</span><span class="kc">False</span>
+<span class="n">file_uri</span><span class="o">=</span> <span class="n">curdir</span> <span class="o">+</span> <span class="s2">&quot;StateAbbrfromFIPS_lookup.dat&quot;</span>
+<span class="n">lookup_dict</span><span class="o">=</span> <span class="n">lookup</span><span class="o">.</span><span class="n">LookUpDict</span><span class="p">()</span>
+<span class="n">lookup_dict</span><span class="o">=</span> <span class="n">lookup</span><span class="o">.</span><span class="n">make_lookup_from_file</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">file_uri</span><span class="p">,</span> <span class="s2">&quot;pipe&quot;</span><span class="p">,</span> <span class="n">iscasesens</span><span class="p">,</span> <span class="n">nkeys</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">lookup_dict</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;notok:&quot;</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;error making LookUpDict &quot;</span> <span class="o">+</span> <span class="n">title</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="n">lookup_dict</span><span class="o">.</span><span class="n">title</span><span class="p">[</span><span class="mi">6</span><span class="p">:])</span>
+<span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">lookup_dict</span><span class="o">.</span><span class="n">fields</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;error making LookUpDict since missing fields &quot;</span> <span class="o">+</span> <span class="n">title</span><span class="p">)</span>
+<span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">lookup_dict</span><span class="o">.</span><span class="n">recs</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;error making LookUpDict since missing recs &quot;</span> <span class="o">+</span> <span class="n">title</span><span class="p">)</span>
+<span class="n">lookups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lookup_dict</span><span class="p">)</span>
+<span class="n">hash_lookups</span><span class="p">[</span><span class="n">lookup_dict</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span><span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lookups</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+
+<span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;StateName&quot;</span>
+<span class="n">nkeys</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">iscasesens</span><span class="o">=</span><span class="kc">False</span>
+<span class="n">file_uri</span><span class="o">=</span> <span class="n">curdir</span> <span class="o">+</span> <span class="s2">&quot;StateNamefromFIPS_lookup.dat&quot;</span>
+<span class="n">lookup_dict</span><span class="o">=</span> <span class="n">lookup</span><span class="o">.</span><span class="n">LookUpDict</span><span class="p">()</span>
+<span class="n">lookup_dict</span><span class="o">=</span> <span class="n">lookup</span><span class="o">.</span><span class="n">make_lookup_from_file</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">file_uri</span><span class="p">,</span> <span class="s2">&quot;pipe&quot;</span><span class="p">,</span> <span class="n">iscasesens</span><span class="p">,</span> <span class="n">nkeys</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">lookup_dict</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;notok:&quot;</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;error making LookUpDict &quot;</span> <span class="o">+</span> <span class="n">title</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="n">lookup_dict</span><span class="o">.</span><span class="n">title</span><span class="p">[</span><span class="mi">6</span><span class="p">:])</span>
+<span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">lookup_dict</span><span class="o">.</span><span class="n">fields</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;error making LookUpDict since missing fields &quot;</span> <span class="o">+</span> <span class="n">title</span><span class="p">)</span>
+<span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">lookup_dict</span><span class="o">.</span><span class="n">recs</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;error making LookUpDict since missing recs &quot;</span> <span class="o">+</span> <span class="n">title</span><span class="p">)</span>
+<span class="n">lookups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lookup_dict</span><span class="p">)</span>
+<span class="n">hash_lookups</span><span class="p">[</span><span class="n">lookup_dict</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span><span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lookups</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="transforms">
+<h3>Transforms<a class="headerlink" href="#transforms" title="Link to this heading">#</a></h3>
+<p>The transforms normalize source field values and populate newly added enrichment fields. Notice
+the conditional logic used and the ability to normalize field values in the transform functions.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define Transforms</span>
+<span class="c1"># 1st transform sets useAGI based on source field AGI value since it has some</span>
+<span class="c1"># coded values that shoud not be included in aggregations per source documentation</span>
+<span class="n">ntrans</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">transforms</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">transforms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transform</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span><span class="s2">&quot;useAGI&quot;</span><span class="p">))</span>
+<span class="n">transforms</span><span class="p">[</span><span class="n">ntrans</span><span class="p">]</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transform</span><span class="o">.</span><span class="n">Op</span><span class="p">(</span><span class="s2">&quot;setToRef&quot;</span><span class="p">,</span> <span class="s2">&quot;AGI&quot;</span><span class="p">))</span>
+<span class="n">transforms</span><span class="p">[</span><span class="n">ntrans</span><span class="p">]</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transform</span><span class="o">.</span><span class="n">Op</span><span class="p">(</span><span class="s2">&quot;IfEq&quot;</span><span class="p">,</span> <span class="s2">&quot;-1&quot;</span><span class="p">))</span>
+<span class="n">transforms</span><span class="p">[</span><span class="n">ntrans</span><span class="p">]</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transform</span><span class="o">.</span><span class="n">Op</span><span class="p">(</span><span class="s2">&quot;setToValue&quot;</span><span class="p">,</span><span class="s2">&quot;true&quot;</span><span class="p">))</span> <span class="c1"># action for False condition</span>
+<span class="n">transforms</span><span class="p">[</span><span class="n">ntrans</span><span class="p">]</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transform</span><span class="o">.</span><span class="n">Op</span><span class="p">(</span><span class="s2">&quot;setToValue&quot;</span><span class="p">,</span><span class="s2">&quot;false&quot;</span><span class="p">))</span> <span class="c1"># action for True condition, useAGI = false meaning dont use AGI value since it is code -1</span>
+
+<span class="n">ntrans</span> <span class="o">+=</span><span class="mi">1</span>
+<span class="n">transforms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transform</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span><span class="s2">&quot;GrossIncome&quot;</span><span class="p">))</span>
+<span class="n">transforms</span><span class="p">[</span><span class="n">ntrans</span><span class="p">]</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transform</span><span class="o">.</span><span class="n">Op</span><span class="p">(</span><span class="s2">&quot;IfNotEq&quot;</span><span class="p">,</span><span class="s2">&quot;-1&quot;</span><span class="p">))</span> <span class="c1"># has coded values we need to handle for useful analytic output records</span>
+<span class="n">transforms</span><span class="p">[</span><span class="n">ntrans</span><span class="p">]</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transform</span><span class="o">.</span><span class="n">Op</span><span class="p">(</span><span class="s2">&quot;NoOp&quot;</span><span class="p">))</span> <span class="c1"># do nothing if -1 (since False for IfNotEq)</span>
+<span class="n">transforms</span><span class="p">[</span><span class="n">ntrans</span><span class="p">]</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transform</span><span class="o">.</span><span class="n">Op</span><span class="p">(</span><span class="s2">&quot;mult&quot;</span><span class="p">,</span><span class="s2">&quot;1000&quot;</span><span class="p">))</span>  <span class="c1"># normalize to true $ unit since in thousands</span>
+
+<span class="n">ntrans</span> <span class="o">+=</span><span class="mi">1</span>
+<span class="n">transforms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transform</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span><span class="s2">&quot;DestStateAbbr&quot;</span><span class="p">))</span>
+<span class="n">transforms</span><span class="p">[</span><span class="n">ntrans</span><span class="p">]</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transform</span><span class="o">.</span><span class="n">Op</span><span class="p">(</span><span class="s2">&quot;setToRef&quot;</span><span class="p">,</span><span class="s2">&quot;y2_statefips&quot;</span><span class="p">))</span>
+<span class="n">transforms</span><span class="p">[</span><span class="n">ntrans</span><span class="p">]</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transform</span><span class="o">.</span><span class="n">Op</span><span class="p">(</span><span class="s2">&quot;setLength&quot;</span><span class="p">,</span><span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="s2">&quot;left&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">))</span> <span class="c1"># lookup dict use fixed 2 char long codes</span>
+<span class="n">transforms</span><span class="p">[</span><span class="n">ntrans</span><span class="p">]</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transform</span><span class="o">.</span><span class="n">Op</span><span class="p">(</span><span class="s2">&quot;lookup&quot;</span><span class="p">,</span><span class="s2">&quot;StateAbbr&quot;</span><span class="p">))</span> <span class="c1"># short title we assigned to lookup dictionary file</span>
+
+<span class="n">ntrans</span> <span class="o">+=</span><span class="mi">1</span>
+<span class="n">transforms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transform</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span><span class="s2">&quot;DestStateName&quot;</span><span class="p">))</span>
+<span class="n">transforms</span><span class="p">[</span><span class="n">ntrans</span><span class="p">]</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transform</span><span class="o">.</span><span class="n">Op</span><span class="p">(</span><span class="s2">&quot;setToRef&quot;</span><span class="p">,</span><span class="s2">&quot;y2_statefips&quot;</span><span class="p">))</span>
+<span class="n">transforms</span><span class="p">[</span><span class="n">ntrans</span><span class="p">]</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transform</span><span class="o">.</span><span class="n">Op</span><span class="p">(</span><span class="s2">&quot;setLength&quot;</span><span class="p">,</span><span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="s2">&quot;left&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">))</span> <span class="c1"># lookup dict use fixed 2 char long codes</span>
+<span class="n">transforms</span><span class="p">[</span><span class="n">ntrans</span><span class="p">]</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transform</span><span class="o">.</span><span class="n">Op</span><span class="p">(</span><span class="s2">&quot;lookup&quot;</span><span class="p">,</span><span class="s2">&quot;StateName&quot;</span><span class="p">))</span>
+
+<span class="n">ntrans</span> <span class="o">+=</span><span class="mi">1</span>
+<span class="n">transforms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transform</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span><span class="s2">&quot;isSubTotal&quot;</span><span class="p">))</span>
+<span class="n">transforms</span><span class="p">[</span><span class="n">ntrans</span><span class="p">]</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transform</span><span class="o">.</span><span class="n">Op</span><span class="p">(</span><span class="s2">&quot;setToRef&quot;</span><span class="p">,</span><span class="s2">&quot;y1_state_name&quot;</span><span class="p">))</span>
+<span class="n">transforms</span><span class="p">[</span><span class="n">ntrans</span><span class="p">]</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transform</span><span class="o">.</span><span class="n">Op</span><span class="p">(</span><span class="s2">&quot;IfStrContains&quot;</span><span class="p">,</span><span class="s2">&quot;migra&quot;</span><span class="p">))</span>
+<span class="n">transforms</span><span class="p">[</span><span class="n">ntrans</span><span class="p">]</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transform</span><span class="o">.</span><span class="n">Op</span><span class="p">(</span><span class="s2">&quot;setToValue&quot;</span><span class="p">,</span><span class="s2">&quot;false&quot;</span><span class="p">))</span>
+<span class="n">transforms</span><span class="p">[</span><span class="n">ntrans</span><span class="p">]</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transform</span><span class="o">.</span><span class="n">Op</span><span class="p">(</span><span class="s2">&quot;setToValue&quot;</span><span class="p">,</span><span class="s2">&quot;true&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="generate-final-data">
+<h3>Generate Final Data<a class="headerlink" href="#generate-final-data" title="Link to this heading">#</a></h3>
+<p>We process the remediated data records into final form so they are normalized, enriched.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">settings</span><span class="p">[</span><span class="s2">&quot;has_header&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;false&quot;</span>
+<span class="n">settings</span><span class="p">[</span><span class="s2">&quot;is_quoted&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
+<span class="n">settings</span><span class="p">[</span><span class="s2">&quot;normalize&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
+<span class="n">settings</span><span class="p">[</span><span class="s2">&quot;use_comment&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;false&quot;</span>
+<span class="n">settings</span><span class="p">[</span><span class="s2">&quot;delim&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;comma&quot;</span>
+<span class="n">settings</span><span class="p">[</span><span class="s2">&quot;delim_out&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;pipe&quot;</span>
+<span class="n">settings</span><span class="p">[</span><span class="s2">&quot;embed_delim&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;_&quot;</span>
+
+<span class="n">outrecs</span><span class="o">=</span> <span class="n">refinedata</span><span class="o">.</span><span class="n">do_refine</span><span class="p">(</span><span class="n">outfields</span><span class="p">,</span> <span class="n">transforms</span><span class="p">,</span> <span class="n">settings</span><span class="p">,</span> <span class="n">lookups</span><span class="p">,</span> <span class="n">flds</span><span class="p">,</span> <span class="n">recs_remediated</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">outrecs</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Refine error: no output records&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">outrecs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;notok:&quot;</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Refine error: &quot;</span> <span class="o">+</span> <span class="n">outrecs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">6</span><span class="p">:])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">*****************************   Sample Final Data Records After Transforms, Enrich, Normalize *****************************&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">outrecs</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">21</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">outrecs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*****************************</span>   <span class="n">Sample</span> <span class="n">Final</span> <span class="n">Data</span> <span class="n">Records</span> <span class="n">After</span> <span class="n">Transforms</span><span class="p">,</span> <span class="n">Enrich</span><span class="p">,</span> <span class="n">Normalize</span> <span class="o">*****************************</span>
+<span class="n">DestStateCode</span><span class="o">|</span><span class="n">OrigStateCode</span><span class="o">|</span><span class="n">OrigStateAbbr</span><span class="o">|</span><span class="n">OrigStateName</span><span class="o">|</span><span class="n">NumReturn</span><span class="o">|</span><span class="n">NumExempt</span><span class="o">|</span><span class="n">GrossIncome</span><span class="o">|</span><span class="n">useAGI</span><span class="o">|</span><span class="n">DestStateAbbr</span><span class="o">|</span><span class="n">DestStateName</span><span class="o">|</span><span class="n">isSubTotal</span>
+<span class="mi">1</span><span class="p">:</span> <span class="mi">01</span><span class="o">|</span><span class="mi">96</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="n">AL</span> <span class="n">Total</span> <span class="n">Migration</span><span class="o">-</span><span class="n">US</span> <span class="ow">and</span> <span class="n">Foreign</span><span class="o">|</span><span class="mi">33716</span><span class="o">|</span><span class="mi">67747</span><span class="o">|</span><span class="mf">1515297000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="mi">97</span><span class="o">|</span><span class="n">true</span>
+<span class="mi">2</span><span class="p">:</span> <span class="mi">01</span><span class="o">|</span><span class="mi">97</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="n">AL</span> <span class="n">Total</span> <span class="n">Migration</span><span class="o">-</span><span class="n">US</span><span class="o">|</span><span class="mi">32868</span><span class="o">|</span><span class="mi">65647</span><span class="o">|</span><span class="mf">1467218000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="mi">97</span><span class="o">|</span><span class="n">true</span>
+<span class="mi">3</span><span class="p">:</span> <span class="mi">01</span><span class="o">|</span><span class="mi">98</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="n">AL</span> <span class="n">Total</span> <span class="n">Migration</span><span class="p">,</span><span class="n">Foreign</span><span class="o">|</span><span class="mi">848</span><span class="o">|</span><span class="mi">2100</span><span class="o">|</span><span class="mf">48079000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="mi">97</span><span class="o">|</span><span class="n">true</span>
+<span class="mi">4</span><span class="p">:</span> <span class="mi">01</span><span class="o">|</span><span class="mi">97</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="n">AL</span> <span class="n">Total</span> <span class="n">Migration</span><span class="o">-</span><span class="n">Same</span> <span class="n">State</span><span class="o">|</span><span class="mi">46630</span><span class="o">|</span><span class="mi">95832</span><span class="o">|</span><span class="mf">1871804000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="mi">97</span><span class="o">|</span><span class="n">true</span>
+<span class="mi">5</span><span class="p">:</span> <span class="mi">01</span><span class="o">|</span><span class="mi">01</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="n">AL</span> <span class="n">Non</span><span class="o">-</span><span class="n">migrants</span><span class="o">|</span><span class="mi">1598458</span><span class="o">|</span><span class="mi">3579600</span><span class="o">|</span><span class="mf">96406319000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="mi">97</span><span class="o">|</span><span class="n">true</span>
+<span class="mi">6</span><span class="p">:</span> <span class="mi">01</span><span class="o">|</span><span class="mi">13</span><span class="o">|</span><span class="n">GA</span><span class="o">|</span><span class="n">Georgia</span><span class="o">|</span><span class="mi">5972</span><span class="o">|</span><span class="mi">12269</span><span class="o">|</span><span class="mf">249108000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="mi">97</span><span class="o">|</span><span class="n">false</span>
+<span class="mi">7</span><span class="p">:</span> <span class="mi">01</span><span class="o">|</span><span class="mi">12</span><span class="o">|</span><span class="n">FL</span><span class="o">|</span><span class="n">Florida</span><span class="o">|</span><span class="mi">4489</span><span class="o">|</span><span class="mi">8446</span><span class="o">|</span><span class="mf">185502000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="mi">97</span><span class="o">|</span><span class="n">false</span>
+<span class="mi">8</span><span class="p">:</span> <span class="mi">01</span><span class="o">|</span><span class="mi">48</span><span class="o">|</span><span class="n">TX</span><span class="o">|</span><span class="n">Texas</span><span class="o">|</span><span class="mi">3435</span><span class="o">|</span><span class="mi">7041</span><span class="o">|</span><span class="mf">135165000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="mi">97</span><span class="o">|</span><span class="n">false</span>
+<span class="mi">9</span><span class="p">:</span> <span class="mi">01</span><span class="o">|</span><span class="mi">47</span><span class="o">|</span><span class="n">TN</span><span class="o">|</span><span class="n">Tennessee</span><span class="o">|</span><span class="mi">2608</span><span class="o">|</span><span class="mi">5304</span><span class="o">|</span><span class="mf">124203000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="mi">97</span><span class="o">|</span><span class="n">false</span>
+<span class="mi">10</span><span class="p">:</span> <span class="mi">01</span><span class="o">|</span><span class="mi">28</span><span class="o">|</span><span class="n">MS</span><span class="o">|</span><span class="n">Mississippi</span><span class="o">|</span><span class="mi">2212</span><span class="o">|</span><span class="mi">4562</span><span class="o">|</span><span class="mf">90723000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="mi">97</span><span class="o">|</span><span class="n">false</span>
+<span class="mi">11</span><span class="p">:</span> <span class="mi">01</span><span class="o">|</span><span class="mi">06</span><span class="o">|</span><span class="n">CA</span><span class="o">|</span><span class="n">California</span><span class="o">|</span><span class="mi">1169</span><span class="o">|</span><span class="mi">2274</span><span class="o">|</span><span class="mf">55689000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="mi">97</span><span class="o">|</span><span class="n">false</span>
+<span class="mi">12</span><span class="p">:</span> <span class="mi">01</span><span class="o">|</span><span class="mi">37</span><span class="o">|</span><span class="n">NC</span><span class="o">|</span><span class="n">North</span> <span class="n">Carolina</span><span class="o">|</span><span class="mi">1056</span><span class="o">|</span><span class="mi">2158</span><span class="o">|</span><span class="mf">49972000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="mi">97</span><span class="o">|</span><span class="n">false</span>
+<span class="mi">13</span><span class="p">:</span> <span class="mi">01</span><span class="o">|</span><span class="mi">22</span><span class="o">|</span><span class="n">LA</span><span class="o">|</span><span class="n">Louisiana</span><span class="o">|</span><span class="mi">883</span><span class="o">|</span><span class="mi">1671</span><span class="o">|</span><span class="mf">40723000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="mi">97</span><span class="o">|</span><span class="n">false</span>
+<span class="mi">14</span><span class="p">:</span> <span class="mi">01</span><span class="o">|</span><span class="mi">57</span><span class="o">|</span><span class="n">FR</span><span class="o">|</span><span class="n">Foreign</span><span class="o">|</span><span class="mi">848</span><span class="o">|</span><span class="mi">2100</span><span class="o">|</span><span class="mf">48079000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="mi">97</span><span class="o">|</span><span class="n">false</span>
+<span class="mi">15</span><span class="p">:</span> <span class="mi">10</span><span class="o">|</span><span class="mi">51</span><span class="o">|</span><span class="n">VA</span><span class="o">|</span><span class="n">Virginia</span><span class="o">|</span><span class="mi">819</span><span class="o">|</span><span class="mi">1624</span><span class="o">|</span><span class="mf">48796000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="mi">97</span><span class="o">|</span><span class="n">false</span>
+<span class="mi">16</span><span class="p">:</span> <span class="mi">01</span><span class="o">|</span><span class="mi">36</span><span class="o">|</span><span class="n">NY</span><span class="o">|</span><span class="n">New</span> <span class="n">York</span><span class="o">|</span><span class="mi">772</span><span class="o">|</span><span class="mi">1518</span><span class="o">|-</span><span class="mf">34582000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="mi">97</span><span class="o">|</span><span class="n">false</span>
+<span class="mi">17</span><span class="p">:</span> <span class="mi">01</span><span class="o">|</span><span class="mi">17</span><span class="o">|</span><span class="n">IL</span><span class="o">|</span><span class="n">Illinois</span><span class="o">|</span><span class="mi">717</span><span class="o">|</span><span class="mi">1443</span><span class="o">|-</span><span class="mf">34167000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="mi">97</span><span class="o">|</span><span class="n">false</span>
+<span class="mi">18</span><span class="p">:</span> <span class="mi">01</span><span class="o">|</span><span class="mi">39</span><span class="o">|</span><span class="n">OH</span><span class="o">|</span><span class="n">Ohio</span><span class="o">|</span><span class="mi">713</span><span class="o">|</span><span class="mi">1430</span><span class="o">|</span><span class="mf">29911000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="mi">97</span><span class="o">|</span><span class="n">false</span>
+<span class="mi">19</span><span class="p">:</span> <span class="mi">01</span><span class="o">|</span><span class="mi">45</span><span class="o">|</span><span class="n">SC</span><span class="o">|</span><span class="n">South</span> <span class="n">Carolina</span><span class="o">|</span><span class="mi">637</span><span class="o">|</span><span class="mi">1220</span><span class="o">|</span><span class="mf">31594000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="mi">97</span><span class="o">|</span><span class="n">false</span>
+<span class="mi">20</span><span class="p">:</span> <span class="mi">01</span><span class="o">|</span><span class="mi">26</span><span class="o">|</span><span class="n">MI</span><span class="o">|</span><span class="n">Michigan</span><span class="o">|</span><span class="mi">594</span><span class="o">|</span><span class="mi">1125</span><span class="o">|</span><span class="mf">22176000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="mi">97</span><span class="o">|</span><span class="n">false</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+</section>
+<section id="analysis-of-final-data">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Analysis of Final Data</a><a class="headerlink" href="#analysis-of-final-data" title="Link to this heading">#</a></h2>
+<p>The final step is to analyze the output data and then compare its quality to both
+the as-is and the remediated data.</p>
+<p>We achieved the desired end data state with quality metrics showing scores of 100 for each output field, and
+the elimination of the errors we discovered in the original as-is data, and the residual errors in the
+remediated data.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># remove header</span>
+<span class="n">flds_hdr</span><span class="o">=</span> <span class="n">outrecs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">)</span>
+<span class="n">outrecs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">settings</span><span class="p">[</span><span class="s1">&#39;is_case_sens&#39;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;false&quot;</span>
+<span class="n">settings</span><span class="p">[</span><span class="s1">&#39;is_quoted&#39;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
+<span class="n">settings</span><span class="p">[</span><span class="s1">&#39;has_header&#39;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;false&quot;</span>
+<span class="n">settings</span><span class="p">[</span><span class="s1">&#39;extract_fields&#39;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;false&quot;</span>
+<span class="n">settings</span><span class="p">[</span><span class="s1">&#39;delim&#39;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;pipe&quot;</span>
+<span class="n">settings</span><span class="p">[</span><span class="s1">&#39;maxuv&#39;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;100&quot;</span>
+<span class="n">covalues</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">covalues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;OrigStateCode,OrigStateAbbr&quot;</span><span class="p">)</span>
+<span class="n">covalues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;DestStateCode,DestStateAbbr&quot;</span><span class="p">)</span>
+
+<span class="n">report_final</span><span class="o">=</span> <span class="n">analyzequality</span><span class="o">.</span><span class="n">do_qualityinspect</span><span class="p">(</span><span class="n">outfields</span><span class="p">,</span> <span class="n">covalues</span><span class="p">,</span> <span class="n">outrecs</span><span class="p">,</span> <span class="n">settings</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">report_final</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;notok:&quot;</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;error from final report:&quot;</span> <span class="o">+</span> <span class="n">report_final</span><span class="o">.</span><span class="n">status</span><span class="p">[</span><span class="mi">6</span><span class="p">:])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Number records: as-is=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">recs</span><span class="p">)</span><span class="si">}</span><span class="s2">, remediated=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">recs_remediated</span><span class="p">)</span><span class="si">}</span><span class="s2">, final=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">outrecs</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">);</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parsing errors: as-is: small1=</span><span class="si">{</span><span class="n">report_asis</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;small1&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, small2=</span><span class="si">{</span><span class="n">report_asis</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;small2&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, big=</span><span class="si">{</span><span class="n">report_asis</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;big&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parsing errors: remediated: small1=</span><span class="si">{</span><span class="n">report_remediated</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;small1&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, small2=</span><span class="si">{</span><span class="n">report_remediated</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;small2&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, big=</span><span class="si">{</span><span class="n">report_remediated</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;big&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parsing errors: final: small1=</span><span class="si">{</span><span class="n">report_final</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;small1&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, small2=</span><span class="si">{</span><span class="n">report_final</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;small2&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, big=</span><span class="si">{</span><span class="n">report_final</span><span class="o">.</span><span class="n">rec_parse_errs</span><span class="p">[</span><span class="s1">&#39;big&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number records with errors: as-is=</span><span class="si">{</span><span class="n">report_asis</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;numrecs_err&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, remediated=</span><span class="si">{</span><span class="n">report_remediated</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;numrecs_err&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, final=</span><span class="si">{</span><span class="n">report_final</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;numrecs_err&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number records with datatype errors: as-is=</span><span class="si">{</span><span class="n">report_asis</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;numrecs_err_datatype&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, remediated=</span><span class="si">{</span><span class="n">report_remediated</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;numrecs_err_datatype&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, final=</span><span class="si">{</span><span class="n">report_final</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;numrecs_err_datatype&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number records with format errors: as-is=</span><span class="si">{</span><span class="n">report_asis</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;numrecs_err_fmt&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, remediated=</span><span class="si">{</span><span class="n">report_remediated</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;numrecs_err_fmt&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, final=</span><span class="si">{</span><span class="n">report_final</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;numrecs_err_fmt&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">As-is fields with datatype errors: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">report_asis</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">temp</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">report_asis</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">temp</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  field: </span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">, count=</span><span class="si">{</span><span class="n">report_asis</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">][</span><span class="n">s</span><span class="p">][</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">report_asis</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">][</span><span class="n">s</span><span class="p">][</span><span class="s1">&#39;reasons&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;      reason=</span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">, count=</span><span class="si">{</span><span class="n">report_asis</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">][</span><span class="n">s</span><span class="p">][</span><span class="s1">&#39;reasons&#39;</span><span class="p">][</span><span class="n">r</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Remediated fields with datatype errors: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">report_remediated</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">temp</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">report_remediated</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">temp</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  field: </span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">, count=</span><span class="si">{</span><span class="n">report_remediated</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">][</span><span class="n">s</span><span class="p">][</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">report_remediated</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">][</span><span class="n">s</span><span class="p">][</span><span class="s1">&#39;reasons&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;      reason=</span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">, count=</span><span class="si">{</span><span class="n">report_remediated</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">][</span><span class="n">s</span><span class="p">][</span><span class="s1">&#39;reasons&#39;</span><span class="p">][</span><span class="n">r</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Final fields with datatype errors: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">report_final</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">);</span>
+<span class="n">temp</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">report_final</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">temp</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  field: </span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">, count=</span><span class="si">{</span><span class="n">report_final</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">][</span><span class="n">s</span><span class="p">][</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">report_final</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">][</span><span class="n">s</span><span class="p">][</span><span class="s1">&#39;reasons&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;      reason=</span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">, count=</span><span class="si">{</span><span class="n">report_final</span><span class="o">.</span><span class="n">err_stats</span><span class="p">[</span><span class="s1">&#39;fields_err_datatype&#39;</span><span class="p">][</span><span class="n">s</span><span class="p">][</span><span class="s1">&#39;reasons&#39;</span><span class="p">][</span><span class="n">r</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">Field Quality&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;As-Is&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">report_asis</span><span class="o">.</span><span class="n">fields</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;field </span><span class="si">{</span><span class="n">report_asis</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">report_asis</span><span class="o">.</span><span class="n">field_quality</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Remediated&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">report_remediated</span><span class="o">.</span><span class="n">fields</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;field </span><span class="si">{</span><span class="n">report_remediated</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">report_remediated</span><span class="o">.</span><span class="n">field_quality</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Field Quality Final&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">report_final</span><span class="o">.</span><span class="n">fields</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;field </span><span class="si">{</span><span class="n">report_final</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">report_final</span><span class="o">.</span><span class="n">field_quality</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># save to files</span>
+<span class="n">file_uri</span><span class="o">=</span> <span class="n">curdir</span> <span class="o">+</span> <span class="n">file_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.csv&quot;</span><span class="p">,</span><span class="s2">&quot;_final_report.dat&quot;</span><span class="p">)</span>
+<span class="n">report_uris</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file_uri</span><span class="p">)</span>
+<span class="n">txt</span><span class="o">=</span> <span class="n">reportfuncs</span><span class="o">.</span><span class="n">save_report_to_file</span><span class="p">(</span><span class="n">file_uri</span><span class="p">,</span> <span class="n">report_final</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">txt</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;notok:&quot;</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;error from saving final report:&quot;</span> <span class="o">+</span> <span class="n">txt</span><span class="p">[</span><span class="mi">6</span><span class="p">:])</span>
+
+<span class="c1"># save final data 0th entry is header of field titles</span>
+<span class="n">file_uri</span><span class="o">=</span> <span class="n">curdir</span> <span class="o">+</span> <span class="n">file_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.csv&quot;</span><span class="p">,</span><span class="s2">&quot;_final_data.dat&quot;</span><span class="p">)</span>
+<span class="n">data_uris</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file_uri</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_uri</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">flds_hdr</span><span class="p">)</span> <span class="o">+</span> <span class="n">LF</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">outrecs</span><span class="p">)):</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">outrecs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">LF</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Number</span> <span class="n">records</span><span class="p">:</span> <span class="k">as</span><span class="o">-</span><span class="ow">is</span><span class="o">=</span><span class="mi">1003</span><span class="p">,</span> <span class="n">remediated</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">final</span><span class="o">=</span><span class="mi">1000</span>
+<span class="n">Parsing</span> <span class="n">errors</span><span class="p">:</span> <span class="k">as</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span> <span class="n">small1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">small2</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">big</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">Parsing</span> <span class="n">errors</span><span class="p">:</span> <span class="n">remediated</span><span class="p">:</span> <span class="n">small1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">small2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">big</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">Parsing</span> <span class="n">errors</span><span class="p">:</span> <span class="n">final</span><span class="p">:</span> <span class="n">small1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">small2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">big</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">Number</span> <span class="n">records</span> <span class="k">with</span> <span class="n">errors</span><span class="p">:</span> <span class="k">as</span><span class="o">-</span><span class="ow">is</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">remediated</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">final</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">Number</span> <span class="n">records</span> <span class="k">with</span> <span class="n">datatype</span> <span class="n">errors</span><span class="p">:</span> <span class="k">as</span><span class="o">-</span><span class="ow">is</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">remediated</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">final</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">Number</span> <span class="n">records</span> <span class="k">with</span> <span class="nb">format</span> <span class="n">errors</span><span class="p">:</span> <span class="k">as</span><span class="o">-</span><span class="ow">is</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">remediated</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">final</span><span class="o">=</span><span class="mi">0</span>
+
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span> <span class="n">fields</span> <span class="k">with</span> <span class="n">datatype</span> <span class="n">errors</span><span class="p">:</span> <span class="mi">3</span>
+<span class="n">field</span><span class="p">:</span> <span class="n">agi</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">10</span>
+    <span class="n">reason</span><span class="o">=</span><span class="n">empty</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">5</span>
+    <span class="n">reason</span><span class="o">=</span><span class="n">non</span><span class="o">-</span><span class="n">numeric</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">5</span>
+<span class="n">field</span><span class="p">:</span> <span class="n">n1</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">5</span>
+    <span class="n">reason</span><span class="o">=</span><span class="n">empty</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">5</span>
+<span class="n">field</span><span class="p">:</span> <span class="n">n2</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">7</span>
+    <span class="n">reason</span><span class="o">=</span><span class="n">non</span><span class="o">-</span><span class="n">numeric</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">2</span>
+    <span class="n">reason</span><span class="o">=</span><span class="n">empty</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">5</span>
+
+<span class="n">Remediated</span> <span class="n">fields</span> <span class="k">with</span> <span class="n">datatype</span> <span class="n">errors</span><span class="p">:</span> <span class="mi">2</span>
+<span class="n">field</span><span class="p">:</span> <span class="n">agi</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">5</span>
+    <span class="n">reason</span><span class="o">=</span><span class="n">non</span><span class="o">-</span><span class="n">numeric</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">5</span>
+<span class="n">field</span><span class="p">:</span> <span class="n">n2</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">2</span>
+    <span class="n">reason</span><span class="o">=</span><span class="n">non</span><span class="o">-</span><span class="n">numeric</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">2</span>
+
+<span class="n">Final</span> <span class="n">fields</span> <span class="k">with</span> <span class="n">datatype</span> <span class="n">errors</span><span class="p">:</span> <span class="mi">0</span>
+
+
+<span class="n">Field</span> <span class="n">Quality</span>
+<span class="n">As</span><span class="o">-</span><span class="n">Is</span>
+<span class="n">field</span> <span class="n">y2_statefips</span><span class="p">:</span> <span class="mf">95.2</span>
+<span class="n">field</span> <span class="n">y1_statefips</span><span class="p">:</span> <span class="mf">95.2</span>
+<span class="n">field</span> <span class="n">y1_state</span><span class="p">:</span> <span class="mf">90.7</span>
+<span class="n">field</span> <span class="n">y1_state_name</span><span class="p">:</span> <span class="mi">100</span>
+<span class="n">field</span> <span class="n">n1</span><span class="p">:</span> <span class="mf">99.5</span>
+<span class="n">field</span> <span class="n">n2</span><span class="p">:</span> <span class="mf">99.3</span>
+<span class="n">field</span> <span class="n">AGI</span><span class="p">:</span> <span class="mf">93.3</span>
+
+<span class="n">Remediated</span>
+<span class="n">field</span> <span class="n">y2_statefips</span><span class="p">:</span> <span class="mi">100</span>
+<span class="n">field</span> <span class="n">y1_statefips</span><span class="p">:</span> <span class="mi">100</span>
+<span class="n">field</span> <span class="n">y1_state</span><span class="p">:</span> <span class="mf">95.2</span>
+<span class="n">field</span> <span class="n">y1_state_name</span><span class="p">:</span> <span class="mi">100</span>
+<span class="n">field</span> <span class="n">n1</span><span class="p">:</span> <span class="mi">100</span>
+<span class="n">field</span> <span class="n">n2</span><span class="p">:</span> <span class="mf">99.8</span>
+<span class="n">field</span> <span class="n">AGI</span><span class="p">:</span> <span class="mf">93.8</span>
+
+<span class="n">Field</span> <span class="n">Quality</span> <span class="n">Final</span>
+<span class="n">field</span> <span class="n">DestStateCode</span><span class="p">:</span> <span class="mi">100</span>
+<span class="n">field</span> <span class="n">OrigStateCode</span><span class="p">:</span> <span class="mi">100</span>
+<span class="n">field</span> <span class="n">OrigStateAbbr</span><span class="p">:</span> <span class="mi">100</span>
+<span class="n">field</span> <span class="n">OrigStateName</span><span class="p">:</span> <span class="mi">100</span>
+<span class="n">field</span> <span class="n">NumReturn</span><span class="p">:</span> <span class="mi">100</span>
+<span class="n">field</span> <span class="n">NumExempt</span><span class="p">:</span> <span class="mi">100</span>
+<span class="n">field</span> <span class="n">GrossIncome</span><span class="p">:</span> <span class="mi">100</span>
+<span class="n">field</span> <span class="n">useAGI</span><span class="p">:</span> <span class="mi">100</span>
+<span class="n">field</span> <span class="n">DestStateAbbr</span><span class="p">:</span> <span class="mi">100</span>
+<span class="n">field</span> <span class="n">DestStateName</span><span class="p">:</span> <span class="mi">100</span>
+<span class="n">field</span> <span class="n">isSubTotal</span><span class="p">:</span> <span class="mi">100</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="saved-files">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Saved Files</a><a class="headerlink" href="#saved-files" title="Link to this heading">#</a></h2>
+<p>Data and reports saved to files for later use.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Data and Reports Saved to Files:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;AS-IS:   data (delim is comma)= </span><span class="si">{</span><span class="n">data_uris</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">,  report= </span><span class="si">{</span><span class="n">report_uris</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;REMEDIATED:   data (delim is comma)= </span><span class="si">{</span><span class="n">data_uris</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">,  report= </span><span class="si">{</span><span class="n">report_uris</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;NORMALIZE_ENRICH:   data (delim is pipe)= </span><span class="si">{</span><span class="n">data_uris</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">,  report= </span><span class="si">{</span><span class="n">report_uris</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Data</span> <span class="ow">and</span> <span class="n">Reports</span> <span class="n">Saved</span> <span class="n">to</span> <span class="n">Files</span><span class="p">:</span>
+<span class="n">AS</span><span class="o">-</span><span class="n">IS</span><span class="p">:</span>   <span class="n">data</span> <span class="p">(</span><span class="n">delim</span> <span class="ow">is</span> <span class="n">comma</span><span class="p">)</span><span class="o">=</span> <span class="n">files</span>\<span class="n">IRSMigration_WithErrors_Hdr</span><span class="o">.</span><span class="n">csv</span><span class="p">,</span>  <span class="n">report</span><span class="o">=</span> <span class="n">files</span>\<span class="n">IRSMigration_WithErrors_Hdr_report</span><span class="o">.</span><span class="n">dat</span>
+<span class="n">REMEDIATED</span><span class="p">:</span>   <span class="n">data</span> <span class="p">(</span><span class="n">delim</span> <span class="ow">is</span> <span class="n">comma</span><span class="p">)</span><span class="o">=</span> <span class="n">files</span>\<span class="n">IRSMigration_WithErrors_Hdr_remediated_data</span><span class="o">.</span><span class="n">dat</span><span class="p">,</span>  <span class="n">report</span><span class="o">=</span> <span class="n">files</span>\<span class="n">IRSMigration_WithErrors_Hdr_remediated_report</span><span class="o">.</span><span class="n">dat</span>
+<span class="n">NORMALIZE_ENRICH</span><span class="p">:</span>   <span class="n">data</span> <span class="p">(</span><span class="n">delim</span> <span class="ow">is</span> <span class="n">pipe</span><span class="p">)</span><span class="o">=</span> <span class="n">files</span>\<span class="n">IRSMigration_WithErrors_Hdr_final_data</span><span class="o">.</span><span class="n">dat</span><span class="p">,</span>  <span class="n">report</span><span class="o">=</span> <span class="n">files</span>\<span class="n">IRSMigration_WithErrors_Hdr_final_report</span><span class="o">.</span><span class="n">dat</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="next">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Next</a><a class="headerlink" href="#next" title="Link to this heading">#</a></h2>
+<p>See Compare Results in Jupyter for examples of using these results to
+make a report comparing before and after remediating, normalizing, and
+enriching the data with VerityPy.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="analyzingdatarecords.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Analyze Data Records</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="compareresults.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Compare Results in Jupyter</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goal">Goal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-continual-improvement">Practice Continual Improvement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remediation-example">Remediation Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remediation-results">Remediation Results</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalize-and-enrich-example">Normalize and Enrich Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-fields">Output Fields</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lookup-dictionaries">Lookup Dictionaries</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transforms">Transforms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-final-data">Generate Final Data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-of-final-data">Analysis of Final Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saved-files">Saved Files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next">Next</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Technik Interlytics.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><!--show release-->
+20240922</div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

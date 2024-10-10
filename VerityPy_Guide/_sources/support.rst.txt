@@ -1,0 +1,11 @@
+Support
+++++++++
+
+There are four types of support offered:
+
+    1. Self- user handles all issues by reviewing code and examples
+    2. Basic- requires an active subscription at this lowest cost level which enables access to forums with information from Technik Interlytics and other users
+    3. Pro- requires active subscription at this level which enables Basic plus direct email to Technik Interlytics. We attempt to resolve all email issues within 24 hours but this depends on several factors so in practice can be typically (not guaranteed) 1-72 hours
+    4. Project- this is a contracted services agreement for a fixed price and duration
+
+see `VerityPy support page at Technik Interlytics web site <https://technikinterlytics.com/veritypy/support.html>`_ 

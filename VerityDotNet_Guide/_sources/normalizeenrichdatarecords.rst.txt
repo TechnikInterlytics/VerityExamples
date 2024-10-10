@@ -1,0 +1,635 @@
+=====================================
+Normalize & Enrich Data Records
+=====================================
+
+Correct errors, make consistent, and add in-record metadata for downstream analytics and modeling.
+
+.. contents:: 
+    :depth: 2
+
+
+Goal
+===============
+
+Use the analysis results to define datatype, format, and value characteristics 
+of the fields in the data set to correct errors and improve consistency and quality. 
+Add enriching metadata fields into records to enable precise analytics, 
+and granular models. 
+
+
+Objectives
+============
+
+With knowledge of discovered problems and data characteristics, we can more 
+thoroughly specify rules and transformations for the data 
+to be in a high quality and trusted state. 
+This state feeds end uses such as analytics and computational modeling which are 
+sensitive to even small amounts of errors and inconsistencies thereby significantly 
+improving the accuracy and validity of their results. 
+
+    * Define datatypes and formats for fields based on actual values and documented architecture
+    * Define correction rules for records with incorrect datatypes or formats
+    * Normalize data with transformation operations to encode/decode, or modify field values
+    * Fix records broken into multiple partial records with VerityX algorithm
+    * Add new fields to records to enrich analytic and modeling meaning and granularity
+
+
+Practice Continual Improvement
+=================================
+
+VerityX is designed for iteratively improving data set quality and enriching. It is counter-productive to attempt 
+to define every detail of a data set's structure, meaning, and use case rules in one lengthy requirements gathering process. 
+It is too complicated, laborious and prone to error. Instead, characterize data with an initial deep assessment and use 
+the results to discover what is correct, what is a problem, and what needs to be clarified. Adjusting the VerityX job 
+with ever increasing specificity is purposefully easy to do, and a core design principle to allow all team members including 
+non-technical business workers and managers to review the business rules and resulting outcomes. 
+
+A typical workflow will be:
+
+1. Organize source data file(s) and use a text editor to view the top of the file to determine its basic structure for:
+   
+    * is there a header line of field titles
+    * what delimiter is used
+    * are there comment lines starting with either # or //
+    * are there empty lines
+    * are there any obvious problems like lines that are much too short or long, odd characters that do not belong in the type of data, values that are inconsistent compared to most records
+
+2. Create a small application (Python or C# DotNet depending on library used) to read in the file's records, 
+   provide settings, define fields. See examples on support web site and the Python sample below.
+3. Iterate: Analyze, Review, Adjust
+   
+   1. submit data to analysis function
+   2. review results: datatype and format distributions per field, unique values per field, record size distribution, special characters
+   3. adjust Field definitions to include datatypes and formats based on results to improve granularity of analysis results
+
+4. Iterate: Remediate, Normalize, Enrich
+   
+   1. define transforms, add enrichment fields, normalize value ranges
+   2. submit data to remediation function
+   3. review result statistics and corrected, normalized, enriched output data: view with text editor, load into Excel, use Jupyter Notebook template
+
+5. Use new data in end use case and assess results
+
+    * analytics: pick a few samples and thoroughly review to see if values and category and numeric aggregations make sense and agree with known outcomes
+    * Data Science: check statistical scalars and distributions to predictions and historical data
+    * AI/ML: include in models and review changes, sensitivities, calibration to prior known test cases, reasonableness of future predictions
+
+
+Remediation Example
+=====================
+
+For this example, we use Visual Studio 2022 (VS2022) on Windows 11. This follows the setup described in 
+'**Analyze Data Records**'.
+
+.. topic:: Sample Code
+
+    Various sample code files including this one are available at the Technik Interlytics 
+    support web site
+
+|
+
+From the analysis, we discovered that there were errors in several fields as well as 
+a serious problem with incorrect parsing due to records broken across multiple source 
+file lines. We also saw that there are records with values violating the documentation and 
+semantics of the schema that must be removed or annotated with enriching metadata. 
+
+We use several VerityDotNet features to remediate the data.
+
+    1. adjust field datatypes and formats based on initial analysis results
+    2. analyze as-is data set
+    3. remediate parsing errors by rebuilding broken records
+    4. analyze remediated data set
+    5. define enrichment fields to add to output data for analytic and ML downstream applications
+    6. define lookup dictionaries and transforms to normalize field values, decode some fields into new enrichment fields, populate enrichment fields 
+       with conditional rules based on multi-field joint values in each record
+    7. refine data set
+    8. analyze final data set
+
+|
+
+This code is in Refine.cs in VerityDotNet_Examples. Steps 1-2:
+
+.. code-block:: 
+
+
+    //assign datatypes and formats
+    for (int i = 0; i < srcFields.Count; i++) {
+      fldName = srcFields[i].title.ToLowerInvariant();
+      if (fldName == "y1_statefips" || fldName == "y2_statefips") {
+        srcFields[i].datatype = "string";
+        srcFields[i].fmt_strlen = 2;
+      }
+      else if (fldName == "y1_state") {
+        srcFields[i].datatype = "string";
+        srcFields[i].fmt_strlen = 2;
+        srcFields[i].fmt_strcase = "upper";
+      }
+      else if (fldName == "y1_state_name") {
+        srcFields[i].datatype = "string";
+      }
+      else if (fldName == "n1" || fldName == "n2" || fldName == "agi") {
+        srcFields[i].datatype = "int";
+      }
+    }
+    
+    //----------------------------
+    //ANALYZE AS-IS
+    //----------------------------
+    settings["hasHeader"] = "true"; //we left header line in array when read file
+    settings["isQuoted"] = "true";
+    settings["isCaseSens"] = "false";
+    settings["delim"] = "comma";
+    settings["maxuv"] = "100"; //override default limit
+    settings["extractFields"] = "false"; //we have Fields from original file so do not want to auto-extract
+    settings["useThreads"] = "false";
+    
+    //perform Verity Analysis. We do not use coValues in this example so send an empty container
+    report_asis = AnalyzeQuality.Inspect(srcFields, new List<Dictionary<string, string>>(), settings, srcRecs);
+    if (report_asis.status.StartsWith("notok:")) throw new Exception($"error doing AnalyzeQuality: {report_asis.status[6..]}");
+
+|
+
+Steps 3-4:
+
+.. code-block:: 
+
+    //Set parameters
+    settings["normalize"] = "true";
+    settings["delimOut"] = "pipe"; //change output delimiter to allow embedded input delimiters
+    settings["embedDelim"] = "_"; //if any output delimiters in values then replace with underscore
+    settings["allowLastEmpty"] = "false"; //disallow Small1 parsing situation
+    settings["joinChar"]= "+"; //inserted when joining lines to fix small2 parsing
+    settings["ignoreEmpty"] = "true"; //do not use empty lines (after trim)
+    settings["pinFields"] = ""; //do not set 'pinned' fields in this example
+    settings["ignoreStartStr"] = "#|//"; //patterns that cause line to not be used. These are same as usual comment line prefixes
+    
+    remRecs = RemediateParsing.FixRecordFieldSplit(settings, srcFields, srcRecs);
+    if (remRecs.Count == 0) throw new ArgumentException("no records from remediation process");
+    else if (remRecs[0].StartsWith("notok:")) throw new Exception(remRecs[0][6..]);
+    else if (remRecs[0].StartsWith("ok:")) {
+      stats = remRecs[0][3..];
+      remRecs.RemoveAt(0); //remove stats entry
+      hdr = remRecs[0];
+      remRecs.RemoveAt(0); //remove header entry
+      Console.WriteLine($"Remediation stats: {stats}");
+      Console.WriteLine($"Header from remediation={hdr}");
+    }
+    else throw new ArgumentException("Remediation response failed to start with ok:");
+    
+    //perform Verity Analysis. Note sending new remediated record array. No coValues.
+    settings["hasHeader"] = "false"; //we removed header line
+    report_remediated = AnalyzeQuality.Inspect(srcFields, new List<Dictionary<string, string>>(), settings, remRecs);
+    if (report_remediated.status.StartsWith("notok:")) throw new Exception($"error doing AnalyzeQuality: {report_remediated.status[6..]}");
+
+
+|
+
+Step 5:
+
+.. code-block:: 
+
+    //Define output field datatypes and formats. Create output Fields 
+    //with titles more indicative of their semantics and set mapping to original field name
+    for (int i = 0; i < srcFields.Count; i++) {
+      txt = srcFields[i].title.ToLowerInvariant();
+      dtype = "";
+      if (txt.StartsWith("y1_state") || txt == "y2_statefips") dtype = "string";
+      else if (txt == "n1" || txt == "n2") dtype = "int";
+      else if (txt == "agi") dtype = "real";
+      mapto = txt;
+      strCase = ""; strCut = ""; strPad = ""; strPadChar = "";
+      strLen = -1;
+      dateFmt = "";
+      numDec = -1;
+      if (txt == "y2_statefips") {
+        title = "DestStateCode";
+        strLen = 2;
+        strCut = "back"; strPad = "front"; strPadChar = "0";
+      }
+      else if (txt == "y1_statefips") {
+        title = "OrigStateCode";
+        strLen = 2;
+        strCut = "back"; strPad = "front"; strPadChar = "0";
+      }
+      else if (txt == "y1_state") {
+        title = "OrigStateAbbr";
+        strCase = "upper"; //required to be upper case
+        strLen = 2;
+        strCut = "back"; strPad = "front"; strPadChar = "hyphen";
+      }
+      else if (txt == "y1_state_name") {
+        title = "OrigStateName";
+      }
+      else if (txt == "n1") title = "NumReturn";
+      else if (txt == "n2") {
+        title = "NumExempt";
+      }
+      else if (txt == "agi") {
+        title = "GrossIncome";
+        numDec = 2;
+      }
+      else title = srcFields[i].title;
+      outFields.Add(new Field() {
+        title = title,
+        mapto = mapto,
+        datatype = dtype,
+        fmt_strlen = strLen,
+        fmt_strcase = strCase,
+        fmt_date = dateFmt,
+        fmt_decimal = numDec,
+        fmt_strcut = strCut,
+        fmt_strpad = strPad,
+        fmt_strpadchar = strPadChar,
+      });
+      hashOutFields[title.ToLowerInvariant()] = i;
+    }
+    
+    //ADD ENRICHMENT FIELDS (not in source records but will be in output records)
+    outFields.Add(new Field() {
+      title = "useAGI", //indicator if record should be included in analytic aggregations
+      datatype = "bool",
+    });
+    hashOutFields[outFields[^1].title.ToLowerInvariant()] = outFields.Count - 1;
+    outFields.Add(new Field() {
+      title = "DestStateAbbr",
+      datatype = "string",
+      fmt_strlen = 2,
+      fmt_strcase = "upper"
+    });
+    hashOutFields[outFields[^1].title.ToLowerInvariant()] = outFields.Count - 1;
+    outFields.Add(new Field() {
+      title = "DestStateName",
+      datatype = "string",
+    });
+    hashOutFields[outFields[^1].title.ToLowerInvariant()] = outFields.Count - 1;
+    outFields.Add(new Field() {
+      title = "isSubTotal", //indicator record is aggregated sum of filtered records
+      datatype = "bool",
+    });
+    hashOutFields[outFields[^1].title.ToLowerInvariant()] = outFields.Count - 1;
+    
+|    
+    
+Step 6:    
+    
+.. sourcecode:: 
+
+    //Make Lookups
+    
+    title = "StateAbbr";
+    fileName = "StateAbbrfromFIPS_lookup.dat";
+    nKeys = 1;
+    isCaseSens = false;
+    fileUri = curDir + fileName;
+    lookUpDict = Lookup.MakeLookUpFromFile(title, fileUri, "pipe", isCaseSens, nKeys);
+    if (lookUpDict.title.StartsWith("notok:")) throw new ArgumentException($"error making lookup {fileName}: {lookUpDict.title[6..]}");
+    else if (lookUpDict.fields.Count == 0) throw new ArgumentException($"lookup does not have fields {fileName}");
+    else if (lookUpDict.recs.Count == 0) throw new ArgumentException($"lookup does not have recs {fileName}");
+    lookUps.Add(lookUpDict);
+    hashLookups[lookUpDict.title.ToLowerInvariant()] = lookUps.Count - 1;
+    
+    title = "StateName";
+    fileName = "StateNamefromFIPS_lookup.dat";
+    nKeys = 1;
+    isCaseSens = false;
+    fileUri = curDir + fileName;
+    lookUpDict = Lookup.MakeLookUpFromFile(title, fileUri, "pipe", isCaseSens, nKeys);
+    if (lookUpDict.title.StartsWith("notok:")) throw new ArgumentException($"error making lookup {fileName}: {lookUpDict.title[6..]}");
+    else if (lookUpDict.fields.Count == 0) throw new ArgumentException($"lookup does not have fields {fileName}");
+    else if (lookUpDict.recs.Count == 0) throw new ArgumentException($"lookup does not have recs {fileName}");
+    lookUps.Add(lookUpDict);
+    hashLookups[lookUpDict.title.ToLowerInvariant()] = lookUps.Count - 1;
+
+
+    //Make Transforms. 1st transform sets useAGI based on source field AGI value since it has some 
+    //coded values that should not be included in aggregations per source documentation
+    transforms.Add(new Transform("useAGI")); //this transform is attached to enrichment field useAGI
+    nTrans= transforms.Count-1;
+    transforms[nTrans].ops.Add(new Transform.Op("setToRef"));
+    transforms[nTrans].ops[^1].param1 = "AGI";
+    transforms[nTrans].ops.Add(new Transform.Op("IfEq"));
+    transforms[nTrans].ops[^1].param1 = "-1";
+    transforms[nTrans].ops.Add(new Transform.Op("setToValue")); //this is action for 'IfEq' False
+    transforms[nTrans].ops[^1].param1 = "true"; //useAGI = true meaning use AGI value since it does not have code -1
+    transforms[nTrans].ops.Add(new Transform.Op("setToValue")); //this is action for 'IfEq' True
+    transforms[nTrans].ops[^1].param1 = "false"; //useAGI = false meaning dont use AGI value since it is code -1
+    
+    transforms.Add(new Transform("GrossIncome")); //this transform is attached to output field GrossIncome which is mapped to source field AGI
+    nTrans= transforms.Count-1;
+    transforms[nTrans].ops.Add(new Transform.Op("IfNotEq"));
+    transforms[nTrans].ops[^1].param1 = "-1"; //also has coded values we need to handle for useful analytic output records
+    transforms[nTrans].ops.Add(new Transform.Op("NoOp")); //special Op to stop chian processing. This occurs when IfNotEq = false which means value = -1
+    transforms[nTrans].ops.Add(new Transform.Op("mult")); //automatically cleans number since default = true for param2
+    transforms[nTrans].ops[^1].param1 = "1000"; //documentation states AGI is in thousands US Dollar so we convert to actual value by x 1000
+    
+    transforms.Add(new Transform("DestStateAbbr")); //this transform is attached to output field DestStateAbbr which is added enrichment field to use lookup dictionary to find destination details from source record FIPS code
+    nTrans= transforms.Count-1;
+    transforms[nTrans].ops.Add(new Transform.Op("setToRef"));
+    transforms[nTrans].ops[^1].param1 = "y2_statefips";
+    transforms[nTrans].ops.Add(new Transform.Op("setLength")); //lookup dict use fixed 2 char long codes
+    transforms[nTrans].ops[^1].param1 = "2";
+    transforms[nTrans].ops[^1].param2 = "left";
+    transforms[nTrans].ops[^1].param3 = "0";
+    transforms[nTrans].ops.Add(new Transform.Op("lookup")); //lookup dict using fixed 2 char code to get state 2 letter abbreviation (FIPS)
+    transforms[nTrans].ops[^1].param1 = "StateAbbr"; //short title we assigned to lookup dictionary file
+    
+    transforms.Add(new Transform("DestStateName")); //this transform is attached to output field DestStateName which is added enrichment field to use lookup dictionary to find destination details from source record FIPS code
+    nTrans= transforms.Count-1;
+    transforms[nTrans].ops.Add(new Transform.Op("setToRef"));
+    transforms[nTrans].ops[^1].param1 = "y2_statefips";
+    transforms[nTrans].ops.Add(new Transform.Op("setLength")); //lookup dict use fixed 2 char long codes
+    transforms[nTrans].ops[^1].param1 = "2";
+    transforms[nTrans].ops[^1].param2 = "left";
+    transforms[nTrans].ops[^1].param3 = "0";
+    transforms[nTrans].ops.Add(new Transform.Op("lookup")); //lookup dict using fixed 2 char code to get state 2 letter abbreviation (FIPS)
+    transforms[nTrans].ops[^1].param1 = "StateName"; //short title we assigned to lookup dictionary file
+    
+    transforms.Add(new Transform("isSubTotal"));
+    nTrans= transforms.Count-1;
+    transforms[nTrans].ops.Add(new Transform.Op("setToRef"));
+    transforms[nTrans].ops[^1].param1 = "y1_state_name";
+    transforms[nTrans].ops.Add(new Transform.Op("IfStrContains"));
+    transforms[nTrans].ops[^1].param1 = "migra";
+    transforms[nTrans].ops.Add(new Transform.Op("setToValue")); //this is action for If.. = False
+    transforms[nTrans].ops[^1].param1 = "false";
+    transforms[nTrans].ops.Add(new Transform.Op("setToValue")); //this is action for If.. = True
+    transforms[nTrans].ops[^1].param1 = "true";
+
+|
+
+
+Step 7:
+
+.. sourcecode:: 
+
+    settings["delim"] = "pipe"; //change since using output fields from remediation
+    report_refine = RefineData.DoRefine(outFields, transforms, settings, lookUps, srcFields, remRecs, ref outRecs);
+    if (report_refine.status.StartsWith("notok:")) throw new ArgumentException($"Refine error: {report_refine.status[6..]}");
+    else if (report_refine.status.StartsWith("ok:")) Console.WriteLine($"Refine done with {report_refine.status[3..]}");
+    if (outRecs.Count == 0) throw new ArgumentException("no output records");
+    //Write output records to file
+    fileOut = curDir + "TestRefine_IRS_output_remediate.dat";
+    nLine = 0;
+    using (StreamWriter sw = new StreamWriter(fileOut)) {
+      foreach (string s in outRecs) {
+        if (s.Length > 0) {
+          sw.WriteLine(s);
+          nLine++;
+        }
+      }
+    }
+    Console.WriteLine($"Verity Refined output with remediation data at: {fileOut}");
+
+|
+
+Step 8:
+
+.. sourcecode:: 
+
+    //perform Verity Analysis. Note sending new refined record array. No coValues.
+    settings["hasHeader"] = "true"; //header line in refined array
+    report_final = AnalyzeQuality.Inspect(srcFields, new List<Dictionary<string, string>>(), settings, outRecs);
+    if (report_final.status.StartsWith("notok:")) throw new Exception($"error doing AnalyzeQuality: {report_final.status[6..]}");
+
+|
+|
+
+Review Results
+---------------------
+
+We show select results from each of the three data states as-is, remediated, refined.
+
+|
+
+.. code-block:: 
+
+    //------------------------------------
+    //          Compare Results
+    //------------------------------------
+    Console.WriteLine("Sample Results Comparing Three Versions:");
+    Console.WriteLine($"Number records: As-is={report_asis.numRecs}, Rem={report_remediated.numRecs}, Final={report_final.numRecs}");
+    Console.WriteLine($"Number records errors: As-is= {report_asis.errStats["numrecserr"]}, Rem= {report_remediated.errStats["numrecserr"]}, Final= {report_final.errStats["numrecserr"]}");
+    Console.WriteLine($"Number records datatype errors: As-is= {report_asis.errStats["numrecserrdatatype"]}, Rem= {report_remediated.errStats["numrecserrdatatype"]}, Final= {report_final.errStats["numrecserrdatatype"]}");
+    Console.WriteLine($"Number records format errors: As-is= {report_asis.errStats["numrecserrfmt"]}, Rem= {report_remediated.errStats["numrecserrfmt"]}, Final= {report_final.errStats["numrecserrfmt"]}");
+    Console.WriteLine($"Number parsing errors Small1: As-is= {report_asis.recParseErrs["small1"]}, Rem= {report_remediated.recParseErrs["small1"]}, Final= {report_final.recParseErrs["small1"]}");
+    Console.WriteLine($"Number parsing errors Small2: As-is= {report_asis.recParseErrs["small2"]}, Rem= {report_remediated.recParseErrs["small2"]}, Final= {report_final.recParseErrs["small2"]}");
+    Console.WriteLine($"Number parsing errors Big: As-is= {report_asis.recParseErrs["big"]}, Rem= {report_remediated.recParseErrs["big"]}, Final= {report_final.recParseErrs["big"]}");
+
+    Console.WriteLine("\nFIELD QUALITY");
+    for (int i = 0; i < report_asis.fields.Count; i++) {
+      Console.WriteLine($"{report_asis.fields[i].title}: As-is={report_asis.fieldQuality[i]}, Rem={report_remediated.fieldQuality[i]}, Final={report_final.fieldQuality[i]} ");
+    }
+    
+    Console.WriteLine("\nUNIQUE VALUES: Top 5 Per Field");
+    for (int i = 0; i < report_asis.fields.Count; i++) {
+      Console.WriteLine($"Field {report_asis.fields[i].title}");
+      for (int j = 0; j < 5; j++) {
+        txt = "As-is:";
+        if (j < report_asis.fieldUniqVals[i].Count) txt += $"{report_asis.fieldUniqVals[i][j].uv}={report_asis.fieldUniqVals[i][j].count}";
+        else txt += "-no value-";
+        txt += ", Rem:";
+        if (j < report_remediated.fieldUniqVals[i].Count) txt += $"{report_remediated.fieldUniqVals[i][j].uv}={report_remediated.fieldUniqVals[i][j].count}";
+        else txt += "-no value-";
+        txt += ", Final:";
+        if (j < report_final.fieldUniqVals[i].Count) txt += $"{report_final.fieldUniqVals[i][j].uv}={report_final.fieldUniqVals[i][j].count}";
+        else txt += "-no value-";
+        Console.WriteLine(txt);
+      }
+    }
+    
+    Console.WriteLine("\nUNIQUE VALUES: Bottom 5 Per Field");
+    for (int i = 0; i < report_asis.fields.Count; i++) {
+      Console.WriteLine($"Field {report_asis.fields[i].title}");
+      for (int j = 0; j < 5; j++) {
+        txt = "As-is:";
+        n1 = report_asis.fieldUniqVals[i].Count - 1 - j;
+        if (n1< report_asis.fieldUniqVals[i].Count) txt += $"{report_asis.fieldUniqVals[i][n1].uv}={report_asis.fieldUniqVals[i][n1].count}";
+        else txt += "-no value-";
+        txt += ", Rem:";
+        n1 = report_remediated.fieldUniqVals[i].Count - 1 - j;
+        if (n1 < report_remediated.fieldUniqVals[i].Count) txt += $"{report_remediated.fieldUniqVals[i][n1].uv}={report_remediated.fieldUniqVals[i][n1].count}";
+        else txt += "-no value-";
+        txt += ", Final:";
+        n1 = report_final.fieldUniqVals[i].Count - 1 - j;
+        if (n1 < report_final.fieldUniqVals[i].Count) txt += $"{report_final.fieldUniqVals[i][n1].uv}={report_final.fieldUniqVals[i][n1].count}";
+        else txt += "-no value-";
+        Console.WriteLine(txt);
+      }
+    }
+    
+    Console.WriteLine("\nSPECIAL CHARACTERS");
+    foreach (KeyValuePair<string, long> kv in report_asis.specCharDist) {
+      txt = $"SpecChar {kv.Key}: As-is={kv.Value}, Rem=";
+      txt += report_remediated.specCharDist.ContainsKey(kv.Key) ? $"{report_remediated.specCharDist[kv.Key]}" : "0";
+      txt += ", Final=";
+      txt += report_final.specCharDist.ContainsKey(kv.Key) ? $"{report_final.specCharDist[kv.Key]}" : "0";
+      Console.WriteLine(txt);
+    }
+
+
+|
+
+This generates summary information:
+
+|
+
+.. sourcecode:: 
+
+    TEST REFINE: 20240808T150435
+    TEST FILE: IRSMigration_WithErrors_Hdr.csv
+    Remediation stats: recin=1004,recout=1000,big=0,small1=0,small2=5,join=3,fix=2,notfix=0
+    Header from remediation=y2_statefips,y1_statefips,y1_state,y1_state_name,n1,n2,AGI
+    Verity Refined output with remediation data at: D:\CodeDevelopment\VS\TestVerityDotNet\test\TestRefine_IRS_output_remediate.dat
+    no problems    -->  OK
+    
+    Sample Final Output: 10 records (joinChar=+)
+    0:     DestStateCode|OrigStateCode|OrigStateAbbr|OrigStateName|NumReturn|NumExempt|GrossIncome|useAGI|DestStateAbbr|DestStateName|isSubTotal
+    1:     01|96|AL|AL Total Migration-US and Foreign|33716|67747|1515297000.00|true|AL|Alabama|true
+    2:     01|97|AL|AL Total Migration-US|32868|65647|1467218000.00|true|AL|Alabama|true
+    3:     01|98|AL|"AL Total Migration|0|848|2100000.00|true|AL|Alabama|true
+    4:     01|97|AL|AL Total Migration-Same +State|46630|95832|1871804000.00|true|AL|Alabama|true
+    5:     01|01|AL|AL +Non-+migrants|1598458|3579600|96406319000.00|true|AL|Alabama|true
+    6:     01|13|GA|Georgia|5972|12269|249108000.00|true|AL|Alabama|false
+    7:     01|12|FL|Florida|4489|8446|185502000.00|true|AL|Alabama|false
+    8:     01|48|TX|Texas|3435|7041|135165000.00|true|AL|Alabama|false
+    9:     01|47|TN|Tennessee|2608|5304|124203000.00|true|AL|Alabama|false
+    10:     01|28|MS|Mississippi|2212|4562|90723000.00|true|AL|Alabama|false
+    
+    
+    Sample Results Comparing Three Versions:
+    Number records: As-is=1003, Rem=1000, Final=1000
+    Number records errors: As-is= 19, Rem= 14, Final= 0
+    Number records datatype errors: As-is= 14, Rem= 9, Final= 0
+    Number records format errors: As-is= 9, Rem= 6, Final= 0
+    Number parsing errors Small1: As-is= 0, Rem= 0, Final= 0
+    Number parsing errors Small2: As-is= 5, Rem= 0, Final= 0
+    Number parsing errors Big: As-is= 0, Rem= 0, Final= 0
+
+    FIELD QUALITY
+    y2_statefips: As-is=95.2, Rem=95.2, Final=100
+    y1_statefips: As-is=95.2, Rem=100, Final=100
+    y1_state: As-is=90.7, Rem=95.2, Final=100
+    y1_state_name: As-is=100, Rem=100, Final=100
+    n1: As-is=98.7, Rem=100, Final=100
+    n2: As-is=97.8, Rem=99.4, Final=100
+    AGI: As-is=89.1, Rem=91.5, Final=100
+
+    UNIQUE VALUES: Top 5 Per Field
+    
+    Field y2_statefips
+    As-is:09=56, Rem:19=56, Final:01=56
+    As-is:19=56, Rem:02=56, Final:02=56
+    As-is:18=56, Rem:04=56, Final:04=56
+    As-is:17=56, Rem:05=56, Final:05=56
+    As-is:16=56, Rem:06=56, Final:06=56
+    
+    Field y1_statefips
+    As-is:97=35, Rem:97=35, Final:97=35
+    As-is:96=18, Rem:96=18, Final:96=18
+    As-is:05=18, Rem:04=18, Final:04=18
+    As-is:40=18, Rem:34=18, Final:34=18
+    As-is:04=18, Rem:20=18, Final:20=18
+    
+    Field y1_state
+    As-is:al=22, Rem:al=22, Final:al=22
+    As-is:az=22, Rem:ak=22, Final:ak=22
+    As-is:hi=22, Rem:ia=22, Final:ia=22
+    As-is:ar=22, Rem:ct=22, Final:ct=22
+    As-is:in=22, Rem:hi=22, Final:hi=22
+    
+    Field y1_state_name
+    As-is:missouri=18, Rem:pennsylvania=18, Final:pennsylvania=18
+    As-is:maryland=18, Rem:missouri=18, Final:missouri=18
+    As-is:washington=18, Rem:maine=18, Final:maine=18
+    As-is:pennsylvania=18, Rem:washington=18, Final:washington=18
+    As-is:wisconsin=18, Rem:maryland=18, Final:maryland=18
+    
+    Field n1
+    As-is:-1=13, Rem:-1=13, Final:-1=13
+    As-is:97=8, Rem:97=8, Final:97=8
+    As-is:59=6, Rem:59=6, Final:59=6
+    As-is:27=5, Rem:30=5, Final:29=5
+    As-is:30=5, Rem:52=5, Final:130=5
+    
+    Field n2
+    As-is:-1=13, Rem:-1=13, Final:-1=13
+    As-is:57=5, Rem:57=5, Final:57=5
+    As-is:-empty-=5, Rem:33=5, Final:33=5
+    As-is:33=5, Rem:207=4, Final:207=4
+    As-is:172=4, Rem:66=4, Final:66=4
+    
+    Field AGI
+    As-is:-1=13, Rem:-1=13, Final:-1.00=13
+    As-is:-empty-=5, Rem:55530=2, Final:55530000.00=2
+    As-is:6258=2, Rem:195751=2, Final:4356000.00=2
+    As-is:111795=2, Rem:4356=2, Final:53044000.00=2
+    As-is:5351=2, Rem:111795=2, Final:4845000.00=2
+    
+
+    UNIQUE VALUES: Bottom 5 Per Field
+    
+    Field y2_statefips
+    As-is:state=1, Rem:1=1, Final:21=49
+    As-is:non-=1, Rem:21=49, Final:11=55
+    As-is:migrants=1, Rem:11=55, Final:19=56
+    As-is:1=1, Rem:01=55, Final:18=56
+    As-is:21=49, Rem:18=56, Final:17=56
+    
+    Field y1_statefips
+    As-is:1598458=1, Rem:50=17, Final:50=17
+    As-is:46630=1, Rem:11=17, Final:11=17
+    As-is:-empty-=1, Rem:16=17, Final:16=17
+    As-is:50=17, Rem:30=17, Final:30=17
+    As-is:11=17, Rem:38=17, Final:38=17
+    
+    Field y1_state
+    As-is:95832=1, Rem:vt=17, Final:vt=17
+    As-is:-empty-=1, Rem:ri=17, Final:ri=17
+    As-is:3579600=1, Rem:nd=17, Final:nd=17
+    As-is:vt=17, Rem:mt=17, Final:mt=17
+    As-is:nd=17, Rem:pa=18, Final:pa=18
+    
+    Field y1_state_name
+    As-is:ky non-migrants=1, Rem:ky non-migrants=1, Final:ky non-migrants=1
+    As-is:co non-migrants=1, Rem:ca total migration-us and foreign=1, Final:ca total migration-us and foreign=1
+    As-is:ca total migration-us and foreign=1, Rem:ca total migration-foreign=1, Final:ca total migration-foreign=1
+    As-is:ca total migration-us=1, Rem:ca total migration-same state=1, Final:ca total migration-same state=1
+    As-is:ca total migration-foreign=1, Rem:ca non-migrants=1, Final:ca non-migrants=1
+    
+    Field n1
+    As-is:64=1, Rem:64=1, Final:64=1
+    As-is:995=1, Rem:1025=1, Final:1147=1
+    As-is:624=1, Rem:719=1, Final:930=1
+    As-is:628=1, Rem:754=1, Final:976=1
+    As-is:719=1, Rem:930=1, Final:995=1
+    
+    Field n2
+    As-is:97=1, Rem:97=1, Final:97=1
+    As-is:1541=1, Rem:1350=1, Final:1350=1
+    As-is:1156=1, Rem:1141=1, Final:1141=1
+    As-is:1115=1, Rem:1130=1, Final:1130=1
+    As-is:1141=1, Rem:1086=1, Final:1086=1
+    
+    Field AGI
+    As-is:2980=1, Rem:2980=1, Final:2980000.00=1
+    As-is:29990=1, Rem:15647=1, Final:43142000.00=1
+    As-is:144141=1, Rem:1016401=1, Final:148163858000.00=1
+    As-is:196950=1, Rem:148163858=1, Final:1178906000.00=1
+    As-is:1016401=1, Rem:1178906=1, Final:2277368000.00=1
+    
+    
+    SPECIAL CHARACTERS
+    SpecChar ascii_234: As-is=1, Rem=1, Final=0
+    SpecChar unicode_8252: As-is=1, Rem=1, Final=0
+    SpecChar ascii_167: As-is=1, Rem=1, Final=0
+    SpecChar unicode_9658: As-is=1, Rem=1, Final=0
+
+|
+
+Next
+========
+
+See Compare Results in Jupyter for examples of using these results to 
+make a report comparing before and after remediating, normalizing, and 
+enriching the data with VerityDotNet.
+

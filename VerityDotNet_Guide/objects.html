@@ -1,0 +1,1209 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Objects &#8212; VerityDotNet</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=f51f75df"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'objects';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Functions" href="functions.html" />
+    <link rel="prev" title="Transforms" href="transforms.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">VerityDotNet</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="README.html">
+    Readme
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="transforms.html">
+    Transforms
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Objects
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="functions.html">
+    Functions
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="analyzingdatarecords.html">
+    Analyze Data Records
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="normalizeenrichdatarecords.html">
+    Normalize & Enrich Data Records
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="compareresults.html">
+    Compare Results in Jupyter
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="license.html">
+    License
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="support.html">
+    Support
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="README.html">
+    Readme
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="transforms.html">
+    Transforms
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Objects
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="functions.html">
+    Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="analyzingdatarecords.html">
+    Analyze Data Records
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="normalizeenrichdatarecords.html">
+    Normalize & Enrich Data Records
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="compareresults.html">
+    Compare Results in Jupyter
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="license.html">
+    License
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="support.html">
+    Support
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Objects</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="objects">
+<h1><a class="toc-backref" href="#id28" role="doc-backlink">Objects</a><a class="headerlink" href="#objects" title="Link to this heading">#</a></h1>
+<nav class="contents" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#objects" id="id28">Objects</a></p>
+<ul>
+<li><p><a class="reference internal" href="#summary" id="id29">Summary</a></p></li>
+<li><p><a class="reference internal" href="#optypes-class" id="id30">OpTypes Class</a></p>
+<ul>
+<li><p><a class="reference internal" href="#opcat" id="id31">OpCat</a></p></li>
+<li><p><a class="reference internal" href="#opfunc" id="id32">OpFunc</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#transform-class" id="id33">Transform Class</a></p>
+<ul>
+<li><p><a class="reference internal" href="#transform" id="id34">Transform</a></p></li>
+<li><p><a class="reference internal" href="#op" id="id35">Op</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#lookup-class" id="id36">LookUp Class</a></p>
+<ul>
+<li><p><a class="reference internal" href="#lookupdict" id="id37">LookUpDict</a></p></li>
+<li><p><a class="reference internal" href="#lookuprec" id="id38">LookUpRec</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#qualityanalysis-class" id="id39">QualityAnalysis Class</a></p>
+<ul>
+<li><p><a class="reference internal" href="#qualityanalysis" id="id40">QualityAnalysis</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#field-class" id="id41">Field Class</a></p>
+<ul>
+<li><p><a class="reference internal" href="#field" id="id42">Field</a></p></li>
+<li><p><a class="reference internal" href="#covalue" id="id43">CoValue</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="summary">
+<h2><a class="toc-backref" href="#id29" role="doc-backlink">Summary</a><a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>C# DotNet objects are used in several ways in this library. There are object classes to define the portfolio of transform functions organized by categories, to load and use lookup dictionaries to encode/decode values, to define transforms and their multiple operations per source and enrichment field, and to collate the settings and results from analyzing data records.</p>
+</section>
+<section id="optypes-class">
+<h2><a class="toc-backref" href="#id30" role="doc-backlink">OpTypes Class</a><a class="headerlink" href="#optypes-class" title="Link to this heading">#</a></h2>
+<section id="opcat">
+<h3><a class="toc-backref" href="#id31" role="doc-backlink">OpCat</a><a class="headerlink" href="#opcat" title="Link to this heading">#</a></h3>
+<section id="description">
+<h4>Description<a class="headerlink" href="#description" title="Link to this heading">#</a></h4>
+<p>Category for transform operations grouped by either type of action performed or datatype it is applied to. Categories include: assignment, conditional, numeric, text, date.</p>
+</section>
+<section id="members">
+<h4>Members<a class="headerlink" href="#members" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>category: string title of this category</p></li>
+<li><p>funcs: list of OpFunc objects for this category</p></li>
+</ul>
+</section>
+<section id="constructor">
+<h4>Constructor<a class="headerlink" href="#constructor" title="Link to this heading">#</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">public</span> <span class="n">OpCat</span><span class="p">(</span><span class="n">string</span> <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">category</span> <span class="o">=</span> <span class="n">title</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">funcs</span> <span class="o">=</span> <span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">OpFunc</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="opfunc">
+<h3><a class="toc-backref" href="#id32" role="doc-backlink">OpFunc</a><a class="headerlink" href="#opfunc" title="Link to this heading">#</a></h3>
+<section id="id1">
+<h4>Description<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<p>Function definition for defining transform operations. This is intended to be used for the specification of available transform operations.</p>
+</section>
+<section id="id2">
+<h4>Members<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>title: string name of function such as ifEq</p></li>
+<li><p>desc: string description</p></li>
+<li><p>param1Req: bool true/false whether param1 is required to be set</p></li>
+<li><p>param1Typ: string datatype of param1 if it is restricted to one type</p></li>
+<li><p>param2Req: bool true/false whether param2 is required to be set</p></li>
+<li><p>param2Typ: string datatype of param2 if it is restricted to one type</p></li>
+<li><p>param3Req: bool true/false whether param3 is required to be set</p></li>
+<li><p>param3Typ: string datatype of param3 if it is restricted to one type</p></li>
+</ul>
+</section>
+<section id="id3">
+<h4>Constructor<a class="headerlink" href="#id3" title="Link to this heading">#</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">public</span> <span class="n">OpFunc</span><span class="p">(</span><span class="n">string</span> <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">desc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">param1Typ</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">param2Typ</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">param3Typ</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">param1Req</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">param2Req</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">param3Req</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="transform-class">
+<h2><a class="toc-backref" href="#id33" role="doc-backlink">Transform Class</a><a class="headerlink" href="#transform-class" title="Link to this heading">#</a></h2>
+<section id="transform">
+<h3><a class="toc-backref" href="#id34" role="doc-backlink">Transform</a><a class="headerlink" href="#transform" title="Link to this heading">#</a></h3>
+<section id="id4">
+<h4>Description<a class="headerlink" href="#id4" title="Link to this heading">#</a></h4>
+<p>Transform object for modifying source or enrichment field value. A transform contains a sequence of operations that may include conditional testing of values and referenced fields. It operates on the field whose name is the title of the transform. This field may be a source data field or an enrichment field added to the output record.</p>
+</section>
+<section id="id5">
+<h4>Members<a class="headerlink" href="#id5" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>title: string name of field transform operates on</p></li>
+<li><p>ops: list of Op objects</p></li>
+</ul>
+</section>
+<section id="id6">
+<h4>Constructor<a class="headerlink" href="#id6" title="Link to this heading">#</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">public</span> <span class="n">Transform</span><span class="p">(</span><span class="n">string</span> <span class="n">title</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">ops</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="methods">
+<h4>Methods<a class="headerlink" href="#methods" title="Link to this heading">#</a></h4>
+<p><strong>GetJSON(bool addLf=false, bool addQuote=false)</strong></p>
+<p>Get JSON string of transform properties.</p>
+<ul class="simple">
+<li><p>addLf: whether to add line feed at ends of each JSON property (default false)</p></li>
+<li><p>addQuote: whether to enclose keys and values in double quotes (default false)</p></li>
+</ul>
+</section>
+</section>
+<section id="op">
+<h3><a class="toc-backref" href="#id35" role="doc-backlink">Op</a><a class="headerlink" href="#op" title="Link to this heading">#</a></h3>
+<section id="id7">
+<h4>Description<a class="headerlink" href="#id7" title="Link to this heading">#</a></h4>
+<p>Operation (Op) for transforms. Each Op has a title which is the name of the function. It specifies the function and its category along with several possible parameters (param1, param2, param3) that depend on the specific function.</p>
+</section>
+<section id="id8">
+<h4>Members<a class="headerlink" href="#id8" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>title: string name of function to be performed</p></li>
+<li><p>category: string name of function category</p></li>
+<li><p>param1: string parameter value which be unused, optional or required depending on specific function</p></li>
+<li><p>param2: string parameter value which be unused, optional or required depending on specific function</p></li>
+<li><p>param3: string parameter value which be unused, optional or required depending on specific function</p></li>
+<li><p>order: integer value to order execution of operations for this transform. Default is -1 with system assigning values at runtime after sorting values which can be discontinuous</p></li>
+<li><p>p1List: list for internal use only</p></li>
+<li><p>p2List: list for internal use only</p></li>
+<li><p>p3List: list for internal use only</p></li>
+</ul>
+</section>
+<section id="id9">
+<h4>Constructor<a class="headerlink" href="#id9" title="Link to this heading">#</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">public</span> <span class="n">Op</span><span class="p">(</span><span class="n">string</span> <span class="n">title</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">category</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">param1</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">param2</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">param3</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">p1List</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">p2List</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">p3List</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="lookup-class">
+<h2><a class="toc-backref" href="#id36" role="doc-backlink">LookUp Class</a><a class="headerlink" href="#lookup-class" title="Link to this heading">#</a></h2>
+<p>Lookup dictionary for transform processing. Transforms have an operation (Op) that allows assigning a value based on looking up the current value in a dictionary. 1, 2, 3 keys are allowed with the replacement value coming from the following column. This Op is in transform_types for category=assignment, function=lookup.</p>
+<p>The description of this function and how it uses the lookup is:</p>
+<p>Assigns a value from a lookup list based on matching values to keys where keys can use wildcards. The match can be made to one, two, or three source fields in the record with field 1 always the current value while fields 2 and 3 are optional if set in Param2. Leave Param2 empty to use only 1 field as the match value. All selected fields must match their respective conditions for a lookup result to be assigned. The conditions and the result to assign are in an object for each list entry with properties: key1, key2, key3, value defined as example {‘key1’:’top*’,’key2’:’*blue*’,’key3’:’*left’,’value’:’Orange’}. Conditions can use front and/or back wildcard (*) like top*, *night, *state* to allow token matching. To use multiple conditions for the same replacement value ( OR condition ), enter them as separate list entries. To use AND and NOT conditions, use special notations as delimiters: top*-and-*night-not-*blue* which means a match requires both top* and *night be true as well as no instances of the token blue.</p>
+<ul class="simple">
+<li><p>Param1: title of list that has been pre-loaded into array of lists as part of initialization.</p></li>
+<li><p>Param2: Fields 2 and 3 both of which are optional and if both supplied use pipe to delimit as with color|position. For this example, current value must start with top (key1 condition), the field color must contain blue, and the field position must end with left. All of these must be true for a match in which case the value of Orange is assigned.</p></li>
+</ul>
+<section id="lookupdict">
+<h3><a class="toc-backref" href="#id37" role="doc-backlink">LookUpDict</a><a class="headerlink" href="#lookupdict" title="Link to this heading">#</a></h3>
+<section id="id10">
+<h4>Description<a class="headerlink" href="#id10" title="Link to this heading">#</a></h4>
+<p>Dictionary with keys (either 1,2,3 field values) mapped to replacement value. The keys can use wild cards and also special notations for AND and NOT conditions.
+In practice, this is made with a convenience method <strong>MakeLookUpFromFile</strong> such as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lookUpDict</span> <span class="o">=</span> <span class="n">Lookup</span><span class="o">.</span><span class="n">MakeLookUpFromFile</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">fileUri</span><span class="p">,</span> <span class="n">delimDict</span><span class="p">,</span> <span class="n">isCaseSens</span><span class="p">,</span> <span class="n">nKeys</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="id11">
+<h4>Members<a class="headerlink" href="#id11" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>title: string used in function ‘lookup’ to select which LookUpDict to use</p></li>
+<li><p>fileURI: URI for reading from file</p></li>
+<li><p>delim: delimiter (comma, pipe, tab, colon)</p></li>
+<li><p>isCaseSens: if false then all text changed to lowercase</p></li>
+<li><p>numKeys: integer number of keys used 1-3</p></li>
+<li><p>fields: list of field titles which must correspond to columns in data set</p></li>
+<li><p>recs:list of LookUpRec objects</p></li>
+</ul>
+</section>
+<section id="id12">
+<h4>Constructor<a class="headerlink" href="#id12" title="Link to this heading">#</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">public</span> <span class="n">LookUpDict</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">fileURI</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">delim</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">numKeys</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">recs</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="lookuprec">
+<h3><a class="toc-backref" href="#id38" role="doc-backlink">LookUpRec</a><a class="headerlink" href="#lookuprec" title="Link to this heading">#</a></h3>
+<section id="id13">
+<h4>Description<a class="headerlink" href="#id13" title="Link to this heading">#</a></h4>
+<p>Record within a lookup dictionary. Each lookup record has 1-3 keys with matching conditions. Each key value can use wildcards at front and/or back. In addition, each key can have a combined condition using more than one token joined using special notation for boolean AND and NOT conditions. For example, a key might be top*-and-*food*-not-*juice which means the field value being checked must statisfy starting with ‘top’, containing ‘food’, and not ending with ‘juice’. Therefore, each key is parsed into lists that are aligned: AND tokens and for each corresponding front_wild and back_wild lists. Similarly, NOT tokens and wild lists. After parsing, key1And is a list of tokens minus front and back wildcards if they were supplied, and if so, they are in correlated lists key1AndFrontWild and key1AndBackWild.</p>
+</section>
+<section id="id14">
+<h4>Members<a class="headerlink" href="#id14" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>key1: single or combined value(s) to check</p></li>
+<li><p>key2: optional. single or combined value(s) to check</p></li>
+<li><p>key3: optional. single or combined value(s) to check</p></li>
+<li><p>key1And: list of AND conditions for key1 (at least 1). System made.</p></li>
+<li><p>key1Not: list of NOT conditions for key1 (0 or more). System made.</p></li>
+<li><p>key2And: optional. list of AND conditions for key2 (at least 1 if used). System made.</p></li>
+<li><p>key2Not: optional. list of NOT conditions for key2 (0 or more). System made.</p></li>
+<li><p>key3And: optional. list of AND conditions for key3 (at least 1 if used). System made.</p></li>
+<li><p>key3Not: optional. list of NOT conditions for key3 (0 or more). System made.</p></li>
+<li><p>key1AndFrontWild: bool for key1And entry if it had front wildcard *. System made.</p></li>
+<li><p>key1AndBackWild: bool for key1And entry if it had back wildcard *. System made.</p></li>
+<li><p>key1NotFrontWild: bool for key1Not entry if it had front wildcard *. System made.</p></li>
+<li><p>key1NotBackWild: bool for key1Not entry if it had back wildcard *. System made.</p></li>
+<li><p>key2AndFrontWild: bool for key2And entry if it had front wildcard *. System made.</p></li>
+<li><p>key2AndBackWild: bool for key2And entry if it had back wildcard *. System made.</p></li>
+<li><p>key2NotFrontWild: bool for key2Not entry if it had front wildcard *. System made.</p></li>
+<li><p>key2NotBackWild: bool for key2Not entry if it had back wildcard *. System made.</p></li>
+<li><p>key3AndFrontWild: bool for key3And entry if it had front wildcard *. System made.</p></li>
+<li><p>key3AndBackWild: bool for key3And entry if it had back wildcard *. System made.</p></li>
+<li><p>key3NotFrontWild: bool for key3Not entry if it had front wildcard *. System made.</p></li>
+<li><p>key3NotBackWild: bool for key3Not entry if it had back wildcard *. System made.</p></li>
+<li><p>result: string final value. System made.</p></li>
+</ul>
+</section>
+<section id="id15">
+<h4>Constructor<a class="headerlink" href="#id15" title="Link to this heading">#</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">public</span> <span class="n">LookUpRec</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">key1</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">key1And</span> <span class="o">=</span> <span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">key1Not</span> <span class="o">=</span> <span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">key1AndFrontWild</span> <span class="o">=</span> <span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="nb">bool</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">key1AndBackWild</span> <span class="o">=</span> <span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="nb">bool</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">key1NotFrontWild</span> <span class="o">=</span> <span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="nb">bool</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">key1NotBackWild</span> <span class="o">=</span> <span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="nb">bool</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">key2</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">key2And</span> <span class="o">=</span> <span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">key2Not</span> <span class="o">=</span> <span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">key2AndFrontWild</span> <span class="o">=</span> <span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="nb">bool</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">key2AndBackWild</span> <span class="o">=</span> <span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="nb">bool</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">key2NotFrontWild</span> <span class="o">=</span> <span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="nb">bool</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">key2NotBackWild</span> <span class="o">=</span> <span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="nb">bool</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">key3</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">key3And</span> <span class="o">=</span> <span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">key3Not</span> <span class="o">=</span> <span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">key3AndFrontWild</span> <span class="o">=</span> <span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="nb">bool</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">key3AndBackWild</span> <span class="o">=</span> <span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="nb">bool</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">key3NotFrontWild</span> <span class="o">=</span> <span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="nb">bool</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">key3NotBackWild</span> <span class="o">=</span> <span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="nb">bool</span><span class="o">&gt;</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="qualityanalysis-class">
+<h2><a class="toc-backref" href="#id39" role="doc-backlink">QualityAnalysis Class</a><a class="headerlink" href="#qualityanalysis-class" title="Link to this heading">#</a></h2>
+<section id="qualityanalysis">
+<h3><a class="toc-backref" href="#id40" role="doc-backlink">QualityAnalysis</a><a class="headerlink" href="#qualityanalysis" title="Link to this heading">#</a></h3>
+<section id="id16">
+<h4>Description<a class="headerlink" href="#id16" title="Link to this heading">#</a></h4>
+<p>Packaging object for both settings used and results from an analysis of data records.</p>
+</section>
+<section id="id17">
+<h4>Members<a class="headerlink" href="#id17" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>title: name for this object usually the name of the job run to make it</p></li>
+<li><p>status: system assigned value which will be notok:reason if there is an error</p></li>
+<li><p>numRecs: integer count of records used</p></li>
+<li><p>numRecsCur: integer count of records used as mutable in threads</p></li>
+<li><p>maxuv: maximum number of unique values to collect per field with remainder into category ‘-other-’. Default=50</p></li>
+<li><p>isCaseSens: bool whether values are case sensitive. Default=False</p></li>
+<li><p>isQuoted: bool whether source records can have quoted values. Default= False</p></li>
+<li><p>hasHeader: bool whether source records have header line as first non-empty, non-comment line. Default= True</p></li>
+<li><p>extractFields: bool whether fields should be extracted from header line instead of supplied in ‘fields’ list. Default= False</p></li>
+<li><p>debug: level as ‘’, info, trace</p></li>
+<li><p>delim: name of delimiter to parse source records (comma, tab, pipe, colon, caret)</p></li>
+<li><p>delimChar: character for delim used in code</p></li>
+<li><p>fields: list of Field objects which have attributes for title, datatype, and formatting</p></li>
+<li><p>fieldNamesLower: list of field titles in lower case</p></li>
+<li><p>hashFields: dictionary key= field title lower case with value= list index</p></li>
+<li><p>fieldDatatypeDist: list of field datatype distributions correlated to fields list. Each field has counts for detected datatypes (int, real, bool, date, string, empty).</p></li>
+<li><dl class="simple">
+<dt>fieldUniqVals: list correlated to fields. Each entry is a descending sorted list of</dt><dd><p>uniquevalue tuples with each tuple (uv,count) where uv= string of unique value
+and count= integer number of instances. A maximum number of values are kept (default=50) with additional
+grouped into -other-</p>
+</dd>
+</dl>
+</li>
+<li><p>hashFieldUVs: working hash map per field of unique values</p></li>
+<li><p>fieldQuality: list correlated to fields. String of an integer 0-100 as a quality metric computed from discovered field characteristics</p></li>
+<li><p>fieldsOut: list of Field objects which have attributes for title, datatype, and formatting used in output records</p></li>
+<li><p>fieldOutNamesLower: list of output field titles in lower case</p></li>
+<li><p>hashFieldsOut: dictionary key= output field title lower case with value= list index</p></li>
+<li><p>fieldOutDatatypeDist: list of output field datatype distributions correlated to fields list. Each field has counts for detected datatypes (int, real, bool, date, string, empty).</p></li>
+<li><dl class="simple">
+<dt>fieldOutUniqVals: list correlated to output fields. Each entry is a descending sorted list of</dt><dd><p>uniquevalue tuples with each tuple (uv,count) where uv= string of unique value
+and count= integer number of instances. A maximum number of values are kept (default=50) with additional
+grouped into -other-</p>
+</dd>
+</dl>
+</li>
+<li><p>hashOutFieldUVs: working hash map per output field of unique values</p></li>
+<li><p>fieldOutQuality: list correlated to output fields. String of an integer 0-100 as a quality metric computed from discovered field characteristics</p></li>
+<li><p>recSizeDist: dictionary of record sizes (byte lengths) to counts. Max 100 sizes.</p></li>
+<li><p>recParseErrs: dictionary of parsing errors (number fields after parsing relative to defined fields) by type as small1 (1 too few fields), small2 (2 or more missing fields), big (1 or more too many fields).</p></li>
+<li><p>recParseErrsExamples: dictionary of parsing errors example records by type as small1 (1 too few fields), small2 (2 or more missing fields), big (1 or more too many fields).</p></li>
+<li><p>recParseDist: dictionary of number of parsed fields to count</p></li>
+<li><dl class="simple">
+<dt>specCharDist: dictionary of special characters and their counts.</dt><dd><p>Special characters are (some use aliases as dictionary keys):
+tab, !, doublequote, #, &lt;, &gt;, [, ], backslash, ^, {, }, ~, ascii_[0-31, 127-255],
+unicode_[256-65535]</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>specCharDistField: list correlated to fields[] with each being a dictionary</dt><dd><p>of special characters to their counts for that specific field. Same organization
+as in spec_char_dist</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>specCharExamples: list of examples of discovered special characters. Each entry is</dt><dd><p>(nline)[sp char list]record with nline being the number line read from source data
+(excluding empty and comments lines) and is therefore 1 larger than the line’s index
+in the list (i.e. nline is 1 based while lists are 0-based).
+[sp char list] comma delimited string of each special character
+found in the record such as [spchar1,spchar2]lineIn. A single field can have
+more than 1 special character. For example, input line (pipe delimited) as record line
+#5 (although actual file line number could be larger due to comments and empty lines) and data =
+= !dog|{House}|123^456 will be stored as an example as
+(5)[!,{,},^]!dog|{House}|123^456</p>
+</dd>
+</dl>
+</li>
+<li><p>coValues: list of dictionaries of field combinations to collect unique value information. Each entry is for one covalue with keys- field1, field2, field3 (optional), number (number of fields either 2 or 3), title = field1,field2,field3</p></li>
+<li><p>coValueUniqVals: correlated to covalues array. Similar to field unique values.</p></li>
+<li><p>hashCoValueUVs: working hash map per coValue of unique values</p></li>
+<li><dl class="simple">
+<dt>errStats: dictionary of properties and counts.</dt><dd><ul>
+<li><p>numrecsErr: number records with any kind of error</p></li>
+<li><p>numrecsErrDatatype: number records with datatype error</p></li>
+<li><p>numrecsErrFmt: number records with format error</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>fieldsErrDatatypeCount: correlated to fields. List of number datatype errors per field</p></li>
+<li><p>fieldsErrDatatypeReasons: correlated to fields. dictionary of datatype error reasons to count per field</p></li>
+<li><p>fieldsErrFmtCount: correlated to fields. List of number format errors per field</p></li>
+<li><p>fieldsErrFmtReasons: correlated to fields. dictionary of format error reasons to count per field</p></li>
+<li><dl class="simple">
+<dt>errDatatypeExamples: list of delimited fields within records with datatype errors.</dt><dd><p>Syntax is: (nline)[fieldinfo]|[fieldinfo]…..  where [fieldinfo] is
+fieldTitle:reason:fieldValue  . fieldValue will be set to -empty- if the actual value is
+empty. nline is the number line read from source data
+(excluding empty and comments lines) and is therefore 1 larger than the line’s index
+in the list (i.e. nline is 1 based while lists are 0-based).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>errFmtExamples: list of delimited fields within records with format errors.</dt><dd><p>Syntax is: (nline)[fieldinfo]|[fieldinfo]…..  where [fieldinfo] is
+fieldTitle:reason:fieldValue  . fieldValue will be set to -empty- if the actual value is
+empty. nline is the number line read from source data
+(excluding empty and comments lines) and is therefore 1 larger than the line’s index
+in the list (i.e. nline is 1 based while lists are 0-based).</p>
+</dd>
+</dl>
+</li>
+<li><p>logMsgs: list of messages</p></li>
+</ul>
+</section>
+<section id="id18">
+<h4>Constructor<a class="headerlink" href="#id18" title="Link to this heading">#</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">public</span> <span class="n">QualityAnalysis</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">delim</span> <span class="o">=</span> <span class="s2">&quot;comma&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">delimChar</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">maxuv</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">isCaseSens</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">isQuoted</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">hasHeader</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">extractFields</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">fieldNamesLower</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">hashFields</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">fieldDatatypeDist</span><span class="o">=</span><span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">fieldUniqVals</span><span class="o">=</span><span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">hashFieldUVs</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">fieldQuality</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">fieldsOut</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">fieldOutNamesLower</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">hashFieldsOut</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">fieldOutDatatypeDist</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">fieldOutUniqVals</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">hashOutFieldUVs</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">fieldOutQuality</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">recSizeDist</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">recParseDist</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">recParseErrs</span><span class="o">=</span><span class="n">new</span><span class="p">(){</span>
+    <span class="p">{</span><span class="s2">&quot;small1&quot;</span><span class="p">,</span><span class="mi">0</span> <span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;small2&quot;</span><span class="p">,</span><span class="mi">0</span> <span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;big&quot;</span><span class="p">,</span><span class="mi">0</span> <span class="p">}</span>
+  <span class="p">};</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">recParseErrsExamples</span> <span class="o">=</span> <span class="n">new</span><span class="p">(){</span>
+    <span class="p">{</span><span class="s2">&quot;small1&quot;</span><span class="p">,</span> <span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;small2&quot;</span><span class="p">,</span><span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;big&quot;</span><span class="p">,</span><span class="n">new</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">()</span> <span class="p">}</span>
+  <span class="p">};</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">coValues</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">coValueUniqVals</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">errStats</span> <span class="o">=</span> <span class="n">new</span><span class="p">(){</span>
+    <span class="p">{</span> <span class="s2">&quot;numrecserr&quot;</span><span class="p">,</span> <span class="mi">0</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="s2">&quot;numrecserrdatatype&quot;</span><span class="p">,</span> <span class="mi">0</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="s2">&quot;numrecserrfmt&quot;</span><span class="p">,</span> <span class="mi">0</span> <span class="p">},</span>
+  <span class="p">};</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">fieldsErrDatatypeCount</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">fieldsErrDatatypeReasons</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">fieldsErrFmtCount</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">fieldsErrFmtReasons</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">numRecs</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">numRecsCur</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">specCharDist</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">specCharDistField</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">specCharExamples</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">errDatatypeExamples</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">errFmtExamples</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">hashCoValueUVs</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">logMsgs</span> <span class="o">=</span> <span class="n">new</span><span class="p">();</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id19">
+<h4>Methods<a class="headerlink" href="#id19" title="Link to this heading">#</a></h4>
+<p><strong>public List&lt;string&gt; GetJSON(bool addLF)</strong></p>
+<p>Constructs array of JSON strings for components of this object.</p>
+<ul class="simple">
+<li><p>addLf: if True then line feed added at end of each entry. This is unnecessary if returned array is printed as line per entry.</p></li>
+<li><p>Returns string list with first entry starting with ‘notok:’’ if error</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="field-class">
+<h2><a class="toc-backref" href="#id41" role="doc-backlink">Field Class</a><a class="headerlink" href="#field-class" title="Link to this heading">#</a></h2>
+<section id="field">
+<h3><a class="toc-backref" href="#id42" role="doc-backlink">Field</a><a class="headerlink" href="#field" title="Link to this heading">#</a></h3>
+<section id="id20">
+<h4>Description<a class="headerlink" href="#id20" title="Link to this heading">#</a></h4>
+<p>Field Object containing attributes for title, datatype, formatting</p>
+</section>
+<section id="id21">
+<h4>Members<a class="headerlink" href="#id21" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>title: field’s title</p></li>
+<li><p>datatype: if used specifies datatype (int, real, date, bool, string)</p></li>
+<li><p>fmt_strcase: for datatype=string, optionally specifies a value is upper or lower case. (upper,lower,””)</p></li>
+<li><p>fmt_strlen: for datatype=string, optionally specifies a required integer length (1-n). If value &lt; 1 then this is ignored.</p></li>
+<li><p>fmt_strcut: for datatype= string when strlen&gt;0 and value length larger then chars removed from either front or back. Default is back (front,back)</p></li>
+<li><p>fmt_strpad: for datatype= string when strlen&gt;0 and value length shorter then chars added to either front or back. Default is back (front,back)</p></li>
+<li><p>fmt_strpadchar: for datatype= string when padding uses this character. Must be 1 character or use one of names (space, fslash, bslash, tab). Default is _</p></li>
+<li><p>fmt_decimal: for datatype=real, optionally specifies a required integer number of decimal places (0-n)</p></li>
+<li><dl class="simple">
+<dt>fmt_date: for datatype=date, optionally specifies a required date format as one of</dt><dd><ul>
+<li><p>mmddyy, mmdyy, mdyy, mmddyyyy, mmdyyyy, mdyyyy,</p></li>
+<li><p>ddmmyy, ddmyy, dmyy, ddmmyyyy, ddmyyyy, dmyyyy,</p></li>
+<li><p>yymmdd, yymmd, yymd, yyyymmdd, yyyymmd, yyyymd,</p></li>
+<li><p>yyyyddd (3 digit day number within year),</p></li>
+<li><p>yyyyMMMdd, ddMMMyyyy (MMM = 3 letter month title like ‘JAN’),</p></li>
+<li><p>‘MONTHdd,yyyy’, ‘ddMONTH,yyyy’, yyyyMONTHdd, ddMONTHyyyy, yyMONTHdd, ddMONTHyy (MONTH full title),</p></li>
+<li><p>*dmmyyyy, mm*dyyyy, *mddyyyy, dd*myyyy (*= can be 1 or 2 characters)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>mapto: when using this Field as an output (i.e. target) field then this specifies if it is</dt><dd><p>mapped to a source field which enables both renaming source fields and adding enrichment fields</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>parseErrorAction: Handle empty field values due to parsing errors. Used in Refining Data as:</dt><dd><ul>
+<li><p>value to assign like ‘NA’ to denote parse error</p></li>
+<li><dl class="simple">
+<dt>set to ‘-ignore-’ which causes the field value to remain as empty since</dt><dd><p>no transform nor normalize will be done</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>set to either ‘-use-’ or ‘’ which causes the empty field value to continue to</dt><dd><p>transform and normalization routines. Note the transform function ifEmpty and ifNotEmpty can be used to set field specific values.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="id22">
+<h4>Constructor<a class="headerlink" href="#id22" title="Link to this heading">#</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">public</span> <span class="n">Field</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">datatype</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">fmt_strcase</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">fmt_strlen</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">fmt_strcut</span> <span class="o">=</span> <span class="s2">&quot;back&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">fmt_strpad</span> <span class="o">=</span> <span class="s2">&quot;back&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">fmt_strpadchar</span> <span class="o">=</span> <span class="s2">&quot;_&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">fmt_decimal</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">fmt_date</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">mapto</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">parseErrorAction</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id23">
+<h4>Methods<a class="headerlink" href="#id23" title="Link to this heading">#</a></h4>
+<p><strong>GetJSON()</strong></p>
+<p>Constructs JSON string for this object.</p>
+</section>
+</section>
+<section id="covalue">
+<h3><a class="toc-backref" href="#id43" role="doc-backlink">CoValue</a><a class="headerlink" href="#covalue" title="Link to this heading">#</a></h3>
+<section id="id24">
+<h4>Description<a class="headerlink" href="#id24" title="Link to this heading">#</a></h4>
+<p>CoValue object to define 2 or 3 fields for joint value analysis</p>
+</section>
+<section id="id25">
+<h4>Members<a class="headerlink" href="#id25" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>title: title which is concantenation of field titles using _ to join them</p></li>
+<li><p>field1: required first field title</p></li>
+<li><p>field2: required second field title</p></li>
+<li><p>field3: optional third field title</p></li>
+<li><p>field1_index: first field’s array index assigned by function</p></li>
+<li><p>field2_index: second field’s array index assigned by function</p></li>
+<li><p>field3_index: third field’s array index assigned by function</p></li>
+<li><p>numfields: number of fields to use either 2 or 3</p></li>
+</ul>
+</section>
+<section id="id26">
+<h4>Constructor<a class="headerlink" href="#id26" title="Link to this heading">#</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">public</span> <span class="n">CoValue</span><span class="p">(){</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">field1</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">field2</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">field3</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">field1_index</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">field2_index</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">field3_index</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="n">this</span><span class="o">.</span><span class="n">numfields</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id27">
+<h4>Methods<a class="headerlink" href="#id27" title="Link to this heading">#</a></h4>
+<p><strong>GetJSON()</strong></p>
+<p>Constructs JSON string for this object.</p>
+</section>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="transforms.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Transforms</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="functions.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Functions</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optypes-class">OpTypes Class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#opcat">OpCat</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#description">Description</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#members">Members</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#constructor">Constructor</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#opfunc">OpFunc</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Description</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Members</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Constructor</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transform-class">Transform Class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transform">Transform</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Description</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Members</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Constructor</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#op">Op</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Description</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Members</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Constructor</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lookup-class">LookUp Class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lookupdict">LookUpDict</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Description</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">Members</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">Constructor</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lookuprec">LookUpRec</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">Description</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">Members</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">Constructor</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qualityanalysis-class">QualityAnalysis Class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qualityanalysis">QualityAnalysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">Description</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">Members</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">Constructor</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">Methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#field-class">Field Class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#field">Field</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">Description</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">Members</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id22">Constructor</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id23">Methods</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#covalue">CoValue</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id24">Description</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id25">Members</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id26">Constructor</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id27">Methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Technik Interlytics.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><!--show release-->
+20240811</div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1184 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Normalize &amp; Enrich Data Records &#8212; VerityDotNet</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=f51f75df"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'normalizeenrichdatarecords';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Compare Results in Jupyter" href="compareresults.html" />
+    <link rel="prev" title="Analyze Data Records" href="analyzingdatarecords.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">VerityDotNet</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="README.html">
+    Readme
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="transforms.html">
+    Transforms
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="objects.html">
+    Objects
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="functions.html">
+    Functions
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="analyzingdatarecords.html">
+    Analyze Data Records
+  </a>
+</li>
+
+
+<li class=" current active">
+  <a class="nav-link dropdown-item nav-internal" href="#">
+    Normalize & Enrich Data Records
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="compareresults.html">
+    Compare Results in Jupyter
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="license.html">
+    License
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="support.html">
+    Support
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="README.html">
+    Readme
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="transforms.html">
+    Transforms
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="objects.html">
+    Objects
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="functions.html">
+    Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="analyzingdatarecords.html">
+    Analyze Data Records
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Normalize & Enrich Data Records
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="compareresults.html">
+    Compare Results in Jupyter
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="license.html">
+    License
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="support.html">
+    Support
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Normalize...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="normalize-enrich-data-records">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Normalize &amp; Enrich Data Records</a><a class="headerlink" href="#normalize-enrich-data-records" title="Link to this heading">#</a></h1>
+<p>Correct errors, make consistent, and add in-record metadata for downstream analytics and modeling.</p>
+<nav class="contents" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#normalize-enrich-data-records" id="id1">Normalize &amp; Enrich Data Records</a></p>
+<ul>
+<li><p><a class="reference internal" href="#goal" id="id2">Goal</a></p></li>
+<li><p><a class="reference internal" href="#objectives" id="id3">Objectives</a></p></li>
+<li><p><a class="reference internal" href="#practice-continual-improvement" id="id4">Practice Continual Improvement</a></p></li>
+<li><p><a class="reference internal" href="#remediation-example" id="id5">Remediation Example</a></p></li>
+<li><p><a class="reference internal" href="#next" id="id6">Next</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="goal">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Goal</a><a class="headerlink" href="#goal" title="Link to this heading">#</a></h2>
+<p>Use the analysis results to define datatype, format, and value characteristics
+of the fields in the data set to correct errors and improve consistency and quality.
+Add enriching metadata fields into records to enable precise analytics,
+and granular models.</p>
+</section>
+<section id="objectives">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Objectives</a><a class="headerlink" href="#objectives" title="Link to this heading">#</a></h2>
+<p>With knowledge of discovered problems and data characteristics, we can more
+thoroughly specify rules and transformations for the data
+to be in a high quality and trusted state.
+This state feeds end uses such as analytics and computational modeling which are
+sensitive to even small amounts of errors and inconsistencies thereby significantly
+improving the accuracy and validity of their results.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Define datatypes and formats for fields based on actual values and documented architecture</p></li>
+<li><p>Define correction rules for records with incorrect datatypes or formats</p></li>
+<li><p>Normalize data with transformation operations to encode/decode, or modify field values</p></li>
+<li><p>Fix records broken into multiple partial records with VerityX algorithm</p></li>
+<li><p>Add new fields to records to enrich analytic and modeling meaning and granularity</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="practice-continual-improvement">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Practice Continual Improvement</a><a class="headerlink" href="#practice-continual-improvement" title="Link to this heading">#</a></h2>
+<p>VerityX is designed for iteratively improving data set quality and enriching. It is counter-productive to attempt
+to define every detail of a data set’s structure, meaning, and use case rules in one lengthy requirements gathering process.
+It is too complicated, laborious and prone to error. Instead, characterize data with an initial deep assessment and use
+the results to discover what is correct, what is a problem, and what needs to be clarified. Adjusting the VerityX job
+with ever increasing specificity is purposefully easy to do, and a core design principle to allow all team members including
+non-technical business workers and managers to review the business rules and resulting outcomes.</p>
+<p>A typical workflow will be:</p>
+<ol class="arabic">
+<li><p>Organize source data file(s) and use a text editor to view the top of the file to determine its basic structure for:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>is there a header line of field titles</p></li>
+<li><p>what delimiter is used</p></li>
+<li><p>are there comment lines starting with either # or //</p></li>
+<li><p>are there empty lines</p></li>
+<li><p>are there any obvious problems like lines that are much too short or long, odd characters that do not belong in the type of data, values that are inconsistent compared to most records</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Create a small application (Python or C# DotNet depending on library used) to read in the file’s records,
+provide settings, define fields. See examples on support web site and the Python sample below.</p></li>
+<li><p>Iterate: Analyze, Review, Adjust</p>
+<ol class="arabic simple">
+<li><p>submit data to analysis function</p></li>
+<li><p>review results: datatype and format distributions per field, unique values per field, record size distribution, special characters</p></li>
+<li><p>adjust Field definitions to include datatypes and formats based on results to improve granularity of analysis results</p></li>
+</ol>
+</li>
+<li><p>Iterate: Remediate, Normalize, Enrich</p>
+<ol class="arabic simple">
+<li><p>define transforms, add enrichment fields, normalize value ranges</p></li>
+<li><p>submit data to remediation function</p></li>
+<li><p>review result statistics and corrected, normalized, enriched output data: view with text editor, load into Excel, use Jupyter Notebook template</p></li>
+</ol>
+</li>
+<li><p>Use new data in end use case and assess results</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>analytics: pick a few samples and thoroughly review to see if values and category and numeric aggregations make sense and agree with known outcomes</p></li>
+<li><p>Data Science: check statistical scalars and distributions to predictions and historical data</p></li>
+<li><p>AI/ML: include in models and review changes, sensitivities, calibration to prior known test cases, reasonableness of future predictions</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<section id="remediation-example">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Remediation Example</a><a class="headerlink" href="#remediation-example" title="Link to this heading">#</a></h2>
+<p>For this example, we use Visual Studio 2022 (VS2022) on Windows 11. This follows the setup described in
+‘<strong>Analyze Data Records</strong>’.</p>
+<aside class="topic">
+<p class="topic-title">Sample Code</p>
+<p>Various sample code files including this one are available at the Technik Interlytics
+support web site</p>
+</aside>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>From the analysis, we discovered that there were errors in several fields as well as
+a serious problem with incorrect parsing due to records broken across multiple source
+file lines. We also saw that there are records with values violating the documentation and
+semantics of the schema that must be removed or annotated with enriching metadata.</p>
+<p>We use several VerityDotNet features to remediate the data.</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>adjust field datatypes and formats based on initial analysis results</p></li>
+<li><p>analyze as-is data set</p></li>
+<li><p>remediate parsing errors by rebuilding broken records</p></li>
+<li><p>analyze remediated data set</p></li>
+<li><p>define enrichment fields to add to output data for analytic and ML downstream applications</p></li>
+<li><p>define lookup dictionaries and transforms to normalize field values, decode some fields into new enrichment fields, populate enrichment fields
+with conditional rules based on multi-field joint values in each record</p></li>
+<li><p>refine data set</p></li>
+<li><p>analyze final data set</p></li>
+</ol>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>This code is in Refine.cs in VerityDotNet_Examples. Steps 1-2:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>//assign datatypes and formats
+for (int i = 0; i &lt; srcFields.Count; i++) {
+  fldName = srcFields[i].title.ToLowerInvariant();
+  if (fldName == &quot;y1_statefips&quot; || fldName == &quot;y2_statefips&quot;) {
+    srcFields[i].datatype = &quot;string&quot;;
+    srcFields[i].fmt_strlen = 2;
+  }
+  else if (fldName == &quot;y1_state&quot;) {
+    srcFields[i].datatype = &quot;string&quot;;
+    srcFields[i].fmt_strlen = 2;
+    srcFields[i].fmt_strcase = &quot;upper&quot;;
+  }
+  else if (fldName == &quot;y1_state_name&quot;) {
+    srcFields[i].datatype = &quot;string&quot;;
+  }
+  else if (fldName == &quot;n1&quot; || fldName == &quot;n2&quot; || fldName == &quot;agi&quot;) {
+    srcFields[i].datatype = &quot;int&quot;;
+  }
+}
+
+//----------------------------
+//ANALYZE AS-IS
+//----------------------------
+settings[&quot;hasHeader&quot;] = &quot;true&quot;; //we left header line in array when read file
+settings[&quot;isQuoted&quot;] = &quot;true&quot;;
+settings[&quot;isCaseSens&quot;] = &quot;false&quot;;
+settings[&quot;delim&quot;] = &quot;comma&quot;;
+settings[&quot;maxuv&quot;] = &quot;100&quot;; //override default limit
+settings[&quot;extractFields&quot;] = &quot;false&quot;; //we have Fields from original file so do not want to auto-extract
+settings[&quot;useThreads&quot;] = &quot;false&quot;;
+
+//perform Verity Analysis. We do not use coValues in this example so send an empty container
+report_asis = AnalyzeQuality.Inspect(srcFields, new List&lt;Dictionary&lt;string, string&gt;&gt;(), settings, srcRecs);
+if (report_asis.status.StartsWith(&quot;notok:&quot;)) throw new Exception($&quot;error doing AnalyzeQuality: {report_asis.status[6..]}&quot;);
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Steps 3-4:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>//Set parameters
+settings[&quot;normalize&quot;] = &quot;true&quot;;
+settings[&quot;delimOut&quot;] = &quot;pipe&quot;; //change output delimiter to allow embedded input delimiters
+settings[&quot;embedDelim&quot;] = &quot;_&quot;; //if any output delimiters in values then replace with underscore
+settings[&quot;allowLastEmpty&quot;] = &quot;false&quot;; //disallow Small1 parsing situation
+settings[&quot;joinChar&quot;]= &quot;+&quot;; //inserted when joining lines to fix small2 parsing
+settings[&quot;ignoreEmpty&quot;] = &quot;true&quot;; //do not use empty lines (after trim)
+settings[&quot;pinFields&quot;] = &quot;&quot;; //do not set &#39;pinned&#39; fields in this example
+settings[&quot;ignoreStartStr&quot;] = &quot;#|//&quot;; //patterns that cause line to not be used. These are same as usual comment line prefixes
+
+remRecs = RemediateParsing.FixRecordFieldSplit(settings, srcFields, srcRecs);
+if (remRecs.Count == 0) throw new ArgumentException(&quot;no records from remediation process&quot;);
+else if (remRecs[0].StartsWith(&quot;notok:&quot;)) throw new Exception(remRecs[0][6..]);
+else if (remRecs[0].StartsWith(&quot;ok:&quot;)) {
+  stats = remRecs[0][3..];
+  remRecs.RemoveAt(0); //remove stats entry
+  hdr = remRecs[0];
+  remRecs.RemoveAt(0); //remove header entry
+  Console.WriteLine($&quot;Remediation stats: {stats}&quot;);
+  Console.WriteLine($&quot;Header from remediation={hdr}&quot;);
+}
+else throw new ArgumentException(&quot;Remediation response failed to start with ok:&quot;);
+
+//perform Verity Analysis. Note sending new remediated record array. No coValues.
+settings[&quot;hasHeader&quot;] = &quot;false&quot;; //we removed header line
+report_remediated = AnalyzeQuality.Inspect(srcFields, new List&lt;Dictionary&lt;string, string&gt;&gt;(), settings, remRecs);
+if (report_remediated.status.StartsWith(&quot;notok:&quot;)) throw new Exception($&quot;error doing AnalyzeQuality: {report_remediated.status[6..]}&quot;);
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Step 5:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span><span class="n">Define</span> <span class="n">output</span> <span class="n">field</span> <span class="n">datatypes</span> <span class="ow">and</span> <span class="n">formats</span><span class="o">.</span> <span class="n">Create</span> <span class="n">output</span> <span class="n">Fields</span>
+<span class="o">//</span><span class="k">with</span> <span class="n">titles</span> <span class="n">more</span> <span class="n">indicative</span> <span class="n">of</span> <span class="n">their</span> <span class="n">semantics</span> <span class="ow">and</span> <span class="nb">set</span> <span class="n">mapping</span> <span class="n">to</span> <span class="n">original</span> <span class="n">field</span> <span class="n">name</span>
+<span class="k">for</span> <span class="p">(</span><span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">srcFields</span><span class="o">.</span><span class="n">Count</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">txt</span> <span class="o">=</span> <span class="n">srcFields</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">ToLowerInvariant</span><span class="p">();</span>
+  <span class="n">dtype</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">txt</span><span class="o">.</span><span class="n">StartsWith</span><span class="p">(</span><span class="s2">&quot;y1_state&quot;</span><span class="p">)</span> <span class="o">||</span> <span class="n">txt</span> <span class="o">==</span> <span class="s2">&quot;y2_statefips&quot;</span><span class="p">)</span> <span class="n">dtype</span> <span class="o">=</span> <span class="s2">&quot;string&quot;</span><span class="p">;</span>
+  <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">txt</span> <span class="o">==</span> <span class="s2">&quot;n1&quot;</span> <span class="o">||</span> <span class="n">txt</span> <span class="o">==</span> <span class="s2">&quot;n2&quot;</span><span class="p">)</span> <span class="n">dtype</span> <span class="o">=</span> <span class="s2">&quot;int&quot;</span><span class="p">;</span>
+  <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">txt</span> <span class="o">==</span> <span class="s2">&quot;agi&quot;</span><span class="p">)</span> <span class="n">dtype</span> <span class="o">=</span> <span class="s2">&quot;real&quot;</span><span class="p">;</span>
+  <span class="n">mapto</span> <span class="o">=</span> <span class="n">txt</span><span class="p">;</span>
+  <span class="n">strCase</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span> <span class="n">strCut</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span> <span class="n">strPad</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span> <span class="n">strPadChar</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">strLen</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="n">dateFmt</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+  <span class="n">numDec</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">txt</span> <span class="o">==</span> <span class="s2">&quot;y2_statefips&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;DestStateCode&quot;</span><span class="p">;</span>
+    <span class="n">strLen</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">strCut</span> <span class="o">=</span> <span class="s2">&quot;back&quot;</span><span class="p">;</span> <span class="n">strPad</span> <span class="o">=</span> <span class="s2">&quot;front&quot;</span><span class="p">;</span> <span class="n">strPadChar</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">txt</span> <span class="o">==</span> <span class="s2">&quot;y1_statefips&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;OrigStateCode&quot;</span><span class="p">;</span>
+    <span class="n">strLen</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">strCut</span> <span class="o">=</span> <span class="s2">&quot;back&quot;</span><span class="p">;</span> <span class="n">strPad</span> <span class="o">=</span> <span class="s2">&quot;front&quot;</span><span class="p">;</span> <span class="n">strPadChar</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">txt</span> <span class="o">==</span> <span class="s2">&quot;y1_state&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;OrigStateAbbr&quot;</span><span class="p">;</span>
+    <span class="n">strCase</span> <span class="o">=</span> <span class="s2">&quot;upper&quot;</span><span class="p">;</span> <span class="o">//</span><span class="n">required</span> <span class="n">to</span> <span class="n">be</span> <span class="n">upper</span> <span class="n">case</span>
+    <span class="n">strLen</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">strCut</span> <span class="o">=</span> <span class="s2">&quot;back&quot;</span><span class="p">;</span> <span class="n">strPad</span> <span class="o">=</span> <span class="s2">&quot;front&quot;</span><span class="p">;</span> <span class="n">strPadChar</span> <span class="o">=</span> <span class="s2">&quot;hyphen&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">txt</span> <span class="o">==</span> <span class="s2">&quot;y1_state_name&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;OrigStateName&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">txt</span> <span class="o">==</span> <span class="s2">&quot;n1&quot;</span><span class="p">)</span> <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;NumReturn&quot;</span><span class="p">;</span>
+  <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">txt</span> <span class="o">==</span> <span class="s2">&quot;n2&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;NumExempt&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">txt</span> <span class="o">==</span> <span class="s2">&quot;agi&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;GrossIncome&quot;</span><span class="p">;</span>
+    <span class="n">numDec</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">else</span> <span class="n">title</span> <span class="o">=</span> <span class="n">srcFields</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="p">;</span>
+  <span class="n">outFields</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">new</span> <span class="n">Field</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">title</span><span class="p">,</span>
+    <span class="n">mapto</span> <span class="o">=</span> <span class="n">mapto</span><span class="p">,</span>
+    <span class="n">datatype</span> <span class="o">=</span> <span class="n">dtype</span><span class="p">,</span>
+    <span class="n">fmt_strlen</span> <span class="o">=</span> <span class="n">strLen</span><span class="p">,</span>
+    <span class="n">fmt_strcase</span> <span class="o">=</span> <span class="n">strCase</span><span class="p">,</span>
+    <span class="n">fmt_date</span> <span class="o">=</span> <span class="n">dateFmt</span><span class="p">,</span>
+    <span class="n">fmt_decimal</span> <span class="o">=</span> <span class="n">numDec</span><span class="p">,</span>
+    <span class="n">fmt_strcut</span> <span class="o">=</span> <span class="n">strCut</span><span class="p">,</span>
+    <span class="n">fmt_strpad</span> <span class="o">=</span> <span class="n">strPad</span><span class="p">,</span>
+    <span class="n">fmt_strpadchar</span> <span class="o">=</span> <span class="n">strPadChar</span><span class="p">,</span>
+  <span class="p">});</span>
+  <span class="n">hashOutFields</span><span class="p">[</span><span class="n">title</span><span class="o">.</span><span class="n">ToLowerInvariant</span><span class="p">()]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">//</span><span class="n">ADD</span> <span class="n">ENRICHMENT</span> <span class="n">FIELDS</span> <span class="p">(</span><span class="ow">not</span> <span class="ow">in</span> <span class="n">source</span> <span class="n">records</span> <span class="n">but</span> <span class="n">will</span> <span class="n">be</span> <span class="ow">in</span> <span class="n">output</span> <span class="n">records</span><span class="p">)</span>
+<span class="n">outFields</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">new</span> <span class="n">Field</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;useAGI&quot;</span><span class="p">,</span> <span class="o">//</span><span class="n">indicator</span> <span class="k">if</span> <span class="n">record</span> <span class="n">should</span> <span class="n">be</span> <span class="n">included</span> <span class="ow">in</span> <span class="n">analytic</span> <span class="n">aggregations</span>
+  <span class="n">datatype</span> <span class="o">=</span> <span class="s2">&quot;bool&quot;</span><span class="p">,</span>
+<span class="p">});</span>
+<span class="n">hashOutFields</span><span class="p">[</span><span class="n">outFields</span><span class="p">[</span><span class="o">^</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">ToLowerInvariant</span><span class="p">()]</span> <span class="o">=</span> <span class="n">outFields</span><span class="o">.</span><span class="n">Count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">outFields</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">new</span> <span class="n">Field</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;DestStateAbbr&quot;</span><span class="p">,</span>
+  <span class="n">datatype</span> <span class="o">=</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+  <span class="n">fmt_strlen</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="n">fmt_strcase</span> <span class="o">=</span> <span class="s2">&quot;upper&quot;</span>
+<span class="p">});</span>
+<span class="n">hashOutFields</span><span class="p">[</span><span class="n">outFields</span><span class="p">[</span><span class="o">^</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">ToLowerInvariant</span><span class="p">()]</span> <span class="o">=</span> <span class="n">outFields</span><span class="o">.</span><span class="n">Count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">outFields</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">new</span> <span class="n">Field</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;DestStateName&quot;</span><span class="p">,</span>
+  <span class="n">datatype</span> <span class="o">=</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="p">});</span>
+<span class="n">hashOutFields</span><span class="p">[</span><span class="n">outFields</span><span class="p">[</span><span class="o">^</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">ToLowerInvariant</span><span class="p">()]</span> <span class="o">=</span> <span class="n">outFields</span><span class="o">.</span><span class="n">Count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">outFields</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="n">new</span> <span class="n">Field</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;isSubTotal&quot;</span><span class="p">,</span> <span class="o">//</span><span class="n">indicator</span> <span class="n">record</span> <span class="ow">is</span> <span class="n">aggregated</span> <span class="nb">sum</span> <span class="n">of</span> <span class="n">filtered</span> <span class="n">records</span>
+  <span class="n">datatype</span> <span class="o">=</span> <span class="s2">&quot;bool&quot;</span><span class="p">,</span>
+<span class="p">});</span>
+<span class="n">hashOutFields</span><span class="p">[</span><span class="n">outFields</span><span class="p">[</span><span class="o">^</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">ToLowerInvariant</span><span class="p">()]</span> <span class="o">=</span> <span class="n">outFields</span><span class="o">.</span><span class="n">Count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Step 6:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>//Make Lookups
+
+title = &quot;StateAbbr&quot;;
+fileName = &quot;StateAbbrfromFIPS_lookup.dat&quot;;
+nKeys = 1;
+isCaseSens = false;
+fileUri = curDir + fileName;
+lookUpDict = Lookup.MakeLookUpFromFile(title, fileUri, &quot;pipe&quot;, isCaseSens, nKeys);
+if (lookUpDict.title.StartsWith(&quot;notok:&quot;)) throw new ArgumentException($&quot;error making lookup {fileName}: {lookUpDict.title[6..]}&quot;);
+else if (lookUpDict.fields.Count == 0) throw new ArgumentException($&quot;lookup does not have fields {fileName}&quot;);
+else if (lookUpDict.recs.Count == 0) throw new ArgumentException($&quot;lookup does not have recs {fileName}&quot;);
+lookUps.Add(lookUpDict);
+hashLookups[lookUpDict.title.ToLowerInvariant()] = lookUps.Count - 1;
+
+title = &quot;StateName&quot;;
+fileName = &quot;StateNamefromFIPS_lookup.dat&quot;;
+nKeys = 1;
+isCaseSens = false;
+fileUri = curDir + fileName;
+lookUpDict = Lookup.MakeLookUpFromFile(title, fileUri, &quot;pipe&quot;, isCaseSens, nKeys);
+if (lookUpDict.title.StartsWith(&quot;notok:&quot;)) throw new ArgumentException($&quot;error making lookup {fileName}: {lookUpDict.title[6..]}&quot;);
+else if (lookUpDict.fields.Count == 0) throw new ArgumentException($&quot;lookup does not have fields {fileName}&quot;);
+else if (lookUpDict.recs.Count == 0) throw new ArgumentException($&quot;lookup does not have recs {fileName}&quot;);
+lookUps.Add(lookUpDict);
+hashLookups[lookUpDict.title.ToLowerInvariant()] = lookUps.Count - 1;
+
+
+//Make Transforms. 1st transform sets useAGI based on source field AGI value since it has some
+//coded values that should not be included in aggregations per source documentation
+transforms.Add(new Transform(&quot;useAGI&quot;)); //this transform is attached to enrichment field useAGI
+nTrans= transforms.Count-1;
+transforms[nTrans].ops.Add(new Transform.Op(&quot;setToRef&quot;));
+transforms[nTrans].ops[^1].param1 = &quot;AGI&quot;;
+transforms[nTrans].ops.Add(new Transform.Op(&quot;IfEq&quot;));
+transforms[nTrans].ops[^1].param1 = &quot;-1&quot;;
+transforms[nTrans].ops.Add(new Transform.Op(&quot;setToValue&quot;)); //this is action for &#39;IfEq&#39; False
+transforms[nTrans].ops[^1].param1 = &quot;true&quot;; //useAGI = true meaning use AGI value since it does not have code -1
+transforms[nTrans].ops.Add(new Transform.Op(&quot;setToValue&quot;)); //this is action for &#39;IfEq&#39; True
+transforms[nTrans].ops[^1].param1 = &quot;false&quot;; //useAGI = false meaning dont use AGI value since it is code -1
+
+transforms.Add(new Transform(&quot;GrossIncome&quot;)); //this transform is attached to output field GrossIncome which is mapped to source field AGI
+nTrans= transforms.Count-1;
+transforms[nTrans].ops.Add(new Transform.Op(&quot;IfNotEq&quot;));
+transforms[nTrans].ops[^1].param1 = &quot;-1&quot;; //also has coded values we need to handle for useful analytic output records
+transforms[nTrans].ops.Add(new Transform.Op(&quot;NoOp&quot;)); //special Op to stop chian processing. This occurs when IfNotEq = false which means value = -1
+transforms[nTrans].ops.Add(new Transform.Op(&quot;mult&quot;)); //automatically cleans number since default = true for param2
+transforms[nTrans].ops[^1].param1 = &quot;1000&quot;; //documentation states AGI is in thousands US Dollar so we convert to actual value by x 1000
+
+transforms.Add(new Transform(&quot;DestStateAbbr&quot;)); //this transform is attached to output field DestStateAbbr which is added enrichment field to use lookup dictionary to find destination details from source record FIPS code
+nTrans= transforms.Count-1;
+transforms[nTrans].ops.Add(new Transform.Op(&quot;setToRef&quot;));
+transforms[nTrans].ops[^1].param1 = &quot;y2_statefips&quot;;
+transforms[nTrans].ops.Add(new Transform.Op(&quot;setLength&quot;)); //lookup dict use fixed 2 char long codes
+transforms[nTrans].ops[^1].param1 = &quot;2&quot;;
+transforms[nTrans].ops[^1].param2 = &quot;left&quot;;
+transforms[nTrans].ops[^1].param3 = &quot;0&quot;;
+transforms[nTrans].ops.Add(new Transform.Op(&quot;lookup&quot;)); //lookup dict using fixed 2 char code to get state 2 letter abbreviation (FIPS)
+transforms[nTrans].ops[^1].param1 = &quot;StateAbbr&quot;; //short title we assigned to lookup dictionary file
+
+transforms.Add(new Transform(&quot;DestStateName&quot;)); //this transform is attached to output field DestStateName which is added enrichment field to use lookup dictionary to find destination details from source record FIPS code
+nTrans= transforms.Count-1;
+transforms[nTrans].ops.Add(new Transform.Op(&quot;setToRef&quot;));
+transforms[nTrans].ops[^1].param1 = &quot;y2_statefips&quot;;
+transforms[nTrans].ops.Add(new Transform.Op(&quot;setLength&quot;)); //lookup dict use fixed 2 char long codes
+transforms[nTrans].ops[^1].param1 = &quot;2&quot;;
+transforms[nTrans].ops[^1].param2 = &quot;left&quot;;
+transforms[nTrans].ops[^1].param3 = &quot;0&quot;;
+transforms[nTrans].ops.Add(new Transform.Op(&quot;lookup&quot;)); //lookup dict using fixed 2 char code to get state 2 letter abbreviation (FIPS)
+transforms[nTrans].ops[^1].param1 = &quot;StateName&quot;; //short title we assigned to lookup dictionary file
+
+transforms.Add(new Transform(&quot;isSubTotal&quot;));
+nTrans= transforms.Count-1;
+transforms[nTrans].ops.Add(new Transform.Op(&quot;setToRef&quot;));
+transforms[nTrans].ops[^1].param1 = &quot;y1_state_name&quot;;
+transforms[nTrans].ops.Add(new Transform.Op(&quot;IfStrContains&quot;));
+transforms[nTrans].ops[^1].param1 = &quot;migra&quot;;
+transforms[nTrans].ops.Add(new Transform.Op(&quot;setToValue&quot;)); //this is action for If.. = False
+transforms[nTrans].ops[^1].param1 = &quot;false&quot;;
+transforms[nTrans].ops.Add(new Transform.Op(&quot;setToValue&quot;)); //this is action for If.. = True
+transforms[nTrans].ops[^1].param1 = &quot;true&quot;;
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Step 7:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>settings[&quot;delim&quot;] = &quot;pipe&quot;; //change since using output fields from remediation
+report_refine = RefineData.DoRefine(outFields, transforms, settings, lookUps, srcFields, remRecs, ref outRecs);
+if (report_refine.status.StartsWith(&quot;notok:&quot;)) throw new ArgumentException($&quot;Refine error: {report_refine.status[6..]}&quot;);
+else if (report_refine.status.StartsWith(&quot;ok:&quot;)) Console.WriteLine($&quot;Refine done with {report_refine.status[3..]}&quot;);
+if (outRecs.Count == 0) throw new ArgumentException(&quot;no output records&quot;);
+//Write output records to file
+fileOut = curDir + &quot;TestRefine_IRS_output_remediate.dat&quot;;
+nLine = 0;
+using (StreamWriter sw = new StreamWriter(fileOut)) {
+  foreach (string s in outRecs) {
+    if (s.Length &gt; 0) {
+      sw.WriteLine(s);
+      nLine++;
+    }
+  }
+}
+Console.WriteLine($&quot;Verity Refined output with remediation data at: {fileOut}&quot;);
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Step 8:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>//perform Verity Analysis. Note sending new refined record array. No coValues.
+settings[&quot;hasHeader&quot;] = &quot;true&quot;; //header line in refined array
+report_final = AnalyzeQuality.Inspect(srcFields, new List&lt;Dictionary&lt;string, string&gt;&gt;(), settings, outRecs);
+if (report_final.status.StartsWith(&quot;notok:&quot;)) throw new Exception($&quot;error doing AnalyzeQuality: {report_final.status[6..]}&quot;);
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<section id="review-results">
+<h3>Review Results<a class="headerlink" href="#review-results" title="Link to this heading">#</a></h3>
+<p>We show select results from each of the three data states as-is, remediated, refined.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>//------------------------------------
+//          Compare Results
+//------------------------------------
+Console.WriteLine(&quot;Sample Results Comparing Three Versions:&quot;);
+Console.WriteLine($&quot;Number records: As-is={report_asis.numRecs}, Rem={report_remediated.numRecs}, Final={report_final.numRecs}&quot;);
+Console.WriteLine($&quot;Number records errors: As-is= {report_asis.errStats[&quot;numrecserr&quot;]}, Rem= {report_remediated.errStats[&quot;numrecserr&quot;]}, Final= {report_final.errStats[&quot;numrecserr&quot;]}&quot;);
+Console.WriteLine($&quot;Number records datatype errors: As-is= {report_asis.errStats[&quot;numrecserrdatatype&quot;]}, Rem= {report_remediated.errStats[&quot;numrecserrdatatype&quot;]}, Final= {report_final.errStats[&quot;numrecserrdatatype&quot;]}&quot;);
+Console.WriteLine($&quot;Number records format errors: As-is= {report_asis.errStats[&quot;numrecserrfmt&quot;]}, Rem= {report_remediated.errStats[&quot;numrecserrfmt&quot;]}, Final= {report_final.errStats[&quot;numrecserrfmt&quot;]}&quot;);
+Console.WriteLine($&quot;Number parsing errors Small1: As-is= {report_asis.recParseErrs[&quot;small1&quot;]}, Rem= {report_remediated.recParseErrs[&quot;small1&quot;]}, Final= {report_final.recParseErrs[&quot;small1&quot;]}&quot;);
+Console.WriteLine($&quot;Number parsing errors Small2: As-is= {report_asis.recParseErrs[&quot;small2&quot;]}, Rem= {report_remediated.recParseErrs[&quot;small2&quot;]}, Final= {report_final.recParseErrs[&quot;small2&quot;]}&quot;);
+Console.WriteLine($&quot;Number parsing errors Big: As-is= {report_asis.recParseErrs[&quot;big&quot;]}, Rem= {report_remediated.recParseErrs[&quot;big&quot;]}, Final= {report_final.recParseErrs[&quot;big&quot;]}&quot;);
+
+Console.WriteLine(&quot;\nFIELD QUALITY&quot;);
+for (int i = 0; i &lt; report_asis.fields.Count; i++) {
+  Console.WriteLine($&quot;{report_asis.fields[i].title}: As-is={report_asis.fieldQuality[i]}, Rem={report_remediated.fieldQuality[i]}, Final={report_final.fieldQuality[i]} &quot;);
+}
+
+Console.WriteLine(&quot;\nUNIQUE VALUES: Top 5 Per Field&quot;);
+for (int i = 0; i &lt; report_asis.fields.Count; i++) {
+  Console.WriteLine($&quot;Field {report_asis.fields[i].title}&quot;);
+  for (int j = 0; j &lt; 5; j++) {
+    txt = &quot;As-is:&quot;;
+    if (j &lt; report_asis.fieldUniqVals[i].Count) txt += $&quot;{report_asis.fieldUniqVals[i][j].uv}={report_asis.fieldUniqVals[i][j].count}&quot;;
+    else txt += &quot;-no value-&quot;;
+    txt += &quot;, Rem:&quot;;
+    if (j &lt; report_remediated.fieldUniqVals[i].Count) txt += $&quot;{report_remediated.fieldUniqVals[i][j].uv}={report_remediated.fieldUniqVals[i][j].count}&quot;;
+    else txt += &quot;-no value-&quot;;
+    txt += &quot;, Final:&quot;;
+    if (j &lt; report_final.fieldUniqVals[i].Count) txt += $&quot;{report_final.fieldUniqVals[i][j].uv}={report_final.fieldUniqVals[i][j].count}&quot;;
+    else txt += &quot;-no value-&quot;;
+    Console.WriteLine(txt);
+  }
+}
+
+Console.WriteLine(&quot;\nUNIQUE VALUES: Bottom 5 Per Field&quot;);
+for (int i = 0; i &lt; report_asis.fields.Count; i++) {
+  Console.WriteLine($&quot;Field {report_asis.fields[i].title}&quot;);
+  for (int j = 0; j &lt; 5; j++) {
+    txt = &quot;As-is:&quot;;
+    n1 = report_asis.fieldUniqVals[i].Count - 1 - j;
+    if (n1&lt; report_asis.fieldUniqVals[i].Count) txt += $&quot;{report_asis.fieldUniqVals[i][n1].uv}={report_asis.fieldUniqVals[i][n1].count}&quot;;
+    else txt += &quot;-no value-&quot;;
+    txt += &quot;, Rem:&quot;;
+    n1 = report_remediated.fieldUniqVals[i].Count - 1 - j;
+    if (n1 &lt; report_remediated.fieldUniqVals[i].Count) txt += $&quot;{report_remediated.fieldUniqVals[i][n1].uv}={report_remediated.fieldUniqVals[i][n1].count}&quot;;
+    else txt += &quot;-no value-&quot;;
+    txt += &quot;, Final:&quot;;
+    n1 = report_final.fieldUniqVals[i].Count - 1 - j;
+    if (n1 &lt; report_final.fieldUniqVals[i].Count) txt += $&quot;{report_final.fieldUniqVals[i][n1].uv}={report_final.fieldUniqVals[i][n1].count}&quot;;
+    else txt += &quot;-no value-&quot;;
+    Console.WriteLine(txt);
+  }
+}
+
+Console.WriteLine(&quot;\nSPECIAL CHARACTERS&quot;);
+foreach (KeyValuePair&lt;string, long&gt; kv in report_asis.specCharDist) {
+  txt = $&quot;SpecChar {kv.Key}: As-is={kv.Value}, Rem=&quot;;
+  txt += report_remediated.specCharDist.ContainsKey(kv.Key) ? $&quot;{report_remediated.specCharDist[kv.Key]}&quot; : &quot;0&quot;;
+  txt += &quot;, Final=&quot;;
+  txt += report_final.specCharDist.ContainsKey(kv.Key) ? $&quot;{report_final.specCharDist[kv.Key]}&quot; : &quot;0&quot;;
+  Console.WriteLine(txt);
+}
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>This generates summary information:</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">TEST</span> <span class="n">REFINE</span><span class="p">:</span> <span class="mi">20240808</span><span class="n">T150435</span>
+<span class="n">TEST</span> <span class="n">FILE</span><span class="p">:</span> <span class="n">IRSMigration_WithErrors_Hdr</span><span class="o">.</span><span class="n">csv</span>
+<span class="n">Remediation</span> <span class="n">stats</span><span class="p">:</span> <span class="n">recin</span><span class="o">=</span><span class="mi">1004</span><span class="p">,</span><span class="n">recout</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">big</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">small1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">small2</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">join</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">fix</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">notfix</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">Header</span> <span class="kn">from</span> <span class="nn">remediation</span><span class="o">=</span><span class="n">y2_statefips</span><span class="p">,</span><span class="n">y1_statefips</span><span class="p">,</span><span class="n">y1_state</span><span class="p">,</span><span class="n">y1_state_name</span><span class="p">,</span><span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">,</span><span class="n">AGI</span>
+<span class="n">Verity</span> <span class="n">Refined</span> <span class="n">output</span> <span class="k">with</span> <span class="n">remediation</span> <span class="n">data</span> <span class="n">at</span><span class="p">:</span> <span class="n">D</span><span class="p">:</span>\<span class="n">CodeDevelopment</span>\<span class="n">VS</span>\<span class="n">TestVerityDotNet</span>\<span class="n">test</span>\<span class="n">TestRefine_IRS_output_remediate</span><span class="o">.</span><span class="n">dat</span>
+<span class="n">no</span> <span class="n">problems</span>    <span class="o">--&gt;</span>  <span class="n">OK</span>
+
+<span class="n">Sample</span> <span class="n">Final</span> <span class="n">Output</span><span class="p">:</span> <span class="mi">10</span> <span class="n">records</span> <span class="p">(</span><span class="n">joinChar</span><span class="o">=+</span><span class="p">)</span>
+<span class="mi">0</span><span class="p">:</span>     <span class="n">DestStateCode</span><span class="o">|</span><span class="n">OrigStateCode</span><span class="o">|</span><span class="n">OrigStateAbbr</span><span class="o">|</span><span class="n">OrigStateName</span><span class="o">|</span><span class="n">NumReturn</span><span class="o">|</span><span class="n">NumExempt</span><span class="o">|</span><span class="n">GrossIncome</span><span class="o">|</span><span class="n">useAGI</span><span class="o">|</span><span class="n">DestStateAbbr</span><span class="o">|</span><span class="n">DestStateName</span><span class="o">|</span><span class="n">isSubTotal</span>
+<span class="mi">1</span><span class="p">:</span>     <span class="mi">01</span><span class="o">|</span><span class="mi">96</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="n">AL</span> <span class="n">Total</span> <span class="n">Migration</span><span class="o">-</span><span class="n">US</span> <span class="ow">and</span> <span class="n">Foreign</span><span class="o">|</span><span class="mi">33716</span><span class="o">|</span><span class="mi">67747</span><span class="o">|</span><span class="mf">1515297000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="n">Alabama</span><span class="o">|</span><span class="n">true</span>
+<span class="mi">2</span><span class="p">:</span>     <span class="mi">01</span><span class="o">|</span><span class="mi">97</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="n">AL</span> <span class="n">Total</span> <span class="n">Migration</span><span class="o">-</span><span class="n">US</span><span class="o">|</span><span class="mi">32868</span><span class="o">|</span><span class="mi">65647</span><span class="o">|</span><span class="mf">1467218000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="n">Alabama</span><span class="o">|</span><span class="n">true</span>
+<span class="mi">3</span><span class="p">:</span>     <span class="mi">01</span><span class="o">|</span><span class="mi">98</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="s2">&quot;AL Total Migration|0|848|2100000.00|true|AL|Alabama|true</span>
+<span class="mi">4</span><span class="p">:</span>     <span class="mi">01</span><span class="o">|</span><span class="mi">97</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="n">AL</span> <span class="n">Total</span> <span class="n">Migration</span><span class="o">-</span><span class="n">Same</span> <span class="o">+</span><span class="n">State</span><span class="o">|</span><span class="mi">46630</span><span class="o">|</span><span class="mi">95832</span><span class="o">|</span><span class="mf">1871804000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="n">Alabama</span><span class="o">|</span><span class="n">true</span>
+<span class="mi">5</span><span class="p">:</span>     <span class="mi">01</span><span class="o">|</span><span class="mi">01</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="n">AL</span> <span class="o">+</span><span class="n">Non</span><span class="o">-+</span><span class="n">migrants</span><span class="o">|</span><span class="mi">1598458</span><span class="o">|</span><span class="mi">3579600</span><span class="o">|</span><span class="mf">96406319000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="n">Alabama</span><span class="o">|</span><span class="n">true</span>
+<span class="mi">6</span><span class="p">:</span>     <span class="mi">01</span><span class="o">|</span><span class="mi">13</span><span class="o">|</span><span class="n">GA</span><span class="o">|</span><span class="n">Georgia</span><span class="o">|</span><span class="mi">5972</span><span class="o">|</span><span class="mi">12269</span><span class="o">|</span><span class="mf">249108000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="n">Alabama</span><span class="o">|</span><span class="n">false</span>
+<span class="mi">7</span><span class="p">:</span>     <span class="mi">01</span><span class="o">|</span><span class="mi">12</span><span class="o">|</span><span class="n">FL</span><span class="o">|</span><span class="n">Florida</span><span class="o">|</span><span class="mi">4489</span><span class="o">|</span><span class="mi">8446</span><span class="o">|</span><span class="mf">185502000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="n">Alabama</span><span class="o">|</span><span class="n">false</span>
+<span class="mi">8</span><span class="p">:</span>     <span class="mi">01</span><span class="o">|</span><span class="mi">48</span><span class="o">|</span><span class="n">TX</span><span class="o">|</span><span class="n">Texas</span><span class="o">|</span><span class="mi">3435</span><span class="o">|</span><span class="mi">7041</span><span class="o">|</span><span class="mf">135165000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="n">Alabama</span><span class="o">|</span><span class="n">false</span>
+<span class="mi">9</span><span class="p">:</span>     <span class="mi">01</span><span class="o">|</span><span class="mi">47</span><span class="o">|</span><span class="n">TN</span><span class="o">|</span><span class="n">Tennessee</span><span class="o">|</span><span class="mi">2608</span><span class="o">|</span><span class="mi">5304</span><span class="o">|</span><span class="mf">124203000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="n">Alabama</span><span class="o">|</span><span class="n">false</span>
+<span class="mi">10</span><span class="p">:</span>     <span class="mi">01</span><span class="o">|</span><span class="mi">28</span><span class="o">|</span><span class="n">MS</span><span class="o">|</span><span class="n">Mississippi</span><span class="o">|</span><span class="mi">2212</span><span class="o">|</span><span class="mi">4562</span><span class="o">|</span><span class="mf">90723000.00</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="n">AL</span><span class="o">|</span><span class="n">Alabama</span><span class="o">|</span><span class="n">false</span>
+
+
+<span class="n">Sample</span> <span class="n">Results</span> <span class="n">Comparing</span> <span class="n">Three</span> <span class="n">Versions</span><span class="p">:</span>
+<span class="n">Number</span> <span class="n">records</span><span class="p">:</span> <span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="o">=</span><span class="mi">1003</span><span class="p">,</span> <span class="n">Rem</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">Final</span><span class="o">=</span><span class="mi">1000</span>
+<span class="n">Number</span> <span class="n">records</span> <span class="n">errors</span><span class="p">:</span> <span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="o">=</span> <span class="mi">19</span><span class="p">,</span> <span class="n">Rem</span><span class="o">=</span> <span class="mi">14</span><span class="p">,</span> <span class="n">Final</span><span class="o">=</span> <span class="mi">0</span>
+<span class="n">Number</span> <span class="n">records</span> <span class="n">datatype</span> <span class="n">errors</span><span class="p">:</span> <span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="o">=</span> <span class="mi">14</span><span class="p">,</span> <span class="n">Rem</span><span class="o">=</span> <span class="mi">9</span><span class="p">,</span> <span class="n">Final</span><span class="o">=</span> <span class="mi">0</span>
+<span class="n">Number</span> <span class="n">records</span> <span class="nb">format</span> <span class="n">errors</span><span class="p">:</span> <span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="o">=</span> <span class="mi">9</span><span class="p">,</span> <span class="n">Rem</span><span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">Final</span><span class="o">=</span> <span class="mi">0</span>
+<span class="n">Number</span> <span class="n">parsing</span> <span class="n">errors</span> <span class="n">Small1</span><span class="p">:</span> <span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Rem</span><span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Final</span><span class="o">=</span> <span class="mi">0</span>
+<span class="n">Number</span> <span class="n">parsing</span> <span class="n">errors</span> <span class="n">Small2</span><span class="p">:</span> <span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">Rem</span><span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Final</span><span class="o">=</span> <span class="mi">0</span>
+<span class="n">Number</span> <span class="n">parsing</span> <span class="n">errors</span> <span class="n">Big</span><span class="p">:</span> <span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Rem</span><span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Final</span><span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">FIELD</span> <span class="n">QUALITY</span>
+<span class="n">y2_statefips</span><span class="p">:</span> <span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="o">=</span><span class="mf">95.2</span><span class="p">,</span> <span class="n">Rem</span><span class="o">=</span><span class="mf">95.2</span><span class="p">,</span> <span class="n">Final</span><span class="o">=</span><span class="mi">100</span>
+<span class="n">y1_statefips</span><span class="p">:</span> <span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="o">=</span><span class="mf">95.2</span><span class="p">,</span> <span class="n">Rem</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">Final</span><span class="o">=</span><span class="mi">100</span>
+<span class="n">y1_state</span><span class="p">:</span> <span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="o">=</span><span class="mf">90.7</span><span class="p">,</span> <span class="n">Rem</span><span class="o">=</span><span class="mf">95.2</span><span class="p">,</span> <span class="n">Final</span><span class="o">=</span><span class="mi">100</span>
+<span class="n">y1_state_name</span><span class="p">:</span> <span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">Rem</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">Final</span><span class="o">=</span><span class="mi">100</span>
+<span class="n">n1</span><span class="p">:</span> <span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="o">=</span><span class="mf">98.7</span><span class="p">,</span> <span class="n">Rem</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">Final</span><span class="o">=</span><span class="mi">100</span>
+<span class="n">n2</span><span class="p">:</span> <span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="o">=</span><span class="mf">97.8</span><span class="p">,</span> <span class="n">Rem</span><span class="o">=</span><span class="mf">99.4</span><span class="p">,</span> <span class="n">Final</span><span class="o">=</span><span class="mi">100</span>
+<span class="n">AGI</span><span class="p">:</span> <span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="o">=</span><span class="mf">89.1</span><span class="p">,</span> <span class="n">Rem</span><span class="o">=</span><span class="mf">91.5</span><span class="p">,</span> <span class="n">Final</span><span class="o">=</span><span class="mi">100</span>
+
+<span class="n">UNIQUE</span> <span class="n">VALUES</span><span class="p">:</span> <span class="n">Top</span> <span class="mi">5</span> <span class="n">Per</span> <span class="n">Field</span>
+
+<span class="n">Field</span> <span class="n">y2_statefips</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">09</span><span class="o">=</span><span class="mi">56</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">19</span><span class="o">=</span><span class="mi">56</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">01</span><span class="o">=</span><span class="mi">56</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">19</span><span class="o">=</span><span class="mi">56</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">02</span><span class="o">=</span><span class="mi">56</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">02</span><span class="o">=</span><span class="mi">56</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">18</span><span class="o">=</span><span class="mi">56</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">04</span><span class="o">=</span><span class="mi">56</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">04</span><span class="o">=</span><span class="mi">56</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">17</span><span class="o">=</span><span class="mi">56</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">05</span><span class="o">=</span><span class="mi">56</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">05</span><span class="o">=</span><span class="mi">56</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">16</span><span class="o">=</span><span class="mi">56</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">06</span><span class="o">=</span><span class="mi">56</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">06</span><span class="o">=</span><span class="mi">56</span>
+
+<span class="n">Field</span> <span class="n">y1_statefips</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">97</span><span class="o">=</span><span class="mi">35</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">97</span><span class="o">=</span><span class="mi">35</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">97</span><span class="o">=</span><span class="mi">35</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">96</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">96</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">96</span><span class="o">=</span><span class="mi">18</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">05</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">04</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">04</span><span class="o">=</span><span class="mi">18</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">40</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">34</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">34</span><span class="o">=</span><span class="mi">18</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">04</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">20</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">20</span><span class="o">=</span><span class="mi">18</span>
+
+<span class="n">Field</span> <span class="n">y1_state</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="n">al</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="n">al</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="n">al</span><span class="o">=</span><span class="mi">22</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="n">az</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="n">ak</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="n">ak</span><span class="o">=</span><span class="mi">22</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="n">hi</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="n">ia</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="n">ia</span><span class="o">=</span><span class="mi">22</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="n">ar</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="n">ct</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="n">ct</span><span class="o">=</span><span class="mi">22</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="ow">in</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="n">hi</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="n">hi</span><span class="o">=</span><span class="mi">22</span>
+
+<span class="n">Field</span> <span class="n">y1_state_name</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="n">missouri</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="n">pennsylvania</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="n">pennsylvania</span><span class="o">=</span><span class="mi">18</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="n">maryland</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="n">missouri</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="n">missouri</span><span class="o">=</span><span class="mi">18</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="n">washington</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="n">maine</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="n">maine</span><span class="o">=</span><span class="mi">18</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="n">pennsylvania</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="n">washington</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="n">washington</span><span class="o">=</span><span class="mi">18</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="n">wisconsin</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="n">maryland</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="n">maryland</span><span class="o">=</span><span class="mi">18</span>
+
+<span class="n">Field</span> <span class="n">n1</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="o">=</span><span class="mi">13</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">97</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">97</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">97</span><span class="o">=</span><span class="mi">8</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">59</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">59</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">59</span><span class="o">=</span><span class="mi">6</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">27</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">30</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">29</span><span class="o">=</span><span class="mi">5</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">30</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">52</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">130</span><span class="o">=</span><span class="mi">5</span>
+
+<span class="n">Field</span> <span class="n">n2</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="o">=</span><span class="mi">13</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">57</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">57</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">57</span><span class="o">=</span><span class="mi">5</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="o">-</span><span class="n">empty</span><span class="o">-=</span><span class="mi">5</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">33</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">33</span><span class="o">=</span><span class="mi">5</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">33</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">207</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">207</span><span class="o">=</span><span class="mi">4</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">172</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">66</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">66</span><span class="o">=</span><span class="mi">4</span>
+
+<span class="n">Field</span> <span class="n">AGI</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="o">-</span><span class="mf">1.00</span><span class="o">=</span><span class="mi">13</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="o">-</span><span class="n">empty</span><span class="o">-=</span><span class="mi">5</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">55530</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mf">55530000.00</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">6258</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">195751</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mf">4356000.00</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">111795</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">4356</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mf">53044000.00</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">5351</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">111795</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mf">4845000.00</span><span class="o">=</span><span class="mi">2</span>
+
+
+<span class="n">UNIQUE</span> <span class="n">VALUES</span><span class="p">:</span> <span class="n">Bottom</span> <span class="mi">5</span> <span class="n">Per</span> <span class="n">Field</span>
+
+<span class="n">Field</span> <span class="n">y2_statefips</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="n">state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">21</span><span class="o">=</span><span class="mi">49</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="n">non</span><span class="o">-=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">21</span><span class="o">=</span><span class="mi">49</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">11</span><span class="o">=</span><span class="mi">55</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="n">migrants</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">11</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">19</span><span class="o">=</span><span class="mi">56</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">01</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">18</span><span class="o">=</span><span class="mi">56</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">21</span><span class="o">=</span><span class="mi">49</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">18</span><span class="o">=</span><span class="mi">56</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">17</span><span class="o">=</span><span class="mi">56</span>
+
+<span class="n">Field</span> <span class="n">y1_statefips</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">1598458</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">50</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">50</span><span class="o">=</span><span class="mi">17</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">46630</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">11</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">11</span><span class="o">=</span><span class="mi">17</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="o">-</span><span class="n">empty</span><span class="o">-=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">16</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">16</span><span class="o">=</span><span class="mi">17</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">50</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">30</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">30</span><span class="o">=</span><span class="mi">17</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">11</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">38</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">38</span><span class="o">=</span><span class="mi">17</span>
+
+<span class="n">Field</span> <span class="n">y1_state</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">95832</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="n">vt</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="n">vt</span><span class="o">=</span><span class="mi">17</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="o">-</span><span class="n">empty</span><span class="o">-=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="n">ri</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="n">ri</span><span class="o">=</span><span class="mi">17</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">3579600</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="n">nd</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="n">nd</span><span class="o">=</span><span class="mi">17</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="n">vt</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="n">mt</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="n">mt</span><span class="o">=</span><span class="mi">17</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="n">nd</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="n">pa</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="n">pa</span><span class="o">=</span><span class="mi">18</span>
+
+<span class="n">Field</span> <span class="n">y1_state_name</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="n">ky</span> <span class="n">non</span><span class="o">-</span><span class="n">migrants</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="n">ky</span> <span class="n">non</span><span class="o">-</span><span class="n">migrants</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="n">ky</span> <span class="n">non</span><span class="o">-</span><span class="n">migrants</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="n">co</span> <span class="n">non</span><span class="o">-</span><span class="n">migrants</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="n">ca</span> <span class="n">total</span> <span class="n">migration</span><span class="o">-</span><span class="n">us</span> <span class="ow">and</span> <span class="n">foreign</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="n">ca</span> <span class="n">total</span> <span class="n">migration</span><span class="o">-</span><span class="n">us</span> <span class="ow">and</span> <span class="n">foreign</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="n">ca</span> <span class="n">total</span> <span class="n">migration</span><span class="o">-</span><span class="n">us</span> <span class="ow">and</span> <span class="n">foreign</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="n">ca</span> <span class="n">total</span> <span class="n">migration</span><span class="o">-</span><span class="n">foreign</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="n">ca</span> <span class="n">total</span> <span class="n">migration</span><span class="o">-</span><span class="n">foreign</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="n">ca</span> <span class="n">total</span> <span class="n">migration</span><span class="o">-</span><span class="n">us</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="n">ca</span> <span class="n">total</span> <span class="n">migration</span><span class="o">-</span><span class="n">same</span> <span class="n">state</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="n">ca</span> <span class="n">total</span> <span class="n">migration</span><span class="o">-</span><span class="n">same</span> <span class="n">state</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="n">ca</span> <span class="n">total</span> <span class="n">migration</span><span class="o">-</span><span class="n">foreign</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="n">ca</span> <span class="n">non</span><span class="o">-</span><span class="n">migrants</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="n">ca</span> <span class="n">non</span><span class="o">-</span><span class="n">migrants</span><span class="o">=</span><span class="mi">1</span>
+
+<span class="n">Field</span> <span class="n">n1</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">64</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">64</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">64</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">995</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">1025</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">1147</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">624</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">719</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">930</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">628</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">754</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">976</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">719</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">930</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">995</span><span class="o">=</span><span class="mi">1</span>
+
+<span class="n">Field</span> <span class="n">n2</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">97</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">97</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">97</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">1541</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">1350</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">1350</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">1156</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">1141</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">1141</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">1115</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">1130</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">1130</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">1141</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">1086</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mi">1086</span><span class="o">=</span><span class="mi">1</span>
+
+<span class="n">Field</span> <span class="n">AGI</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">2980</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">2980</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mf">2980000.00</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">29990</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">15647</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mf">43142000.00</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">144141</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">1016401</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mf">148163858000.00</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">196950</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">148163858</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mf">1178906000.00</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="p">:</span><span class="mi">1016401</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="p">:</span><span class="mi">1178906</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Final</span><span class="p">:</span><span class="mf">2277368000.00</span><span class="o">=</span><span class="mi">1</span>
+
+
+<span class="n">SPECIAL</span> <span class="n">CHARACTERS</span>
+<span class="n">SpecChar</span> <span class="n">ascii_234</span><span class="p">:</span> <span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Final</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">SpecChar</span> <span class="n">unicode_8252</span><span class="p">:</span> <span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Final</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">SpecChar</span> <span class="n">ascii_167</span><span class="p">:</span> <span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Final</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">SpecChar</span> <span class="n">unicode_9658</span><span class="p">:</span> <span class="n">As</span><span class="o">-</span><span class="ow">is</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Rem</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Final</span><span class="o">=</span><span class="mi">0</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+</section>
+<section id="next">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Next</a><a class="headerlink" href="#next" title="Link to this heading">#</a></h2>
+<p>See Compare Results in Jupyter for examples of using these results to
+make a report comparing before and after remediating, normalizing, and
+enriching the data with VerityDotNet.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="analyzingdatarecords.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Analyze Data Records</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="compareresults.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Compare Results in Jupyter</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goal">Goal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-continual-improvement">Practice Continual Improvement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remediation-example">Remediation Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#review-results">Review Results</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next">Next</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Technik Interlytics.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><!--show release-->
+20240811</div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

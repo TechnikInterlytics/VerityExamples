@@ -1,0 +1,871 @@
+==========
+Transforms
+==========
+
+.. contents:: 
+    :depth: 3
+
+
+**VerityPy** transforms allow remediating and enriching source data into Normalized data with 
+a higher level of quality, accuracy, and meaning to support demanding use cases. There are five 
+kinds of transforms:
+
+   1. Assignment: assigns values to field as a fixed value, reference to another field in record, random number, list of categories via frequencies, lookup dictionaries
+   2. Conditional: conditional tests of equality and inequality for numeric, string, and date values
+   3. Numeric: numeric calculation functions including using other fields in record by reference
+   4. Text: manipulate with slicing, adding, padding, replacing
+   5. Date: Change date format to ISO 8601 including from special Excel format 
+
+Transforms are objects with a list of child Op objects. These are described in the "objects" page. Each Op has properties for parameter settings titled 
+param1, param2, param3. Their use and appropriate values are specific to each transform function which are described in this page.
+
+
+|
+
+Assignment
+===========
+
+noOp
+-----
+
+No operation. Use to stop operations in conditional sequence
+
+
+setToValue
+-----------
+
+Assign a fixed value
+
+    * Param1: Value to assign. Required
+
+
+setToIndex
+-----------
+
+Assign a fixed value equal to the record's index in output set which is supplied by application code to the transform execution module.
+
+    * Param1: Optional integer starting index which must be greater than or equal to 0. Default is 0.
+
+
+setToRef
+-----------
+
+Assigns the value of a referenced source field in the current record
+
+    * Param1: field title to get its current value to assign. Required
+
+
+setToRandom
+-----------
+
+Uses random number generator to produce a value scaled between the minimum and maximum values
+
+    * Param1: optional as minimum. Default is 0
+    * Param2: optional as maximum. Default is 1. If this is \< min then set to min + 1
+
+
+setToFrequencyList
+-------------------
+
+Applies a value from a list using relative frequencies of occurrence
+
+    * Param1: relative frequencies of occurrence. Can use any real \> 0 and will be scaled 
+      to sum. Since list, enter delimited by pipe such as 2|7|.5|9 where the second list item occurs 37.8% percent (7/18.5) of the time.
+    * Param2: list of values correlated to Param1 frequencies and entered with pipe delimiter like red|green|blue|orange
+    * Param3: Optional. If used, either a reference field title to use as source of base value, or a real number 0.0-1.0 . 
+      Otherwise, the default is to use a random number.
+
+
+lookup
+--------
+
+Assigns a value from a lookup list based on matching values to keys where keys can use wildcards. 
+The match can be made to one, two, or three source fields in the record with field 1 always 
+the current value while fields 2 and 3 are optional if set in Param2. 
+Leave Param2 empty to use only 1 field as the match value. All selected fields must match their 
+respective conditions for a lookup result to be assigned. 
+The lookup dictionary has records each with properties: key1, key2, key3, value 
+depending on how many keys are used which is set by Param1 and Param2. 
+Keys can use front and/or back wildcard (*) like top*, *night, *state* to allow token matching. 
+
+    * Param1: title of list that has been pre-loaded into array of lists as part of initialization. Required.
+    * Param2: Optional. Field 2 title, or fields 2 and 3 titles. If both supplied use pipe to delimit such as 'field2|field3'.
+
+
+|
+
+Conditional
+==============
+
+
+ifEmpty
+---------
+
+If value is empty. Compares current value as string
+
+
+ifNotEmpty
+------------
+
+If value is not empty. Compares current value as string
+
+
+ifEq
+---------
+
+If equals. Compares current value as real number (converted from string) to Param1 (also converted) from string or one of the char_aliases for PI (math.pi) or E (math.e)
+
+    * Param1: Value to compare. Can be alias math.pi or math.e
+
+
+ifNotEq
+---------
+
+If not equals. Compares current value as real number (converted from string) to Param1 (also converted) from string or one of the char_aliases for PI (math.pi) or E (math.e)
+
+    * Param1: Value to compare. Can be alias math.pi or math.e
+
+
+ifGte
+---------
+
+If greater than or equals. Compares current value as real number (converted from string) to Param1 (also converted) from string or one of the char_aliases for PI (math.pi) or E (math.e)
+
+    * Param1: Value to compare. Can be alias math.pi or math.e
+
+
+ifNotGte
+---------
+
+If not greater than or equals. Compares current value as real number (converted from string) to Param1 (also converted) from string or one of the char_aliases for PI (math.pi) or E (math.e)
+
+    * Param1: Value to compare. Can be alias math.pi or math.e
+
+
+ifGt
+---------
+
+If greater than. Compares current value as real number (converted from string) to Param1 (also converted) from string or one of the char_aliases for PI (math.pi) or E (math.e)
+
+    * Param1: Value to compare. Can be alias math.pi or math.e
+
+
+ifNotGt
+---------
+
+If not greater than. Compares current value as real number (converted from string) to Param1 (also converted) from string or one of the char_aliases for PI (math.pi) or E (math.e)
+
+    * Param1: Value to compare. Can be alias math.pi or math.e
+
+
+ifLte
+---------
+
+If lesser than or equals. Compares current value as real number (converted from string) to Param1 (also converted) from string or one of the char_aliases for PI (math.pi) or E (math.e)
+
+    * Param1: Value to compare. Can be alias math.pi or math.e
+
+
+ifNotLte
+---------
+
+If not lesser than or equals. Compares current value as real number (converted from string) to Param1 (also converted) from string or one of the char_aliases for PI (math.pi) or E (math.e)
+
+    * Param1: Value to compare. Can be alias math.pi or math.e
+
+
+ifLt
+---------
+
+If lesser than. Compares current value as real number (converted from string) to Param1 (also converted) from string or one of the char_aliases for PI (math.pi) or E (math.e)
+
+    * Param1: Value to compare. Can be alias math.pi or math.e
+
+
+ifNotLt
+---------
+
+If not lesser than. Compares current value as real number (converted from string) to Param1 (also converted) from string or one of the char_aliases for PI (math.pi) or E (math.e)
+
+    * Param1: Value to compare. Can be alias math.pi or math.e
+
+
+ifStrEq
+--------
+
+If strings are equal. Compares current value to Param1 as string or one of the char_aliases. You can specify 
+multiple test strings by delimiting with pipe (no spacing) as with Strong|strENGTH|power
+
+    * Param1: Value to compare. Can be alias. Required
+    * Param2: optional boolean whether case sensitive. Default is false.
+
+ifNotStrEq
+------------
+
+If strings are not equal. Compares current value to Param1 as string or one of the char_aliases. You can specify 
+multiple test strings by delimiting with pipe (no spacing) as with Strong|strENGTH|power
+
+    * Param1: Value to compare. Can be alias. Required
+    * Param2: optional boolean whether case sensitive. Default is false.
+
+
+ifStrStarts
+---------------
+
+If current value starts with Param1. You can specify multiple test strings by delimiting with pipe (no spacing) as with Strong|strENGTH|power 
+
+    * Param1: Value to compare. Can be alias. Required
+    * Param2: optional boolean whether case sensitive. Default is false.
+
+ifNotStrStarts
+----------------
+
+If current value not starts with Param1. You can specify multiple test strings by delimiting with pipe (no spacing) as with Strong|strENGTH|power 
+
+    * Param1: Value to compare. Can be alias. Required
+    * Param2: optional boolean whether case sensitive. Default is false.
+
+
+ifStrContains
+---------------
+
+If current value contains Param1. You can specify multiple test strings by delimiting with pipe (no spacing) as with Strong|strENGTH|power 
+
+    * Param1: Value to compare. Can be alias. Required
+    * Param2: optional boolean whether case sensitive. Default is false.
+    * Param3: optional boolean whether remove all spaces from current value before comparing so 'this is me' becomes 'thisisme'. Default is false.
+
+ifNotStrContains
+------------------
+
+If current value not contains Param1. You can specify multiple test strings by delimiting with pipe (no spacing) as with Strong|strENGTH|power 
+
+    * Param1: Value to compare. Can be alias. Required
+    * Param2: optional boolean whether case sensitive. Default is false.
+    * Param3: optional boolean whether remove all spaces from current value before comparing so 'this is me' becomes 'thisisme'. Default is false.
+
+
+ifStrEnds
+---------------
+
+If current value ends with Param1. You can specify multiple test strings by delimiting with pipe (no spacing) as with Strong|strENGTH|power 
+
+    * Param1: Value to compare. Can be alias. Required
+    * Param2: optional boolean whether case sensitive. Default is false.
+
+ifNotStrEnds
+----------------
+
+If current value not ends with Param1. You can specify multiple test strings by delimiting with pipe (no spacing) as with Strong|strENGTH|power 
+
+    * Param1: Value to compare. Can be alias. Required
+    * Param2: optional boolean whether case sensitive. Default is false.
+
+
+ifInt
+--------------
+
+If integer. Param1 specifies if must be positive integer, negative, or any
+
+    * Param1: optional ['any','positive','negative'] default=any
+
+ifNotInt
+--------------
+
+If not integer. Param1 specifies if must be positive integer, negative, or any
+
+    * Param1: optional ['any','positive','negative'] default=any
+
+
+ifReal
+--------------
+
+If real number. Param1 specifies if must be positive integer, negative, or any
+
+    * Param1: optional ['any','positive','negative'] default=any
+
+ifNotReal
+--------------
+
+If not real number. Param1 specifies if must be positive integer, negative, or any
+
+    * Param1: optional ['any','positive','negative'] default=any
+
+
+ifISODate
+--------------
+
+If in ISO DateTime format of yyyyMMdd with optional time suffix of Thhmmss. 
+Date part may use delimiters / or - while time part may use : . Examples: 
+2024-03-24T14:33:05, 20240324T143305, 20240324
+
+
+ifNotISODate
+--------------
+
+If not in ISO DateTime format of yyyyMMdd with optional time suffix of Thhmmss. 
+Date part may use delimiters / or - while time part may use : . Examples: 
+2024-03-24T14:33:05, 20240324T143305, 20240324
+
+
+ifDateFormat
+--------------
+
+If in supplied format possibly with delimiters / or - 
+
+    * Param1: format to check for. Required. MMM indicates month abbreviation like Jan or Aug, 
+      and MONTH indicates full name like January. 
+      Formats: mmddyy, mmdyy,mdyy,mmddyyyy,mmdyyyy,mdyyyy,ddmmyy,ddmyy,dmyy,ddmmyyyy,ddmyyyy,dmyyyy,
+      yymmdd,yymmd,yymd,yyyymmdd,yyyymmd,yyyymd,yyyyddd,yyyyMMMdd,ddMMMyyyy,
+      MONTHdd,yyyy,ddMONTH,yyyy,yyyyMONTHdd,ddMONTHyyyy,yyMONTHdd,ddMONTHyy
+
+
+ifNotDateFormat
+-----------------
+
+If not in supplied format possibly with delimiters / or - 
+
+    * Param1: format to check for. Required. MMM indicates month abbreviation like Jan or Aug, 
+      and MONTH indicates full name like January. 
+      Formats: mmddyy, mmdyy,mdyy,mmddyyyy,mmdyyyy,mdyyyy,ddmmyy,ddmyy,dmyy,ddmmyyyy,ddmyyyy,dmyyyy,
+      yymmdd,yymmd,yymd,yyyymmdd,yyyymmd,yyyymd,yyyyddd,yyyyMMMdd,ddMMMyyyy,
+      MONTHdd,yyyy,ddMONTH,yyyy,yyyyMONTHdd,ddMONTHyyyy,yyMONTHdd,ddMONTHyy
+
+
+|
+
+Numeric
+==========
+
+
+convertMainFrameNumber
+------------------------
+
+Converts a number in string representation in coded main frame format to string of real number. 
+Encoded last character is indicator of this formatting including sign reversal if necessary. 
+Always makes last 2 digits into decimal portion so no further divide by 100 is necessary. 
+If special char is within input string it becomes the end char and the 
+remaining suffix is discarded. Leading zeros are truncated so 000.12 becomes 0.12 . Codes are::
+
+    {= 0
+    }= 0 and negate
+    a= 1
+    j= 1 and negate
+    b= 2
+    k= 2 and negate
+    c= 3
+    l= 3 and negate
+    d= 4
+    m= 4 and negate
+    e= 5
+    n= 5 and negate
+    f= 6
+    o= 6 and negate (this is letter)
+    g= 7
+    p= 7 and negate
+    h= 8
+    q= 8 and negate
+    i= 9
+    r= 9 and negate
+
+
+round
+--------
+
+Rounds number to specified number of decimal digits. If number digits=0 (default) then nearest integer made (real datatype ends .00). 
+Midpoint goes to even number
+
+
+floor
+--------
+
+Returns the largest integral value less than or equal to number. Real datatype ends .00 
+
+
+ceiling
+--------
+
+Returns the smallest integral value greater than or equal to number. Real datatype ends .00 
+
+
+abs
+--------
+
+Returns the absolute value.
+
+
+negate
+--------
+
+Inverts sign.
+
+
+mult
+----------
+
+Multiply current value by supplied number. May use special notations
+
+    * Param1: number to use. Required.
+    * Param2: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.
+
+
+div
+----------
+
+Divide current value by supplied number (current/x). May use special notations
+
+    * Param1: number to use. Required. If 0, then result = 9.99 x 10^10
+    * Param2: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.
+
+divFrom
+----------
+
+Divide current value from supplied number (x/current). May use special notations
+
+    * Param1: number to use. Required. If Param1=0 then result=0 while if current value=0 then result= 9.99 x 10^10
+    * Param2: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.
+
+
+
+add
+----------
+
+Add current value by supplied number. May use special notations
+
+    * Param1: number to use. Required.
+    * Param2: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.
+
+subtract
+----------
+
+Subtract current value by supplied number (current-x). May use special notations
+
+    * Param1: number to use. Required.
+    * Param2: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.
+
+
+subtractFrom
+-------------
+
+Subtract current value from supplied number (x-current). May use special notations
+
+    * Param1: number to use. Required.
+    * Param2: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.
+
+
+multByRef
+----------
+
+Multiply current value by value of referenced field.
+
+    * Param1: title of reference field. Required.
+    * Param2: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.
+
+divByRef
+----------
+
+Divide current value by value of referenced field (current/ref).
+
+    * Param1: title of reference field. Required. If reference value=0 then result = 9.99 x 10^10
+    * Param2: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.
+
+
+divFromRef
+----------------
+
+Divide current value from value of referenced field (ref/current).
+
+    * Param1: title of reference field. Required. If current value=0 then result = 9.99 x 10^10
+    * Param2: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.
+
+
+addByRef
+----------
+
+Add current value by value of referenced field.
+
+    * Param1: title of reference field. Required.
+    * Param2: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.
+
+subtractByRef
+------------------
+
+Subtract current value by value of referenced field (current-ref).
+
+    * Param1: title of reference field. Required.
+    * Param2: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.
+
+subtractFromRef
+-------------------
+
+Subtract current value from value of referenced field (ref-current).
+
+    * Param1: title of reference field. Required.
+    * Param2: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.
+
+
+multRefs
+----------
+
+Multiply referenced fields.
+
+    * Param1: first reference field. Required.
+    * Param2: second field title or multiple field titles separated by commas like title2,title3,title4. Required.
+    * Param3: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.
+
+addRefs
+----------
+
+Add referenced fields.
+
+    * Param1: first reference field. Required.
+    * Param2: second field title or multiple field titles separated by commas like title2,title3,title4. Required.
+    * Param3: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.
+
+
+log
+-----------
+
+Base 10 log of current value. If value \< 0 then result= -10^10. If datatype is int then result uses FLOOR
+
+
+ln
+-----------
+
+Base E log of current value. If value \< 0 then result= -10^10. If datatype is int then result uses FLOOR
+
+
+pow10
+-----------
+
+Base 10 exponential of current value.
+
+
+powe
+-----------
+
+Base E exponential of current value.
+
+
+setDecimal
+---------------
+
+Sets number of decimal places for number. If \<= 0 then value is truncated to integer. 
+If less than number's decimals, excess digits cut. If greater, decimal places padded right with 0
+
+    * Param1: integer number decimal places greater than or equal to 0
+
+
+convertFromExp
+------------------
+
+Convert a string representing exponential number into non-exponential number. 
+String will be checked for format n.nnEsnn where n is integer digit, 
+and s is an optional + or -. String can also have front - or be enclosed in parentheses. Examples: 
+1.3E05 converted to 130000, -1.23e-1 converted to -0.123
+
+
+
+|
+
+Text
+======
+
+trim
+--------------
+
+Remove whitespace left (i.e. front) and right (i.e. back)
+
+
+ltrim
+----------
+
+Remove whitespace left (i.e. front)
+
+
+rtrim
+----------
+
+Remove whitespace right (i.e. back)
+
+
+toLower
+----------
+
+Set to lower case
+
+
+toUpper
+----------
+
+Set to upper case
+
+
+toTitle
+----------
+
+Set to title case
+
+
+front
+----------
+
+Take characters from front of string. Matching part is found in current value and then cut after its first occurrence so it is inclusive of match, 
+such as Param1= 'r' for current value= 'horse' yields 'hor'.
+
+    * Param1: string to find match. Required.
+
+
+before
+----------
+
+Take characters from front of string before the matching part is found in current value so it is exclusive of match, 
+such as Param1= 'r' for current value= 'horse' yields 'ho'.
+
+    * Param1: string to find match. Required.
+
+
+frontN
+----------
+
+Take N characters from front of string
+
+    * Param1: integer number of characters. Required.
+
+
+end
+----------
+
+Take characters from end of string. Matching part is found in current value and then cut at its first occurrence to end so it is inclusive of match, 
+such as Param1= 'r' for current value= 'horse' yields 'rse'.
+
+    * Param1: string to find match. Required.
+
+
+after
+----------
+
+Take characters from end of string after the matching part is found in current value so it is exclusive of match, 
+such as Param1= 'r' for current value= 'horse' yields 'se'.
+
+    * Param1: string to find match. Required.
+
+
+endN
+----------
+
+Take N characters from end of string
+
+    * Param1: integer number of characters. Required.
+
+
+mid
+------------
+
+Take characters from middle of string. Matching part is found in current value and then cut after its first occurrence. 
+If Param2 not used, result is after cutting with Param1. If Param2 is used, then initial result is again cut after finding Param2's occurrence 
+meaning result is string including Param1 and Param2. Examples: value= 'Semantics' with Param1='m' and Param2='c' yields 'mantic'; 
+value= 'mishmash' with Param1='ma' and Param2='s' yields 'mas'
+
+    * Param1: string to find match. Required.
+    * Param2: optional second string to find ending match
+
+
+midN
+------------
+
+Take N characters from middle of string. Result is after cutting at Param1 character index from front of string. 
+If Param2 not used or less than 1, then result goes to end of string. If Param2 is used, then initial result is again cut after Param2's number  
+of characters. Examples: value= 'Semantics' with Param1='2' and Param2='6' yields 'mantic' ;
+for value= 'mishmash' with Param1='4' and Param2='3' yields 'mas'."
+
+    * Param1: integer starting position using 0-based indexing
+    * Param2: optional second integer for number of characters to take
+
+
+charAt
+-----------------
+
+Take 1 character at position (0-based)
+
+    * Param1: integer character position 0-n. Required
+
+
+prepend
+------------
+
+Add string to front of value
+
+    * Param1: string to add. Required
+
+
+append
+------------
+
+Add string to back of value
+
+    * Param1: string to add. Required
+
+
+remove
+------------
+
+Remove all instances of string from value
+
+    * Param1: string to remove. Required
+
+
+replace
+------------
+
+Replace all instances of string from value with new string part
+
+    * Param1: string to remove. Required
+    * Param2: string to insert as replacement. Required
+
+
+setLength
+------------
+
+Sets value to specific length by cutting or padding characters as needed
+
+    * Param1: integer character length. Required
+    * Param2: optional side to act on (left, right)
+    * Param3: optional character to pad with if needed. Default is x. If longer than 1 char only first used.
+
+
+
+|
+
+Date
+========
+
+
+setToISODate
+----------------
+
+Creates an ISO 8601 DateTime string yyyyMMdd[Thhmmss] with time part depending on Param1
+
+    * Param1: 'today' for current date as yyyyMMdd, 'now' for current date and time, or an ISO formatted dateTime. 
+    * Param2: optional for either 'today' or 'now'. Ignored when Param1 is ISO dateTime. The number hours timezone offset from UTC (e.g. Dallas TX is -5, Kolkata India is +5.5, New York NY is -4), 
+      otherwise the computer's time zone is used so depends on server settings.
+
+
+dateToISO
+-------------
+
+Converts data in specified format to ISO 8601 date yyyyMMdd
+
+    * Param1: Required. format with MMM for month abbreviation like Jan or Aug, 
+      and MONTH for full name like January. 
+      Formats: mmddyy, mmdyy,mdyy,mmddyyyy,mmdyyyy,mdyyyy,ddmmyy,ddmyy,dmyy,ddmmyyyy,ddmyyyy,dmyyyy,
+      yymmdd,yymmd,yymd,yyyymmdd,yyyymmd,yyyymd,yyyyddd,yyyyMMMdd,ddMMMyyyy,
+      MONTHdd,yyyy,ddMONTH,yyyy,yyyyMONTHdd,ddMONTHyyyy,yyMONTHdd,ddMONTHyy
+
+
+excelDateNumberToISO
+---------------------
+
+Converts a date in numeric excel format into ISO8601 yyyymmdd format with fractional days removed. Excel uses 
+number days since January 1, 1900 as its counting base. Example: 44416 = 20210808, 42855 = 20170430
+
+
+|
+|
+
+Examples
+==============
+
+
+Populate Enrichment Field
+-------------------------------
+
+Enrichment fields are key to improving and maintaining data accuracy, trust, integrity and pedigree for 
+any use case needing managed control of data assets and which has a strong dependency of outcomes 
+on even small quantities of data errors and variability. They are fields added to the output data 
+set that are not in the source data. Essentially, they are in-record metadata. 
+
+In this example, we have an enrichment field titled 'useAGI' that is defined to be a boolean datatype 
+indicating whether the output record should be used for aggregating records into groups with subtotals 
+of their field 'AGI' values. This is real-world data from the IRS Migration data set where AGI is the 
+Adjusted Gross Income from tax returns. The problem is there are records in the source data that cannot be 
+used for subtotal calculations because they are either already subtotals or have faulty data. There are 
+two ways to detect these situations based on IRS documentation:
+
+    1. faulty data: AGI will have value = -1
+    2. is a subtotal: field 'y1_state_name' contains words ["total","non-","migrants","Migration","Foreign","-US","Same State"]. 
+       Of these, the most consistent is the word part 'migra' when case insensitive
+
+These data characteristics were discovered using **VerityPy's** analysis function and reviewing the 
+errors (e.g. the words noted are not correct state names, and -1 is not a valid AGI value from real tax returns) 
+and unique value distributions.
+
+While this business logic may seem complicated, it is easily represented in **VerityPy's** transforms 
+in the following steps:
+
+    1. setToRef("AGI")
+    2. ifNotEq("-1")
+    3. setToValue("false")
+    4. setToRef("y1_state_name")
+    5. ifStrContains("migra")
+    6. setToValue("true")
+    7. setToValue("false")
+
+The action flow of this transform depends on the values of the fields 'AGI' and 'y1_state_name' 
+in the record being processed. Consider three situations:
+
+    * AGI = -1, y1_state_name= 'AL' : 
+      Step 1 assigns -1 to the working value. Step 2 tests if the value 
+      is NOT equal to -1 since IF conditions flow as IF --> action when false then stop else action when true then continue. 
+      In this case, the IF condition is FALSE since the value is -1 meaning NOT EQUAL is FALSE. Thus, 
+      step 3 is executed assigning 'false' as the final value and the transform ends.
+    * AGI = 5400, y1_state_name = 'AL Total Migration-US and Foreign' : 
+      Step 1 assigns 5400 to the working value. Step 2 tests if the value 
+      is NOT equal to -1. In this case, the IF condition is TRUE since the value is not -1. 
+      Thus, step 3 is ignored and step 4 assigns 'AL Total Migration-US and Foreign' as the working value. 
+      Step 5 tests if the working value contains 'migra' case insensitive (since that is default for function) 
+      with this result being TRUE. Consequently, step 6 is ignored (since it is for FALSE result from IF) 
+      and step 7 is executed assigning final value 'false'. Note that if step 5 was instead 
+      ifStrContains("migra","true") making it case sensitive then its result would be FALSE and 
+      step 6 executed assigning final value of 'true'.
+    * AGI = 5400, y1_state_name = 'AL' : 
+      Step 1 assigns 5400 to the working value. Step 2 tests if the value 
+      is NOT equal to -1. In this case, the IF condition is TRUE since the value is not -1. 
+      Thus, step 3 is ignored and step 4 assigns 'AL' as the working value. 
+      Step 5 tests if the working value contains 'migra' case insensitive (since that is default for function) 
+      with this result being FALSE. Consequently, step 6 executed assigning final value of 'true'.
+
+
+|
+
+Correct Numeric Units
+---------------------------
+
+In this example, we again use real-world data from the IRS Migration data set where AGI is the 
+Adjusted Gross Income from tax returns in thousands of US dollars. We want to transform the 
+value into actual dollars to support downstream analytics. 
+The problem is there are records in the source data that cannot be 
+used for subtotal calculations because they are faulty data. These are 
+denoted by AGI = -1.
+
+We use business logic to multiply by 1000 unless the AGI is faulty in the following steps:
+
+    1. setToRef("AGI")
+    2. ifNotEq("-1")
+    3. noOp()
+    4. mult("1000")
+
+The action flow of this transform depends on the value of the field 'AGI'.
+
+    * AGI = -1: 
+      Step 1 assigns -1 to the working value. Step 2 tests if the value 
+      is NOT equal to -1 since IF conditions flow as IF --> action when false then stop else action when true then continue. 
+      In this case, the IF condition is FALSE since the value is -1 meaning NOT EQUAL is FALSE. Thus, 
+      step 3 is executed which is the special noOp function (no operation meaning do nothing) and the transform ends.
+    * AGI = 123.45: 
+      Step 1 assigns 123.45 to the working value. Step 2 tests if the value 
+      is NOT equal to -1 which is TRUE.
+      In this case, step 3 is ignored and step 4 is executed multiplying the working value by 1000 and 
+      assigning this as final value.
+
+

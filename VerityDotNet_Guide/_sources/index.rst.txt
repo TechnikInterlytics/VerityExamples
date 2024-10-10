@@ -1,0 +1,23 @@
+.. 20240921
+
+VerityDotNet Guide
+===================
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents:
+
+   README
+   installation
+   transforms
+   objects
+   functions
+   analyzingdatarecords
+   normalizeenrichdatarecords
+   compareresults
+   license
+   support
+   
+
+:ref:`search`
+-------------

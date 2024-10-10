@@ -1,0 +1,11 @@
+Installation
+============
+
+Install VerityDotNet within your Visual Studio solution using NuGet:
+
+  .. image:: images/VerityDotNet_NuGet_VisStudio2022.png
+
+  Once installed, it will appear as a package dependency in your Solution:
+
+  .. image:: images/VerityDotNet_depen_VisStud2022.png
+

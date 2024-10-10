@@ -1,0 +1,597 @@
+======================
+Analyze Data Records
+======================
+
+Perform a deep inspection of data sets and use the muiti-faceted results to evaluate the 
+quality, conformance and presence of errors. 
+
+.. contents:: 
+    :depth: 2
+
+
+Goal
+===============
+
+The goal of analysis is to characterize data to know its structure, range of values, 
+and presence of anomalies in relation to what it should be as defined by its architecture. 
+Ideally, the documentation would describe the details of how it was collected, stored, and 
+the meaning of the data in the context of its intended use. In this ideal case, unit tests could be 
+made to automatically measure quality metrics both as the data is received and processed, and 
+as it is distributed and used. Unfortunately, this ideal situation rarely exists and we are forced 
+to manage data with uncertain quality, pedigree, and trustworthiness. When the use can tolerate 
+imperfect data then this is not much of a problem. However, we now have increasingly stringent needs for 
+better data to feed Artificial Intelligence (AI), Data Science (DataSci), and more sophisticated 
+forecasting models in financial markets, global supply chain, consumer activity, and many others.
+
+
+Objectives
+=============
+
+We have learned from in-depth analysis and thorough reconstruction of data sets across many fields 
+and types of data systems that there are several specific types of anomalies that frequenetly exist and 
+go undetected by even the most modern tools. Part of this expert assessment included following and measuring 
+the impact of the imperfect data on the end-use business activities for how outcome errors impacted 
+decision making, audit, compliance, analytics, forecast accuracy, etc. From this we created a combined 
+human expert and big data Machine Learning (ML) technology to filter through all data to find several types 
+of problems and reliable approaches to correcting them automatically. This led to the following key objectives 
+of the VerityX (X denotes both the Python and DotNet libraries) analysis process:
+
+    * capture details of field datatype and format for all records and visibly showcase even infrequent variations.
+         - many tools limit the depth and breadth of records analyzed and variations captured due to processing, memory, and storage limitations.
+    * capture complete range of values for each field and emphasize low frequency instances since this is how anomalies can be quickly discovered.
+    * capture complete range of values for combinations of several fields
+    * track number of field values parsed per record as key indicator of presence of extra delimiters and line feeds 
+      that are not apparent during human review but which cause parsing code to break what should be a single record 
+      into multiple partial records or generate more field values than there are fields. This is surprisingly common 
+      in many mid and large size data systems. 
+    * provide automated correction algorithms that repair all of the above problems with minimal required data 
+      architecture and engineering which tends to be so complicated and labor intensive that it often lags 
+      actual data causing serious 'technical debt'.
+    * provide multiple views and types of results into data quality and problems since real world data teams are typically 
+      too constrained in time and personnel to probe every data set, system, and operation in detail.
+
+
+Practice Continual Improvement
+=================================
+
+VerityX is designed for iteratively improving data set quality and enriching. It is counter-productive to attempt 
+to define every detail of a data set's structure, meaning, and use case rules in one lengthy requirements gathering process. 
+It is too complicated, laborious and prone to error. Instead, characterize data with an initial deep assessment and use 
+the results to discover what is correct, what is a problem, and what needs to be clarified. Adjusting the VerityX job 
+with ever increasing specificity is purposefully easy to do, and a core design principle to allow all team members including 
+non-technical business workers and managers to review the business rules and resulting outcomes. 
+
+A typical workflow will be:
+
+1. Organize source data file(s) and use a text editor to view the top of the file to determine its basic structure for:
+   
+    * is there a header line of field titles
+    * what delimiter is used
+    * are there comment lines starting with either # or //
+    * are there empty lines
+    * are there any obvious problems like lines that are much too short or long, odd characters that do not belong in the type of data, values that are inconsistent compared to most records
+
+2. Create a small application (Python or C# DotNet depending on library used) to read in the file's records, 
+   provide settings, define fields. See examples on support web site and the sample below.
+3. Iterate: Analyze, Review, Adjust
+   
+   1. submit data to analysis function
+   2. review results: datatype and format distributions per field, unique values per field, record size distribution, special characters
+   3. adjust Field definitions to include datatypes and formats based on results to improve granularity of analysis results
+
+4. Iterate: Remediate, Normalize, Enrich
+   
+   1. define transforms, add enrichment fields, normalize value ranges
+   2. submit data to remediation function
+   3. review result statistics and corrected, normalized, enriched output data: view with text editor, load into Excel, use Jupyter Notebook template
+
+5. Use new data in end use case and assess results
+
+    * analytics: pick a few samples and thoroughly review to see if values and category and numeric aggregations make sense and agree with known outcomes
+    * Data Science: check statistical scalars and distributions to predictions and historical data
+    * AI/ML: include in models and review changes, sensitivities, calibration to prior known test cases, reasonableness of future predictions
+
+
+
+Example
+=================
+
+.. topic:: Sample Code
+
+    Various samples including this one are available at the Technik Interlytics support web site
+
+|
+
+We use C# in Visual Studio 2022 (VS2022) on Windows 11. 
+
+  1. Open VS2022
+  2. create a new console solution for Target framework .Net 6.0
+  3. in Program.cs, set namespace, public class Program, and a Main method
+  4. test by running with F5 key. You should see a console open with the line "STARTING VERITYDOTNET_EXAMPLES"
+
+|
+
+.. sourcecode:: 
+
+  namespace VerityDotNet_Examples {
+    public class Program {
+      static void Main() {
+        try {
+          Console.WriteLine("STARTING VERITYDOTNET_EXAMPLES");
+        }
+        catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+      }
+    }
+  }  
+
+|
+
+6. Add new class Analyze.cs and change to be internal static
+
+|
+
+.. sourcecode:: 
+
+  namespace VerityDotNet_Examples {
+    internal static class Analyze {
+
+    }
+  }
+
+|
+
+7. Use Tools / Nuget Package Manager / Manage NuGet Packages for Solution and enter 'VerityDotNet' into BROWSE
+8. Select VerityDotNet by Technik Interlytics and then your project in the list in right side pane and click INSTALL
+9. Read and accept the License. Carefully review the license requirements especially on it not being open source and therefore not usable in an open source project.
+10. Go to Analyze.cs and add 'using VerityDotNet'
+
+|
+
+.. sourcecode:: 
+
+  using VerityDotNet;
+
+|
+
+11. create a folder 'data' under your project in Solution Explorer
+12. obtain sample data files from Technik Interlytics support and add to this 'data' folder
+
+    * FIPS_stateCountyCodes.dat 
+    * IRSMigration_WithErrors_Hdr.csv 
+    * IRSMigration_WithErrors_NoBrk_Hdr.csv 
+    * lookup_3field_test.dat 
+    * StateAbbrfromFIPS_lookup.dat 
+    * StateNamefromFIPS_lookup.dat 
+    * USStatesNormalize.dat
+
+|
+
+.. image:: images/solexplorewithdata.png
+
+
+Read Data File
+----------------
+
+.. sourcecode:: 
+
+    // Set variables for file handling
+    curDir = AppContext.BaseDirectory;
+    dirDelim = curDir.Contains('\\') ? "\\" : "/";
+    if (!curDir.EndsWith(dirDelim)) curDir += dirDelim;
+    txt = dirDelim + "bin" + dirDelim; //remove bin part of path if there
+    if (curDir.Contains(txt)) {
+      curDir = curDir[..(curDir.IndexOf(txt) + 1)];
+    }
+    curDir += "data" + dirDelim;
+    fileName = "IRSMigration_WithErrors_Hdr.csv";
+    fileUri = curDir + fileName;
+    if (!File.Exists(fileUri)) throw new Exception($"file not found: {fileUri}");
+    delimChar = ",";
+    //read data file and make list of Field objects and source records
+    using (StreamReader sr = new StreamReader(fileUri)) {
+      while (!sr.EndOfStream) {
+        lineIn = sr.ReadLine();
+        if (lineIn == null) break;
+        if (lineIn.Length > 0 && !lineIn.StartsWith("//") && !lineIn.StartsWith("#")) {
+          nLine++;
+          if (nLine == 1) {
+            if (!lineIn.Contains(delimChar)) throw new Exception($"first line does not have field delimiter: {delimChar}");
+            if (lineIn.Contains(DQ)) lineIn = lineIn.Replace(DQ, "");
+            temp = lineIn.Split(delimChar).ToList<string>();
+            for (int i = 0; i < temp.Count; i++) {
+              txt = temp[i].Trim();
+              srcFields.Add(new Field() {
+                title = txt,
+              });
+              qualityAnalysis.hashFields[txt.ToLowerInvariant()] = srcFields.Count - 1;
+            }
+          }
+          else {
+            recs.Add(lineIn);
+          }
+        }
+      }
+    }
+
+|
+
+Add Field Characteristics
+--------------------------
+
+We add some details to the fields to enable greater granularity in analysis results.
+
+.. sourcecode::
+
+    //assign datatypes and formats
+    for (int i=0; i< srcFields.Count; i++) {
+      fldName= srcFields[i].title.ToLowerInvariant();
+      if (fldName=="y1_statefips" || fldName == "y2_statefips") {
+        srcFields[i].datatype= "string";
+        srcFields[i].fmt_strlen = 2;
+      }
+      else if (fldName=="y1_state") {
+        srcFields[i].datatype = "string";
+        srcFields[i].fmt_strlen = 2;
+        srcFields[i].fmt_strcase = "upper";
+      }
+      else if (fldName == "y1_state_name") {
+        srcFields[i].datatype = "string";
+      }
+      else if (fldName=="n1" || fldName == "n2" || fldName == "agi") {
+        srcFields[i].datatype = "int";
+      }
+    }
+
+|
+
+Specify CoValues to Analyze
+------------------------------
+
+.. sourcecode:: 
+
+    //add coValue. Each list entry is a dictionary for a new coValue
+    //which has keys for 2 or 3 fields to use. AnalyzeQuality.Inspect 
+    //method will check title and then assign list indices
+    coValues.Add(new Dictionary<string, string>() {
+      {"field1", "y1_state" },
+      {"field2", "y1_state_name" },
+      {"field3", "" },
+    });
+
+|
+
+
+Set Parameters and Do Analysis
+--------------------------------
+
+.. sourcecode:: 
+
+    //set parameters. 
+    parameters["isCaseSens"] = "false";
+    parameters["isQuoted"] = "true"; //allows possibility of some quoted field values
+    parameters["delim"] = "comma"; // !!! critical to set correct delimiter !!!!
+    parameters["maxuv"] = "100"; //override default limit
+    parameters["hasHeader"] = "false"; //we removed header line as we read file but could have left it in if desired
+    parameters["extractFields"] = "false"; //we have Fields from original file so do not want to auto-extract
+    parameters["useThreads"] = "false"; //multi-threading is not used in this example 
+    //perform Verity Analysis.
+    qualityAnalysis = AnalyzeQuality.Inspect(srcFields, coValues, settings, recs);
+    if (qualityAnalysis.status.StartsWith("notok:")) throw new Exception($"error doing AnalyzeQuality: {qualityAnalysis.status[6..]}"); //always check for error condition
+
+
+
+Test Results
+-------------------
+
+There are many characteristics in the result object 'qualityAnalysis' but we only show a few examples here. More examples including test routines are 
+available in the Technik Interlytics support web site. This sections shows validating the results to known outcomes.
+
+.. sourcecode:: 
+
+    n1 = 0;
+    foreach (long l1 in qualityAnalysis.fieldsErrDatatypeCount) {
+      if (l1 > 0) n1++;
+    }
+    if (n1 != 3) errs.Add($"incorrect fieldsErrDatatypeCount {n1}/3");
+    n1 = 0;
+    foreach (long l1 in qualityAnalysis.fieldsErrFmtCount) {
+      if (l1 > 0) n1++;
+    }
+    if (n1 != 3) errs.Add($"incorrect fieldsErrFmtCount {n1}/3");
+    if (qualityAnalysis.fieldDatatypeDist.Count != qualityAnalysis.fields.Count) errs.Add($"incorrect fieldDatatypeDist {qualityAnalysis.fieldDatatypeDist.Count}/{qualityAnalysis.fields.Count}");
+    if (qualityAnalysis.fieldDatatypeDist[4]["int"]!=998) errs.Add($"incorrect fieldDatatypeDist[4][int] {qualityAnalysis.fieldDatatypeDist[4]["int"]}/998");
+    if (qualityAnalysis.fieldDatatypeDist[4]["empty"] != 5) errs.Add($"incorrect fieldDatatypeDist[4][empty] {qualityAnalysis.fieldDatatypeDist[4]["empty"]}/5");
+    if (qualityAnalysis.fieldUniqVals.Count != qualityAnalysis.fields.Count) errs.Add($"incorrect fieldUniqVals {qualityAnalysis.fieldUniqVals.Count}/{qualityAnalysis.fields.Count}");
+    if (qualityAnalysis.fieldUniqVals[1].Count == 0) errs.Add($"incorrect #fieldUniqVals[1]=0");
+    n1 = -1;
+    for (int i = 0; i < qualityAnalysis.fieldUniqVals[1].Count; i++) {
+      if (qualityAnalysis.fieldUniqVals[1][i].uv == "96") {
+        n1 = i; break;
+      }
+    }
+    if (n1 < 0) errs.Add($"fieldUniqVals[1] missing key=96");
+    else if (qualityAnalysis.fieldUniqVals[1][n1].count != 18) errs.Add($"key=96 value wrong in fieldUniqVals[1][{n1}] {qualityAnalysis.fieldUniqVals[1][n1].count}/18");
+    if (qualityAnalysis.specCharDist.Count != 4) errs.Add($"incorrect specCharDist {qualityAnalysis.specCharDist.Count}/4");
+    if (!qualityAnalysis.specCharDist.ContainsKey("unicode_8252")) errs.Add($"missing key=unicode_8252 in specCharDist");
+    if (qualityAnalysis.specCharDist["unicode_8252"]!=1) errs.Add($"incorrect key=unicode_8252 in specCharDist {qualityAnalysis.specCharDist["unicode_8252"]}/1");
+    if (qualityAnalysis.coValues.Count != 1) errs.Add($"incorrect #coValues {qualityAnalysis.coValues.Count}/1");
+    if (qualityAnalysis.coValueUniqVals.Count != 1) errs.Add($"incorrect #coValueUniqVals {qualityAnalysis.coValueUniqVals.Count}/1");
+    n1 = -1;
+    for (int i = 0; i < qualityAnalysis.coValueUniqVals[0].Count; i++) {
+      if (qualityAnalysis.coValueUniqVals[0][i].uv == "nc_north carolina") {
+        n1 = i; break;
+      }
+    }
+    if (n1 < 0) errs.Add($"coValueUniqVals[0] missing key=nc_north carolina");
+    else if (qualityAnalysis.coValueUniqVals[0][n1].count != 18) errs.Add($"coValueUniqVals[0][{n1}] for key=nc_north carolina wrong {qualityAnalysis.coValueUniqVals[0][n1].count}/18");
+    if (qualityAnalysis.fieldQuality.Count != qualityAnalysis.fields.Count) errs.Add($"incorrect fieldQuality {qualityAnalysis.fieldQuality.Count}/{qualityAnalysis.fields.Count}");
+    else if (qualityAnalysis.fieldQuality[0] != "95.2") errs.Add($"incorrect fieldQuality[0] {qualityAnalysis.fieldQuality[0]}/95.2");
+    else if (qualityAnalysis.fieldQuality[4] != "98.7") errs.Add($"incorrect fieldQuality[4] {qualityAnalysis.fieldQuality[4]}/98.7");
+    else if (qualityAnalysis.fieldQuality[5] != "97.8") errs.Add($"incorrect fieldQuality[6] {qualityAnalysis.fieldQuality[5]}/97.8");
+    if (errs.Count > 0) {
+      Console.WriteLine("Analyze has errors  ---> FAIL");
+      for (int i = 0; i < errs.Count; i++) {
+        Console.WriteLine($"Error {i}:{errs[i]}");
+      }
+    }
+    else {
+      Console.WriteLine("Analyze 0 errors  ---> OK");
+    }
+
+|
+
+This shows the following output:
+
+  
+  .. sourcecode::
+
+    TEST ANALYZE QUALITY: IRSMigration_WithErrors_Hdr.csv_20240806T132858
+    Verity Analysis report at: D:\CodeDevelopment\VS\TestVerityDotNet\test\IRSMigration_WithErrors_Hdr_report.dat
+    Analyze Quality using Fields 0 errors  ---> OK
+
+|
+
+Review Results
+--------------------
+
+This section lists some of the report results.
+
+  .. sourcecode::
+
+    Console.WriteLine("Sample Results:");
+    Console.WriteLine($"Number records= {qualityAnalysis.numRecs}");
+    Console.WriteLine($"Number records errors= {qualityAnalysis.errStats["numrecserr"]}");
+    Console.WriteLine($"Number records datatype errors= {qualityAnalysis.errStats["numrecserrdatatype"]}");
+    Console.WriteLine($"Number records format errors= {qualityAnalysis.errStats["numrecserrfmt"]}");
+    Console.WriteLine($"Number parsing errors Small1= {qualityAnalysis.recParseErrs["small1"]}");
+    Console.WriteLine($"Number parsing errors Small2= {qualityAnalysis.recParseErrs["small2"]}");
+    Console.WriteLine($"Number parsing errors Big= {qualityAnalysis.recParseErrs["big"]}");
+    for (int i = 0; i < qualityAnalysis.fields.Count; i++) {
+      Console.WriteLine($"Field Quality {qualityAnalysis.fields[i].title}={qualityAnalysis.fieldQuality[i]} ");
+    }
+    Console.WriteLine("UNIQUE VALUES: Top 5 Per Field");
+    for (int i = 0; i < qualityAnalysis.fields.Count; i++) {
+      Console.WriteLine($"Field {qualityAnalysis.fields[i].title}");
+      for (int j=0; j<5; j++) {
+        if (j >= qualityAnalysis.fieldUniqVals[i].Count) break;
+        Console.WriteLine($"UV: {qualityAnalysis.fieldUniqVals[i][j].uv} has {qualityAnalysis.fieldUniqVals[i][j].count} instances");
+      }
+    }
+    Console.WriteLine("UNIQUE VALUES: Bottom 5 Per Field");
+    for (int i = 0; i < qualityAnalysis.fields.Count; i++) {
+      Console.WriteLine($"Field {qualityAnalysis.fields[i].title}");
+      for (int j = 0; j < 5; j++) {
+        n1 = qualityAnalysis.fieldUniqVals[i].Count - 1 - j;
+        if (n1 < 0) break;
+        Console.WriteLine($"UV: {qualityAnalysis.fieldUniqVals[i][n1].uv} has {qualityAnalysis.fieldUniqVals[i][n1].count} instances");
+      }
+    }
+    Console.WriteLine("SPECIAL CHARACTERS");
+    foreach (KeyValuePair<string, long> kv in qualityAnalysis.specCharDist) {
+      Console.WriteLine($"SpecChar {kv.Key} has {kv.Value} instances");
+    }
+    Console.WriteLine($"CoValues (20 values max): {qualityAnalysis.coValues[0].title}");
+    n1 = 0;
+    foreach ((string uv, long count) in qualityAnalysis.coValueUniqVals[0]) {
+      Console.WriteLine($"{uv}: {count} instances");
+      n1++;
+      if (n1 >= 20) break;
+    }
+
+
+|
+
+With output:
+
+  .. sourcecode::
+
+    Sample Results:
+    Number records= 1003
+    Number records errors= 19
+    Number records datatype errors= 14
+    Number records format errors= 9
+    Number parsing errors Small1= 0
+    Number parsing errors Small2= 5
+    Number parsing errors Big= 0
+    Field Quality y2_statefips=95.2
+    Field Quality y1_statefips=95.2
+    Field Quality y1_state=90.7
+    Field Quality y1_state_name=100
+    Field Quality n1=98.7
+    Field Quality n2=97.8
+    Field Quality AGI=89.1
+    UNIQUE VALUES: Top 5 Per Field
+    Field y2_statefips
+    UV: 09 has 56 instances
+    UV: 19 has 56 instances
+    UV: 18 has 56 instances
+    UV: 17 has 56 instances
+    UV: 16 has 56 instances
+    Field y1_statefips
+    UV: 97 has 35 instances
+    UV: 96 has 18 instances
+    UV: 05 has 18 instances
+    UV: 40 has 18 instances
+    UV: 04 has 18 instances
+    Field y1_state
+    UV: al has 22 instances
+    UV: az has 22 instances
+    UV: hi has 22 instances
+    UV: ar has 22 instances
+    UV: in has 22 instances
+    Field y1_state_name
+    UV: missouri has 18 instances
+    UV: maryland has 18 instances
+    UV: washington has 18 instances
+    UV: pennsylvania has 18 instances
+    UV: wisconsin has 18 instances
+    Field n1
+    UV: -1 has 13 instances
+    UV: 97 has 8 instances
+    UV: 59 has 6 instances
+    UV: 27 has 5 instances
+    UV: 30 has 5 instances
+    Field n2
+    UV: -1 has 13 instances
+    UV: 57 has 5 instances
+    UV: -empty- has 5 instances
+    UV: 33 has 5 instances
+    UV: 172 has 4 instances
+    Field AGI
+    UV: -1 has 13 instances
+    UV: -empty- has 5 instances
+    UV: 6258 has 2 instances
+    UV: 111795 has 2 instances
+    UV: 5351 has 2 instances
+    UNIQUE VALUES: Bottom 5 Per Field
+    Field y2_statefips
+    UV: state has 1 instances
+    UV: non- has 1 instances
+    UV: migrants has 1 instances
+    UV: 1 has 1 instances
+    UV: 21 has 49 instances
+    Field y1_statefips
+    UV: 1598458 has 1 instances
+    UV: 46630 has 1 instances
+    UV: -empty- has 1 instances
+    UV: 50 has 17 instances
+    UV: 11 has 17 instances
+    Field y1_state
+    UV: 95832 has 1 instances
+    UV: -empty- has 1 instances
+    UV: 3579600 has 1 instances
+    UV: vt has 17 instances
+    UV: nd has 17 instances
+    Field y1_state_name
+    UV: ky non-migrants has 1 instances
+    UV: co non-migrants has 1 instances
+    UV: ca total migration-us and foreign has 1 instances
+    UV: ca total migration-us has 1 instances
+    UV: ca total migration-foreign has 1 instances
+    Field n1
+    UV: 64 has 1 instances
+    UV: 995 has 1 instances
+    UV: 624 has 1 instances
+    UV: 628 has 1 instances
+    UV: 719 has 1 instances
+    Field n2
+    UV: 97 has 1 instances
+    UV: 1541 has 1 instances
+    UV: 1156 has 1 instances
+    UV: 1115 has 1 instances
+    UV: 1141 has 1 instances
+    Field AGI
+    UV: 2980 has 1 instances
+    UV: 29990 has 1 instances
+    UV: 144141 has 1 instances
+    UV: 196950 has 1 instances
+    UV: 1016401 has 1 instances
+    SPECIAL CHARACTERS
+    SpecChar ascii_234 has 1 instances
+    SpecChar unicode_8252 has 1 instances
+    SpecChar ascii_167 has 1 instances
+    SpecChar unicode_9658 has 1 instances
+    CoValues (20 values max): y1_state,y1_state_name
+    mo_missouri: 18 instances
+    md_maryland: 18 instances
+    wa_washington: 18 instances
+    pa_pennsylvania: 18 instances
+    wi_wisconsin: 18 instances
+    sd_south dakota: 18 instances
+    me_maine: 18 instances
+    mi_michigan: 18 instances
+    sc_south carolina: 18 instances
+    oh_ohio: 18 instances
+    nv_nevada: 18 instances
+    ny_new york: 18 instances
+    va_virginia: 18 instances
+    fr_foreign: 18 instances
+    nj_new jersey: 18 instances
+    la_louisiana: 18 instances
+    wy_wyoming: 18 instances
+    ms_mississippi: 18 instances
+    tn_tennessee: 18 instances
+    tx_texas: 18 instances
+
+|
+
+Multi_Threading
+=================
+
+Multi-threaded functions are built-in for AnalyzeQuality. To use it, you need to supply a license and a licenseId in the 'settings' dictionary. You obtain 
+the license from Technik Interlytics with a suitable paid subscription plan. An evaluation license can be used with limited capability by supplying "VerityTrial" 
+as the license (no licenseId is needed). We can use the same example as above but with modified settings to enable multi-threading.
+
+With a full license, you can set several parameters to control the number and assignment of threads. Note that the actual number of threads and 
+the number of records assigned to each thread in each cycle is determined at run-time. These settings, and the limits with a Trial license, are the 
+starting values for the run-time calculation.
+
+  * maxThreads- maximum number of threads to use
+  * nRecsPerThreadMin- minimum number of records to assign to each thread in each cycle
+  * nRecsPerThreadMax- maximum number of records to assign to each thread in each cycle
+  * useThreads- boolean whether to use multi-threading. Must be 'true' to more than 1 thread to be used
+
+The Trial license imposes limits:
+
+  * maxThreads- 3
+  * nRecsPerThreadMax- 50
+
+|
+
+.. sourcecode:: 
+
+    Console.WriteLine("\n\nTest 2: Multi-thread with TRIAL license");
+    //add parameters
+    parameters["license"] = "VerityTrial";
+    parameters["licenseid"] = "";
+    parameters["maxThreads"] = "5"; //will be ignored due to trial license
+    parameters["nRecsPerThreadMin"] = "500"; //will be ignored due to trial license
+    parameters["nRecsPerThreadMax"] = "10000"; //will be ignored due to trial license
+    parameters["useThreads"] = "true"; //multi-threading is used
+
+    errs.Clear();
+    //perform Verity Analysis. We do not use coValues in this example so send an empty container
+    qualityAnalysis = AnalyzeQuality.Inspect(srcFields, new List<Dictionary<string, string>>(), parameters, recs);
+    if (qualityAnalysis.status.StartsWith("notok:")) throw new Exception($"error doing AnalyzeQuality: {qualityAnalysis.status[6..]}");
+    else if (!qualityAnalysis.status.StartsWith("license trial:")) throw new Exception($"error doing AnalyzeQuality report status does not start with license trial: {qualityAnalysis.status}");
+    else Console.WriteLine($"AnalyzeQuality with threads trial license status: {qualityAnalysis.status}");
+
+|
+
+Output:
+
+.. sourcecode::
+
+    Test 2: Multi-thread with TRIAL license
+    AnalyzeQuality with threads trial license status: license trial:#threads=3, recsPerT=50, #recsIn=1003
+    Analyze with threads TRIAL license 0 errors  ---> OK
+
+
+|
+
+
+Next
+===========
+
+See Normalize & Enrich Data Records for examples of how to use the analysis 
+results to remediate, normalize, and enrich the data.

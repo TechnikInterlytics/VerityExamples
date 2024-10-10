@@ -1,0 +1,397 @@
+Objects
++++++++
+
+.. contents:: 
+    :depth: 3
+
+
+Summary
+=========
+
+Python objects are used in several ways in this library. There are object classes to define the portfolio of transform functions organized by categories, to load and use lookup dictionaries to encode/decode values, to define transforms and their multiple operations per source and enrichment field, and to collate the settings and results from analyzing data records.
+
+
+Optypes Module
+=====================
+
+OpCat
+-----------
+
+Description
+^^^^^^^^^^^^
+
+Category for transform operations grouped by either type of action performed or datatype it is applied to. Categories include: assignment, conditional, numeric, text, date. 
+
+Members
+^^^^^^^^
+
+* category: string title of this category
+* funcs: list of OpFunc objects for this category
+
+Constructor
+^^^^^^^^^^^
+
+In module optypes.py: OpCat(category:str): category title is required
+
+
+OpFunc
+--------
+
+Description
+^^^^^^^^^^^^
+
+Function definition for defining transform operations. This is intended to be used for the specification of available transform operations.
+
+Members
+^^^^^^^^^^^
+
+* title: string name of function such as ifEq
+* desc: string description
+* param1req: bool true/false whether param1 is required to be set
+* param1typ: string datatype of param1 if it is restricted to one type
+* param2req: bool true/false whether param2 is required to be set
+* param2typ: string datatype of param2 if it is restricted to one type
+* param3req: bool true/false whether param3 is required to be set
+* param3typ: string datatype of param3 if it is restricted to one type
+
+Constructor
+^^^^^^^^^^^
+
+In module optypes.py: OpFunc(title:str): title is required
+
+
+Transform Module
+==================
+
+Transform
+----------
+
+Description
+^^^^^^^^^^^^
+
+Transform object for modifying source or enrichment field value. A transform contains a sequence of operations that may include conditional testing of values and referenced fields. It operates on the field whose name is the title of the transform. This field may be a source data field or an enrichment field added to the output record.
+
+Members
+^^^^^^^^^^^
+
+* title: string name of field transform operates on
+* ops: list of Op objects
+
+Constructor
+^^^^^^^^^^^
+
+In module transform.py: Transform(title:str): title is required
+
+
+Methods
+^^^^^^^^
+
+**get_json(add_lf:bool, add_quote:bool)**
+
+Get JSON string of transform properties. 
+
+* add_lf: whether to add line feed at ends of each JSON property (default false)
+* add_quote: whether to enclose keys and values in double quotes (default false)
+
+
+
+Op
+------
+
+Description
+^^^^^^^^^^^^
+
+Operation (Op) for transforms. Each Op has a title which is the name of the function. It specifies the function and its category along with several possible parameters (param1, param2, param3) that depend on the specific function. 
+
+Members
+^^^^^^^^^^^
+
+* title: string name of function to be performed
+* category: string name of function category
+* param1: string parameter value which be unused, optional or required depending on specific function
+* param2: string parameter value which be unused, optional or required depending on specific function
+* param3: string parameter value which be unused, optional or required depending on specific function
+* order: integer value to order execution of operations for this transform. Default is -1 with system assigning values at runtime after sorting values which can be discontinuous
+* p1list: list for internal use only
+* p2list: list for internal use only
+* p3list: list for internal use only
+
+Constructor
+^^^^^^^^^^^
+
+In module transform.py: Op(title:str, param1:str="", param2:str="", param3:str="", order:int=-1)
+
+* title is required
+* others optional
+
+
+LookUp Module
+================
+
+Lookup dictionary for transform processing. Transforms have an operation (Op) that allows assigning a value based on looking up the current value in a dictionary. 1, 2, 3 keys are allowed with the replacement value coming from the following column. This Op is in transform_types for category=assignment, function=lookup. 
+
+The description of this function and how it uses the lookup is:
+
+Assigns a value from a lookup list based on matching values to keys where keys can use wildcards. The match can be made to one, two, or three source fields in the record with field 1 always the current value while fields 2 and 3 are optional if set in Param2. Leave Param2 empty to use only 1 field as the match value. All selected fields must match their respective conditions for a lookup result to be assigned. The conditions and the result to assign are in an object for each list entry with properties: key1, key2, key3, value defined as example {'key1':'top\*','key2':'\*blue\*','key3':'\*left','value':'Orange'}. Conditions can use front and/or back wildcard (\*) like top\*, \*night, \*state\* to allow token matching. To use multiple conditions for the same replacement value ( OR condition ), enter them as separate list entries. To use AND and NOT conditions, use special notations as delimiters: top\*-and-\*night-not-\*blue\* which means a match requires both top\* and \*night be true as well as no instances of the token blue. 
+
+* Param1: title of list that has been pre-loaded into array of lists as part of initialization. 
+* Param2: Fields 2 and 3 both of which are optional and if both supplied use pipe to delimit as with color|position. For this example, current value must start with top (key1 condition), the field color must contain blue, and the field position must end with left. All of these must be true for a match in which case the value of Orange is assigned.
+
+
+LookUpDict
+--------------
+
+Description
+^^^^^^^^^^^^
+
+Dictionary with keys (either 1,2,3 field values) mapped to replacement value. The keys can use wild cards and also special notations for AND and NOT conditions. 
+In practice, this is made with a convenience method **make_lookup_from_file** such as:
+
+.. sourcecode:: 
+
+  lookup_dict= lookup.make_lookup_from_file(title, file_uri, "pipe", iscasesens, nkeys)
+
+
+
+Members
+^^^^^^^^^^^^
+
+* title: string used in function 'lookup' to select which LookUpDict to use
+* is_case_sens: if false then all text changed to lowercase
+* num_keys: integer number of keys used 1-3
+* delim: delimiter (comma, pipe, tab, colon)
+* fields: list of field titles which must correspond to columns in data set
+* recs:list of LookUpRec objects
+
+
+Constructor
+^^^^^^^^^^^^
+
+In module lookup.py: LookUpDict()
+
+
+LookUpRec
+--------------
+
+Description
+^^^^^^^^^^^^
+
+Record within a lookup dictionary. Each lookup record has 1-3 keys with matching conditions. Each key value can use wildcards at front and/or back. In addition, each key can have a combined condition using more than one token joined using special notation for boolean AND and NOT conditions. For example, a key might be top\*-and-\*food\*-not-\*juice which means the field value being checked must statisfy starting with 'top', containing 'food', and not ending with 'juice'. Therefore, each key is parsed into lists that are aligned: AND tokens and for each corresponding front_wild and back_wild lists. Similarly, NOT tokens and wild lists. After parsing, key1_and is a list of tokens minus front and back wildcards if they were supplied, and if so, they are in correlated lists key1_and_front_wild and key1_and_back_wild.
+
+
+Members
+^^^^^^^^^^^^
+
+* key1: single or combined value(s) to check
+* key2: optional. single or combined value(s) to check
+* key3: optional. single or combined value(s) to check
+* key1_and: list of AND conditions for key1 (at least 1). System made.
+* key1_not: list of NOT conditions for key1 (0 or more). System made.
+* key2_and: optional. list of AND conditions for key2 (at least 1 if used). System made.
+* key2_not: optional. list of NOT conditions for key2 (0 or more). System made.
+* key3_and: optional. list of AND conditions for key3 (at least 1 if used). System made.
+* key3_not: optional. list of NOT conditions for key3 (0 or more). System made.
+* key1_and_front_wild: bool for key1_and entry if it had front wildcard \*. System made.
+* key1_and_back_wild: bool for key1_and entry if it had back wildcard \*. System made.
+* key1_not_front_wild: bool for key1_not entry if it had front wildcard \*. System made.
+* key1_not_back_wild: bool for key1_not entry if it had back wildcard \*. System made.
+* key2_and_front_wild: bool for key2_and entry if it had front wildcard \*. System made.
+* key2_and_back_wild: bool for key2_and entry if it had back wildcard \*. System made.
+* key2_not_front_wild: bool for key2_not entry if it had front wildcard \*. System made.
+* key2_not_back_wild: bool for key2_not entry if it had back wildcard \*. System made.
+* key3_and_front_wild: bool for key3_and entry if it had front wildcard \*. System made.
+* key3_and_back_wild: bool for key3_and entry if it had back wildcard \*. System made.
+* key3_not_front_wild: bool for key3_not entry if it had front wildcard \*. System made.
+* key3_not_back_wild: bool for key3_not entry if it had back wildcard \*. System made.
+* result: string final value. System made.
+
+Constructor
+^^^^^^^^^^^^
+
+In module lookup.py: LookUpRec()
+
+
+
+QualityAnalysis Module
+========================
+
+
+QualityAnalysis
+----------------
+
+Description
+^^^^^^^^^^^^
+Packaging object for both settings used and results from an analysis of data records.
+
+Members
+^^^^^^^^^^^^
+
+* title: name for this object usually the name of the job run to make it
+* status: system assigned value which will be notok:reason if there is an error
+* numrecs: integer count of records used
+* maxuv: maximum number of unique values to collect per field with remainder into category '-other-'. Default=50
+* is_case_sens: bool whether values are case sensitive. Default=False
+* is_quoted: bool whether source records can have quoted values. Default= False
+* has_header: bool whether source records have header line as first non-empty, non-comment line. Default= True
+* extract_fields: bool whether fields should be extracted from header line instead of supplied in 'fields' list. Default= False
+* delim: name of delimiter to parse source records (comma, tab, pipe, colon, caret)
+* delim_char: character for delim used in code
+* fields: list of field objects which have attributes for title, datatype, and formatting
+* hash_fields: dictionary key= field title lower case with value= list index
+* field_uniqvalues: list correlated to fields. Each entry is a descending sorted list of 
+        uniquevalue tuples with each tuple (uv,count) where uv= string of unique value 
+        and count= integer number of instances. A maximum number of values are kept (default=50) with additional 
+        grouped into -other-
+* field_quality: list correlated to fields. String of an integer 0-100 as a quality metric computed from discovered field characteristics
+* field_datatype_dist: list of field datatype distributions correlated to fields list. Each field has counts for detected datatypes (int, real, bool, date, string, empty).
+* rec_size_dist: dictionary of record sizes (byte lengths) to counts. Max 100 sizes.
+* rec_parse_errs: dictionary of parsing errors (number fields after parsing relative to defined fields) by type as small1 (1 too few fields), small2 (2 or more missing fields), big (1 or more too many fields). Also, has keys for lists of example records small1_recs, small2_recs, big_recs (each max 50). 
+* rec_parse_dist: dictionary of number of parsed fields to count
+* spec_char_dist: dictionary of special characters and their counts. 
+        Special characters are (some use aliases as dictionary keys): 
+        tab, !, doublequote, #, <, >, [, ], backslash, ^, {, }, ~, ascii_[0-31, 127-255], 
+        unicode_[256-65535]
+* spec_char_dist_field: list correlated to fields[] with each being a dictionary 
+        of special characters to their counts for that specific field. Same organization 
+        as in spec_char_dist
+* spec_char_examples: list of examples of discovered special characters. Each entry is 
+        (nline)[sp char list]record with nline being the number line read from source data 
+        (excluding empty and comments lines) and is therefore 1 larger than the line's index 
+        in the Python list (i.e. nline is 1 based while lists are 0-based).
+        [sp char list] comma delimited string of each special character 
+        found in the record such as [spchar1,spchar2]lineIn. A single field can have  
+        more than 1 special character. For example, input line (pipe delimited) as record line 
+        #5 (although actual file line number could be larger due to comments and empty lines) and data =
+        = !dog|{House}|123^456 will be stored as an example as 
+        (5)[!,{,},^]!dog|{House}|123^456
+* covalues: list of dictionaries of field combinations to collect unique value information. Each entry is for one covalue with keys- field1, field2, field3 (optional), number (number of fields either 2 or 3), title = field1,field2,field3
+* covalue_uniqvalues: correlated to covalues array. Similar to field unique values.
+* err_stats: dictionary of properties and counts. 
+      * numrecs_err: number records with any kind of error
+      * numrecs_err_datatype: number records with datatype error
+      * numrecs_err_fmt: number records with format error
+      * fields_err_datatype: dictionary of fields with datatype errors and counts
+      * fields_err_fmt: dictionary of fields with format errors and counts
+* err_datatype_examples: list of delimited fields within records with datatype errors. 
+        Syntax is: (nline)[fieldinfo]|[fieldinfo].....  where [fieldinfo] is 
+        fieldTitle:reason:fieldValue  . fieldValue will be set to -empty- if the actual value is 
+        empty. nline is the number line read from source data 
+        (excluding empty and comments lines) and is therefore 1 larger than the line's index 
+        in the Python list (i.e. nline is 1 based while lists are 0-based).
+* err_fmt_examples: list of delimited fields within records with format errors. 
+        Syntax is: (nline)[fieldinfo]|[fieldinfo].....  where [fieldinfo] is 
+        fieldTitle:reason:fieldValue  . fieldValue will be set to -empty- if the actual value is 
+        empty. nline is the number line read from source data 
+        (excluding empty and comments lines) and is therefore 1 larger than the line's index 
+        in the Python list (i.e. nline is 1 based while lists are 0-based).
+
+
+
+
+Constructor
+^^^^^^^^^^^^
+
+In module qualityanalysis.py: QualityAnalysis()
+
+
+Methods
+^^^^^^^^^^^^
+
+**get_json(add_lf:bool=False)**
+
+Constructs array of JSON strings for components of this object. 
+
+* add_lf: if True then line feed added at end of each entry. This is unnecessary if returned array is printed as line per entry. 
+* Returns string list with first entry starting with 'notok:'' if error
+
+
+
+Field Module
+=============
+
+Field
+----------
+
+Description
+^^^^^^^^^^^^
+
+Field Object containing attributes for title, datatype, formatting
+
+Members
+^^^^^^^^^^^^
+
+* title: field's title
+* datatype: if used specifies datatype (int, real, date, bool, string)
+* fmt_strcase: for datatype=string, optionally specifies a value is upper or lower case. (upper,lower,"") 
+* fmt_strlen: for datatype=string, optionally specifies a required integer length (1-n). If value \< 1 then this is ignored.
+* fmt_strcut: for datatype= string when strlen\>0 and value length larger then chars removed from either front or back. Default is back (front,back)
+* fmt_strpad: for datatype= string when strlen\>0 and value length shorter then chars added to either front or back. Default is back (front,back)
+* fmt_strpadchar: for datatype= string when padding uses this character. Must be 1 character or use one of names (space, fslash, bslash, tab). Default is _
+* fmt_decimal: for datatype=real, optionally specifies a required integer number of decimal places (0-n)
+* fmt_date: for datatype=date, optionally specifies a required date format as one of
+    - mmddyy, mmdyy, mdyy, mmddyyyy, mmdyyyy, mdyyyy, 
+    - ddmmyy, ddmyy, dmyy, ddmmyyyy, ddmyyyy, dmyyyy,
+    - yymmdd, yymmd, yymd, yyyymmdd, yyyymmd, yyyymd, 
+    - yyyyddd (3 digit day number within year), 
+    - yyyyMMMdd, ddMMMyyyy (MMM = 3 letter month title like 'JAN'),
+    - 'MONTHdd,yyyy', 'ddMONTH,yyyy', yyyyMONTHdd, ddMONTHyyyy, yyMONTHdd, ddMONTHyy (MONTH full title),
+    - \*dmmyyyy, mm\*dyyyy, \*mddyyyy, dd\*myyyy (\*= can be 1 or 2 characters)
+* mapto: when using this Field as an output (i.e. target) field then this specifies if it is 
+    mapped to a source field which enables both renaming source fields and adding enrichment fields
+* parse_error_action: Handle empty field values due to parsing errors. Used in Refining Data as: 
+    - value to assign like 'NA' to denote parse error
+    - set to '-ignore-' which causes the field value to remain as empty since 
+        no transform nor normalize will be done
+    - set to either '-use-' or '' which causes the empty field value to continue to 
+        transform and normalization routines. Note the transform function ifEmpty and ifNotEmpty can be used to set field specific values.
+
+
+Constructor
+^^^^^^^^^^^^
+
+In module field.py: Field(title)
+
+
+Methods
+^^^^^^^^^^^^
+
+**get_json()**
+
+Constructs JSON string for this object. 
+
+
+
+CoValue
+----------
+
+Description
+^^^^^^^^^^^^
+
+CoValue object to define 2 or 3 fields for joint value analysis
+
+Members
+^^^^^^^^^^^^
+
+* title: title which is concantenation of field titles using _ to join them
+* field1: required first field title
+* field2: required second field title
+* field3: optional third field title
+* field1_index: first field's array index assigned by function
+* field2_index: second field's array index assigned by function
+* field3_index: third field's array index assigned by function
+* numfields: number of fields to use either 2 or 3
+
+
+Constructor
+^^^^^^^^^^^^
+
+In module field.py: CoValue(title)
+
+
+Methods
+^^^^^^^^^^^^
+
+**get_json()**
+
+Constructs JSON string for this object. 
+

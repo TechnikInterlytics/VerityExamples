@@ -1,0 +1,9 @@
+Installation
+============
+
+Install VerityPy using pip:
+
+.. code-block:: console
+
+    pip install veritypy
+

@@ -1,0 +1,699 @@
+=====================================
+Normalize & Enrich Data Records
+=====================================
+
+Correct errors, make consistent, and add in-record metadata for downstream analytics and modeling.
+
+.. contents:: 
+    :depth: 2
+
+
+Goal
+===============
+
+Use the analysis results to define datatype, format, and value characteristics 
+of the fields in the data set to correct errors and improve consistency and quality. 
+Add enriching metadata fields into records to enable precise analytics, 
+and granular models. 
+
+
+Objectives
+============
+
+With knowledge of discovered problems and data characteristics, we can more 
+thoroughly specify rules and transformations for the data 
+to be in a high quality and trusted state. 
+This state feeds end uses such as analytics and computational modeling which are 
+sensitive to even small amounts of errors and inconsistencies thereby significantly 
+improving the accuracy and validity of their results. 
+
+    * Define datatypes and formats for fields based on actual values and documented architecture
+    * Define correction rules for records with incorrect datatypes or formats
+    * Normalize data with transformation operations to encode/decode, or modify field values
+    * Fix records broken into multiple partial records with VerityX algorithm
+    * Add new fields to records to enrich analytic and modeling meaning and granularity
+
+
+Practice Continual Improvement
+=================================
+
+VerityX is designed for iteratively improving data set quality and enriching. It is counter-productive to attempt 
+to define every detail of a data set's structure, meaning, and use case rules in one lengthy requirements gathering process. 
+It is too complicated, laborious and prone to error. Instead, characterize data with an initial deep assessment and use 
+the results to discover what is correct, what is a problem, and what needs to be clarified. Adjusting the VerityX job 
+with ever increasing specificity is purposefully easy to do, and a core design principle to allow all team members including 
+non-technical business workers and managers to review the business rules and resulting outcomes. 
+
+A typical workflow will be:
+
+1. Organize source data file(s) and use a text editor to view the top of the file to determine its basic structure for:
+   
+    * is there a header line of field titles
+    * what delimiter is used
+    * are there comment lines starting with either # or //
+    * are there empty lines
+    * are there any obvious problems like lines that are much too short or long, odd characters that do not belong in the type of data, values that are inconsistent compared to most records
+
+2. Create a small application (Python or C# DotNet depending on library used) to read in the file's records, 
+   provide settings, define fields. See examples on support web site and the Python sample below.
+3. Iterate: Analyze, Review, Adjust
+   
+   1. submit data to analysis function
+   2. review results: datatype and format distributions per field, unique values per field, record size distribution, special characters
+   3. adjust Field definitions to include datatypes and formats based on results to improve granularity of analysis results
+
+4. Iterate: Remediate, Normalize, Enrich
+   
+   1. define transforms, add enrichment fields, normalize value ranges
+   2. submit data to remediation function
+   3. review result statistics and corrected, normalized, enriched output data: view with text editor, load into Excel, use Jupyter Notebook template
+
+5. Use new data in end use case and assess results
+
+    * analytics: pick a few samples and thoroughly review to see if values and category and numeric aggregations make sense and agree with known outcomes
+    * Data Science: check statistical scalars and distributions to predictions and historical data
+    * AI/ML: include in models and review changes, sensitivities, calibration to prior known test cases, reasonableness of future predictions
+
+
+Remediation Example
+=====================
+
+For this example, we use Visual Studio Code (VSC) on Windows 11. This follows the setup described in 
+'**Analyze Data Records**'.
+
+.. topic:: Sample Code
+
+    Various sample code files including this one are available at the Technik Interlytics 
+    support web site
+
+|
+
+From the analysis, we discovered that there were errors in several fields as well as 
+a serious problem with incorrect parsing due to records broken across multiple source 
+file lines. We also saw that there are records with values violating the documentation and 
+semantics of the schema that must be removed or annotated with enriching metadata. 
+
+We use several VerityPy features to remediate the data.
+
+    1. analyze as-is data set
+    2. remediate parsing errors by rebuilding broken records
+    3. analyze remediated data set
+    4. adjust field datatypes and formats based on analysis results
+    5. define enrichment fields to add to output data for analytic and ML downstream applications
+    6. define transformations to normalize field values, decode some fields into new enrichment fields, populate enrichment fields 
+       with conditional rules based on multi-field joint values in each record
+    7. analyze final data set
+
+|
+
+Steps 1-3 use the same setup code in analyze.py. The code to get the reports and remediate is:
+
+.. code-block:: 
+
+    report_asis =analyzequality.do_qualityinspect(flds, covalues, recs, settings)
+    if report_asis.status.startswith("notok:"):
+        raise ValueError("error from as-is report:" + report_asis.status[6:])
+
+
+    data_uris.append(file_uri)  # uses URI as set in analyze.py
+    file_uri= curdir + file_name.replace(".csv","_report.dat")
+    report_uris.append(file_uri)
+    txt= reportfuncs.save_report_to_file(file_uri, report_asis)
+    if txt.startswith("notok:"):
+        raise ValueError("error from saving as-is report:" + txt[6:])
+
+    recs_remediated= remediateparsing.fix_record_field_split(settings, flds, recs)
+    if len(recs_remediated)>0 and recs_remediated[0].startswith("notok:"):
+        raise ValueError("error remediating:" + recs_remediated[0][6:])
+
+    print(f"Remediated stats: {stats}")
+    print(f"Remediated fields: {','.join(flds_hdr)}")
+
+    report_remediated= analyzequality.do_qualityinspect(flds, covalues, recs_remediated, settings)
+    if report_remediated.status.startswith("notok:"):
+        raise ValueError("error from remediated report:" + report_remediated.status[6:])
+
+    print(f"\nNumber records: as-is={len(recs)}, remediated={len(recs_remediated)}");
+    print(f"Parsing errors: as-is: small1={report_asis.rec_parse_errs['small1']}, small2={report_asis.rec_parse_errs['small2']}, big={report_asis.rec_parse_errs['big']}")
+    print(f"Parsing errors: remediated: small1={report_remediated.rec_parse_errs['small1']}, small2={report_remediated.rec_parse_errs['small2']}, big={report_remediated.rec_parse_errs['big']}")
+    print(f"Number records with errors: as-is={report_asis.err_stats['numrecs_err']}, remediated={report_remediated.err_stats['numrecs_err']}");
+    print(f"Number records with datatype errors: as-is={report_asis.err_stats['numrecs_err_datatype']}, remediated={report_remediated.err_stats['numrecs_err_datatype']}");
+    print(f"Number records with format errors: as-is={report_asis.err_stats['numrecs_err_fmt']}, remediated={report_remediated.err_stats['numrecs_err_fmt']}");
+
+    print(f"\nAs-is fields with datatype errors: {len(report_asis.err_stats['fields_err_datatype'])}");
+    temp=sorted(report_asis.err_stats['fields_err_datatype'])
+    for s in temp:
+        print(f"  field: {s}, count={report_asis.err_stats['fields_err_datatype'][s]['count']}")
+        for r in report_asis.err_stats['fields_err_datatype'][s]['reasons']:
+            print(f"      reason={r}, count={report_asis.err_stats['fields_err_datatype'][s]['reasons'][r]}")
+
+    print(f"\nRemediated fields with datatype errors: {len(report_remediated.err_stats['fields_err_datatype'])}");
+    temp=sorted(report_remediated.err_stats['fields_err_datatype'])
+    for s in temp:
+        print(f"  field: {s}, count={report_remediated.err_stats['fields_err_datatype'][s]['count']}")
+        for r in report_remediated.err_stats['fields_err_datatype'][s]['reasons']:
+            print(f"      reason={r}, count={report_remediated.err_stats['fields_err_datatype'][s]['reasons'][r]}")
+
+    rec_parse=[]
+    print("\nRecord Parsing Problems: Small2")
+    for i in range(len(report_asis.rec_parse_errs['small2_recs'])):
+        txt=report_asis.rec_parse_errs['small2_recs'][i]
+        if txt.startswith("("):
+            txt1=txt[1:txt.find(")")]
+            if numfuncs.is_int(txt1):
+                rec_parse.append(int(txt1))
+    if len(rec_parse)>0:
+        rec_parse.sort()
+        for i in rec_parse:
+            # ensure proper indexing per record number (1 based) and array (0-based) by subtracting 1
+            print(f"\nasis record {i}: {recs[i-1]}")
+            print(f"remediated record {i}: {recs_remediated[i-1]}")
+
+    # save to files
+    file_uri= curdir + file_name.replace(".csv","_remediated_report.dat")
+    report_uris.append(file_uri)
+    txt= reportfuncs.save_report_to_file(file_uri, report_remediated)
+    if txt.startswith("notok:"):
+        raise ValueError("error from saving remediated report:" + txt[6:])
+    
+    file_uri= curdir + file_name.replace(".csv","_remediated_data.dat")
+    data_uris.append(file_uri)
+    with open(file_uri,"w", encoding="utf-8") as f:
+        f.write(','.join(flds_hdr) + LF)
+        for i in range(len(recs_remediated)):
+            f.write(recs_remediated[i] + LF)
+
+|
+
+
+Remediation Results
+---------------------
+
+Comparing results before and after remediation shows:
+
+    * Remediation found 5 source records that were too small2
+    * There are 3 fewer records after remediating as-is since they were joined to create fixed records
+    * The joining results are clearly seen in the example records listed
+    * There are no parsing errors in the remediated records
+    * The characteristics of datatype and format errors have changed
+
+
+|
+
+.. code-block:: 
+
+    Starting runtest at 20240715T104723
+    Remediated stats: recin=1003,recout=1000,big=0,small1=0,small2=5,join=3,fix=2,notfix=0
+    Remediated fields: y2_statefips,y1_statefips,y1_state,y1_state_name,n1,n2,AGI
+
+    Number records: as-is=1003, remediated=1000
+    Parsing errors: as-is: small1=0, small2=5, big=0
+    Parsing errors: remediated: small1=0, small2=0, big=0
+    Number records with errors: as-is=20, remediated=16
+    Number records with datatype errors: as-is=12, remediated=7
+    Number records with format errors: as-is=12, remediated=10
+
+    As-is fields with datatype errors: 3
+    field: agi, count=10
+        reason=empty, count=5
+        reason=non-numeric, count=5
+    field: n1, count=5
+        reason=empty, count=5
+    field: n2, count=7
+        reason=non-numeric, count=2
+        reason=empty, count=5
+
+    Remediated fields with datatype errors: 2
+    field: agi, count=5
+        reason=non-numeric, count=5
+    field: n2, count=2
+        reason=non-numeric, count=2
+
+    Record Parsing Problems: Small2
+
+    asis record 4: 01,97,AL,AL Total Migration-Same
+    remediated record 4: 01,97,AL,AL Total Migration-Same State,46630,95832,1.871804e+6
+
+    asis record 5: State,46630,95832,1.871804e+6
+    remediated record 5: 01,01,AL,AL Non-migrants,1598458,3579600,96406319
+
+    asis record 6: 01,01,AL,AL
+    remediated record 6: 01,13,GA,Georgia,5972,12269,249108
+
+    asis record 7: Non-
+    remediated record 7: 01,12,FL,Florida,4489,8446,1.85502e+5
+
+    asis record 8: migrants,1598458,3579600,96406319
+    remediated record 8: 01,48,TX,Texas,3435,7041,135165
+
+|
+
+Normalize and Enrich Example
+==============================
+
+Now that we have fixed parsing errors, we can generate the final data set that is normalized and 
+has enrichment fields. We do the following steps:
+
+    1. adjust field datatypes and formats based on analysis results
+    2. define enrichment fields to add to output data for analytic and ML downstream applications
+    3. define transformations to normalize field values, decode some fields into new enrichment fields, populate enrichment fields 
+       with conditional rules based on multi-field joint values in each record
+    4. analyze final data set
+
+|
+
+We need to use additional parts of the VerityX library.
+
+.. code-block:: 
+
+    from VerityPy.processing import datefuncs, qualityanalysis, analyzequality, field, numfuncs, remediateparsing, refinedata
+    from VerityPy.transforms import lookup, transform
+    from VerityPy.utils import reportfuncs
+
+|
+
+Output Fields
+-----------------
+
+    Use results to adjust specifications and create output fields that include enrichment. Notice how 
+    we use many of the optional properties of the Field object now to get more precise and granular results.
+
+.. code-block:: 
+
+    for i in range(len(flds)):
+        txt=flds[i].title.lower()
+        dtype=""
+        if txt.endswith("fips") or txt.startswith("y1_state"):
+            dtype="string"
+        elif txt in ["n1","n2"]:
+            dtype="int"
+        elif txt=="agi":
+            dtype="real"
+        mapto=txt
+        strcase=""
+        strcut=""
+        strpad=""
+        strpadchar=""
+        strlen=-1
+        fmtdate=""
+        numdec=-1
+        if txt=="y2_statefips":
+            title="DestStateCode"
+            strlen=2
+            strcut="back"
+            strpad="front"
+            strpadchar="0"
+        elif txt=="y1_statefips":
+            title="OrigStateCode"
+            strlen=2
+            strcut="back"
+            strpad="front"
+            strpadchar="0"
+        elif txt=="y1_state":
+            title="OrigStateAbbr"
+            strlen=2
+            strcase="upper"
+            strcut="back"
+            strpad="front"
+            strpadchar="hyphen"
+        elif txt=="y1_state_name":
+            title="OrigStateName"
+        elif txt=="n1":
+            title="NumReturn"
+        elif txt=="n2":
+            title="NumExempt"
+        elif txt=="agi":
+            title="GrossIncome"
+            numdec=2
+        else:
+            title=flds[i].title
+
+        outfields.append(field.Field(title))
+        nfld= len(outfields)-1
+        outfields[nfld].mapto=mapto
+        outfields[nfld].datatype=dtype
+        outfields[nfld].fmt_strlen=strlen
+        outfields[nfld].fmt_strcase=strcase
+        outfields[nfld].fmt_strcut=strcut
+        outfields[nfld].fmt_strpad=strpad
+        outfields[nfld].fmt_strpadchar=strpadchar
+        outfields[nfld].fmt_date=fmtdate
+        outfields[nfld].fmt_decimal=numdec
+        hash_outfields[title.lower()]=nfld
+
+    # ADD ENRICHMENT FIELDS (not in source records but will be in output records)
+    outfields.append(field.Field("useAGI"))
+    nfld= len(outfields)-1
+    outfields[nfld].datatype= "bool"
+    hash_outfields[outfields[nfld].title.lower()]=nfld
+
+    outfields.append(field.Field("DestStateAbbr"))
+    nfld= len(outfields)-1
+    outfields[nfld].datatype= "string"
+    outfields[nfld].fmt_strlen= 2
+    outfields[nfld].fmt_strcase= "upper"
+    hash_outfields[outfields[nfld].title.lower()]=nfld
+
+    outfields.append(field.Field("DestStateName"))
+    nfld= len(outfields)-1
+    outfields[nfld].datatype= "string"
+    hash_outfields[outfields[nfld].title.lower()]=nfld
+
+    outfields.append(field.Field("isSubTotal"))
+    nfld= len(outfields)-1
+    outfields[nfld].datatype= "bool"
+    hash_outfields[outfields[nfld].title.lower()]=nfld
+
+|
+
+Lookup Dictionaries
+------------------------
+
+Lookup dictionaries are a flexible way to encode or decode values using multiple dictionaries. It 
+is common in large data systems for fields to contain values that span multiple versions of 
+code lists and both the business rules to know which is appropriate and the code to execute 
+these rules tend to become complex and prone to errors in traditional data processing. VerityX 
+elevates the visibility of these rules to simple conditional logic and references. 
+
+.. code-block:: 
+
+    title = "StateAbbr"
+    nkeys=1
+    iscasesens=False
+    file_uri= curdir + "StateAbbrfromFIPS_lookup.dat"
+    lookup_dict= lookup.LookUpDict()
+    lookup_dict= lookup.make_lookup_from_file(title, file_uri, "pipe", iscasesens, nkeys)
+    if lookup_dict.title.startswith("notok:"):
+        raise ValueError("error making LookUpDict " + title + ": " + lookup_dict.title[6:])
+    elif len(lookup_dict.fields)==0:
+        raise ValueError("error making LookUpDict since missing fields " + title)
+    elif len(lookup_dict.recs)==0:
+        raise ValueError("error making LookUpDict since missing recs " + title)
+    lookups.append(lookup_dict)
+    hash_lookups[lookup_dict.title.lower()]= len(lookups)-1
+
+    title = "StateName"
+    nkeys=1
+    iscasesens=False
+    file_uri= curdir + "StateNamefromFIPS_lookup.dat"
+    lookup_dict= lookup.LookUpDict()
+    lookup_dict= lookup.make_lookup_from_file(title, file_uri, "pipe", iscasesens, nkeys)
+    if lookup_dict.title.startswith("notok:"):
+        raise ValueError("error making LookUpDict " + title + ": " + lookup_dict.title[6:])
+    elif len(lookup_dict.fields)==0:
+        raise ValueError("error making LookUpDict since missing fields " + title)
+    elif len(lookup_dict.recs)==0:
+        raise ValueError("error making LookUpDict since missing recs " + title)
+    lookups.append(lookup_dict)
+    hash_lookups[lookup_dict.title.lower()]= len(lookups)-1
+
+|
+
+Transforms
+----------------
+
+The transforms normalize source field values and populate newly added enrichment fields. Notice 
+the conditional logic used and the ability to normalize field values in the transform functions. 
+
+.. code-block::     
+
+    # Define Transforms
+    # 1st transform sets useAGI based on source field AGI value since it has some
+    # coded values that shoud not be included in aggregations per source documentation
+    ntrans=0
+    transforms=[]
+    transforms.append(transform.Transform("useAGI"))
+    transforms[ntrans].ops.append(transform.Op("setToRef", "AGI"))
+    transforms[ntrans].ops.append(transform.Op("IfEq", "-1"))
+    transforms[ntrans].ops.append(transform.Op("setToValue","true")) # action for False condition
+    transforms[ntrans].ops.append(transform.Op("setToValue","false")) # action for True condition, useAGI = false meaning dont use AGI value since it is code -1
+
+    ntrans +=1
+    transforms.append(transform.Transform("GrossIncome"))
+    transforms[ntrans].ops.append(transform.Op("IfNotEq","-1")) # has coded values we need to handle for useful analytic output records
+    transforms[ntrans].ops.append(transform.Op("NoOp")) # do nothing if -1 (since False for IfNotEq)
+    transforms[ntrans].ops.append(transform.Op("mult","1000"))  # normalize to true $ unit since in thousands
+
+    ntrans +=1
+    transforms.append(transform.Transform("DestStateAbbr"))
+    transforms[ntrans].ops.append(transform.Op("setToRef","y2_statefips"))
+    transforms[ntrans].ops.append(transform.Op("setLength","2","left","0")) # lookup dict use fixed 2 char long codes
+    transforms[ntrans].ops.append(transform.Op("lookup","StateAbbr")) # short title we assigned to lookup dictionary file
+
+    ntrans +=1
+    transforms.append(transform.Transform("DestStateName"))
+    transforms[ntrans].ops.append(transform.Op("setToRef","y2_statefips"))
+    transforms[ntrans].ops.append(transform.Op("setLength","2","left","0")) # lookup dict use fixed 2 char long codes
+    transforms[ntrans].ops.append(transform.Op("lookup","StateName"))
+
+    ntrans +=1
+    transforms.append(transform.Transform("isSubTotal"))
+    transforms[ntrans].ops.append(transform.Op("setToRef","y1_state_name"))
+    transforms[ntrans].ops.append(transform.Op("IfStrContains","migra"))
+    transforms[ntrans].ops.append(transform.Op("setToValue","false"))
+    transforms[ntrans].ops.append(transform.Op("setToValue","true"))
+
+
+|
+
+Generate Final Data
+------------------------
+
+We process the remediated data records into final form so they are normalized, enriched.
+
+.. code-block:: 
+
+    settings["has_header"]="false"
+    settings["is_quoted"]="true"
+    settings["normalize"]="true"
+    settings["use_comment"]="false"
+    settings["delim"]="comma"
+    settings["delim_out"]="pipe"
+    settings["embed_delim"]="_"
+
+    outrecs= refinedata.do_refine(outfields, transforms, settings, lookups, flds, recs_remediated)
+    if len(outrecs)==0:
+        raise ValueError("Refine error: no output records")
+    elif outrecs[0].startswith("notok:"):
+        raise ValueError("Refine error: " + outrecs[0][6:])
+
+    print("\n\n*****************************   Sample Final Data Records After Transforms, Enrich, Normalize *****************************")
+    print(outrecs[0]);
+    for i in range(1,21):
+        print(f"{i}: {outrecs[i]}")
+
+|
+
+.. code-block:: 
+
+    *****************************   Sample Final Data Records After Transforms, Enrich, Normalize *****************************
+    DestStateCode|OrigStateCode|OrigStateAbbr|OrigStateName|NumReturn|NumExempt|GrossIncome|useAGI|DestStateAbbr|DestStateName|isSubTotal
+    1: 01|96|AL|AL Total Migration-US and Foreign|33716|67747|1515297000.00|true|AL|97|true
+    2: 01|97|AL|AL Total Migration-US|32868|65647|1467218000.00|true|AL|97|true
+    3: 01|98|AL|AL Total Migration,Foreign|848|2100|48079000.00|true|AL|97|true
+    4: 01|97|AL|AL Total Migration-Same State|46630|95832|1871804000.00|true|AL|97|true  
+    5: 01|01|AL|AL Non-migrants|1598458|3579600|96406319000.00|true|AL|97|true
+    6: 01|13|GA|Georgia|5972|12269|249108000.00|true|AL|97|false
+    7: 01|12|FL|Florida|4489|8446|185502000.00|true|AL|97|false
+    8: 01|48|TX|Texas|3435|7041|135165000.00|true|AL|97|false
+    9: 01|47|TN|Tennessee|2608|5304|124203000.00|true|AL|97|false
+    10: 01|28|MS|Mississippi|2212|4562|90723000.00|true|AL|97|false
+    11: 01|06|CA|California|1169|2274|55689000.00|true|AL|97|false
+    12: 01|37|NC|North Carolina|1056|2158|49972000.00|true|AL|97|false
+    13: 01|22|LA|Louisiana|883|1671|40723000.00|true|AL|97|false
+    14: 01|57|FR|Foreign|848|2100|48079000.00|true|AL|97|false
+    15: 10|51|VA|Virginia|819|1624|48796000.00|true|AL|97|false
+    16: 01|36|NY|New York|772|1518|-34582000.00|true|AL|97|false
+    17: 01|17|IL|Illinois|717|1443|-34167000.00|true|AL|97|false
+    18: 01|39|OH|Ohio|713|1430|29911000.00|true|AL|97|false
+    19: 01|45|SC|South Carolina|637|1220|31594000.00|true|AL|97|false
+    20: 01|26|MI|Michigan|594|1125|22176000.00|true|AL|97|false
+
+
+|
+
+Analysis of Final Data
+============================
+
+The final step is to analyze the output data and then compare its quality to both 
+the as-is and the remediated data. 
+
+We achieved the desired end data state with quality metrics showing scores of 100 for each output field, and 
+the elimination of the errors we discovered in the original as-is data, and the residual errors in the 
+remediated data.
+
+
+|
+
+.. code-block:: 
+
+    # remove header
+    flds_hdr= outrecs[0].split("|")
+    outrecs.pop(0)
+
+    settings['is_case_sens']="false"
+    settings['is_quoted']="true"
+    settings['has_header']="false"
+    settings['extract_fields']="false"
+    settings['delim']="pipe"
+    settings['maxuv']="100"
+    covalues=[]
+    covalues.append("OrigStateCode,OrigStateAbbr")
+    covalues.append("DestStateCode,DestStateAbbr")
+
+    report_final= analyzequality.do_qualityinspect(outfields, covalues, outrecs, settings)
+    if report_final.status.startswith("notok:"):
+        raise ValueError("error from final report:" + report_final.status[6:])
+
+    print(f"\nNumber records: as-is={len(recs)}, remediated={len(recs_remediated)}, final={len(outrecs)}");
+    print(f"Parsing errors: as-is: small1={report_asis.rec_parse_errs['small1']}, small2={report_asis.rec_parse_errs['small2']}, big={report_asis.rec_parse_errs['big']}")
+    print(f"Parsing errors: remediated: small1={report_remediated.rec_parse_errs['small1']}, small2={report_remediated.rec_parse_errs['small2']}, big={report_remediated.rec_parse_errs['big']}")
+    print(f"Parsing errors: final: small1={report_final.rec_parse_errs['small1']}, small2={report_final.rec_parse_errs['small2']}, big={report_final.rec_parse_errs['big']}")
+
+    print(f"Number records with errors: as-is={report_asis.err_stats['numrecs_err']}, remediated={report_remediated.err_stats['numrecs_err']}, final={report_final.err_stats['numrecs_err']}")
+    print(f"Number records with datatype errors: as-is={report_asis.err_stats['numrecs_err_datatype']}, remediated={report_remediated.err_stats['numrecs_err_datatype']}, final={report_final.err_stats['numrecs_err_datatype']}")
+    print(f"Number records with format errors: as-is={report_asis.err_stats['numrecs_err_fmt']}, remediated={report_remediated.err_stats['numrecs_err_fmt']}, final={report_final.err_stats['numrecs_err_fmt']}")
+
+    print(f"\nAs-is fields with datatype errors: {len(report_asis.err_stats['fields_err_datatype'])}")
+    temp=sorted(report_asis.err_stats['fields_err_datatype'])
+    for s in temp:
+        print(f"  field: {s}, count={report_asis.err_stats['fields_err_datatype'][s]['count']}")
+        for r in report_asis.err_stats['fields_err_datatype'][s]['reasons']:
+            print(f"      reason={r}, count={report_asis.err_stats['fields_err_datatype'][s]['reasons'][r]}")
+
+    print(f"\nRemediated fields with datatype errors: {len(report_remediated.err_stats['fields_err_datatype'])}")
+    temp=sorted(report_remediated.err_stats['fields_err_datatype'])
+    for s in temp:
+        print(f"  field: {s}, count={report_remediated.err_stats['fields_err_datatype'][s]['count']}")
+        for r in report_remediated.err_stats['fields_err_datatype'][s]['reasons']:
+            print(f"      reason={r}, count={report_remediated.err_stats['fields_err_datatype'][s]['reasons'][r]}")
+
+    print(f"\nFinal fields with datatype errors: {len(report_final.err_stats['fields_err_datatype'])}");
+    temp=sorted(report_final.err_stats['fields_err_datatype'])
+    for s in temp:
+        print(f"  field: {s}, count={report_final.err_stats['fields_err_datatype'][s]['count']}")
+        for r in report_final.err_stats['fields_err_datatype'][s]['reasons']:
+            print(f"      reason={r}, count={report_final.err_stats['fields_err_datatype'][s]['reasons'][r]}")
+
+    print("\n\nField Quality")
+    print("As-Is")
+    for i in range(len(report_asis.fields)):
+        print(f"field {report_asis.fields[i].title}: {report_asis.field_quality[i]}")
+    print("\nRemediated")
+    for i in range(len(report_remediated.fields)):
+        print(f"field {report_remediated.fields[i].title}: {report_remediated.field_quality[i]}")
+    print("\nField Quality Final")
+    for i in range(len(report_final.fields)):
+        print(f"field {report_final.fields[i].title}: {report_final.field_quality[i]}")
+
+    # save to files
+    file_uri= curdir + file_name.replace(".csv","_final_report.dat")
+    report_uris.append(file_uri)
+    txt= reportfuncs.save_report_to_file(file_uri, report_final)
+    if txt.startswith("notok:"):
+        raise ValueError("error from saving final report:" + txt[6:])
+    
+    # save final data 0th entry is header of field titles
+    file_uri= curdir + file_name.replace(".csv","_final_data.dat")
+    data_uris.append(file_uri)
+    with open(file_uri, "w", encoding="utf-8") as f:
+        f.write("|".join(flds_hdr) + LF)
+        for i in range(len(outrecs)):
+            f.write(outrecs[i] + LF)
+
+
+|
+
+.. code-block:: 
+
+    Number records: as-is=1003, remediated=1000, final=1000
+    Parsing errors: as-is: small1=0, small2=5, big=0
+    Parsing errors: remediated: small1=0, small2=0, big=0
+    Parsing errors: final: small1=0, small2=0, big=0
+    Number records with errors: as-is=20, remediated=16, final=0
+    Number records with datatype errors: as-is=12, remediated=7, final=0
+    Number records with format errors: as-is=12, remediated=10, final=0
+
+    As-is fields with datatype errors: 3
+    field: agi, count=10
+        reason=empty, count=5
+        reason=non-numeric, count=5
+    field: n1, count=5
+        reason=empty, count=5
+    field: n2, count=7
+        reason=non-numeric, count=2
+        reason=empty, count=5
+
+    Remediated fields with datatype errors: 2
+    field: agi, count=5
+        reason=non-numeric, count=5
+    field: n2, count=2
+        reason=non-numeric, count=2
+
+    Final fields with datatype errors: 0
+
+
+    Field Quality
+    As-Is
+    field y2_statefips: 95.2
+    field y1_statefips: 95.2
+    field y1_state: 90.7
+    field y1_state_name: 100
+    field n1: 99.5
+    field n2: 99.3
+    field AGI: 93.3
+
+    Remediated
+    field y2_statefips: 100
+    field y1_statefips: 100
+    field y1_state: 95.2
+    field y1_state_name: 100
+    field n1: 100
+    field n2: 99.8
+    field AGI: 93.8
+
+    Field Quality Final
+    field DestStateCode: 100
+    field OrigStateCode: 100
+    field OrigStateAbbr: 100
+    field OrigStateName: 100
+    field NumReturn: 100
+    field NumExempt: 100
+    field GrossIncome: 100
+    field useAGI: 100
+    field DestStateAbbr: 100
+    field DestStateName: 100
+    field isSubTotal: 100
+
+
+|
+
+Saved Files
+=============
+
+Data and reports saved to files for later use.
+
+.. code-block:: 
+
+    print("\nData and Reports Saved to Files:")
+    print(f"AS-IS:   data (delim is comma)= {data_uris[0]},  report= {report_uris[0]}")
+    print(f"REMEDIATED:   data (delim is comma)= {data_uris[1]},  report= {report_uris[1]}")
+    print(f"NORMALIZE_ENRICH:   data (delim is pipe)= {data_uris[2]},  report= {report_uris[2]}")
+
+.. code-block:: 
+
+    Data and Reports Saved to Files:
+    AS-IS:   data (delim is comma)= files\IRSMigration_WithErrors_Hdr.csv,  report= files\IRSMigration_WithErrors_Hdr_report.dat
+    REMEDIATED:   data (delim is comma)= files\IRSMigration_WithErrors_Hdr_remediated_data.dat,  report= files\IRSMigration_WithErrors_Hdr_remediated_report.dat
+    NORMALIZE_ENRICH:   data (delim is pipe)= files\IRSMigration_WithErrors_Hdr_final_data.dat,  report= files\IRSMigration_WithErrors_Hdr_final_report.dat
+
+
+|
+
+Next
+========
+
+See Compare Results in Jupyter for examples of using these results to 
+make a report comparing before and after remediating, normalizing, and 
+enriching the data with VerityPy.
+

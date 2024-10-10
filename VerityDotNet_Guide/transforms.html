@@ -1,0 +1,1680 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Transforms &#8212; VerityDotNet</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=f51f75df"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'transforms';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Objects" href="objects.html" />
+    <link rel="prev" title="Installation" href="installation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">VerityDotNet</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="README.html">
+    Readme
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Transforms
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="objects.html">
+    Objects
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="functions.html">
+    Functions
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="analyzingdatarecords.html">
+    Analyze Data Records
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="normalizeenrichdatarecords.html">
+    Normalize & Enrich Data Records
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="compareresults.html">
+    Compare Results in Jupyter
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="license.html">
+    License
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="support.html">
+    Support
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="README.html">
+    Readme
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Transforms
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="objects.html">
+    Objects
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="functions.html">
+    Functions
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="analyzingdatarecords.html">
+    Analyze Data Records
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="normalizeenrichdatarecords.html">
+    Normalize & Enrich Data Records
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="compareresults.html">
+    Compare Results in Jupyter
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="license.html">
+    License
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="support.html">
+    Support
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Transforms</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="transforms">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Transforms</a><a class="headerlink" href="#transforms" title="Link to this heading">#</a></h1>
+<nav class="contents" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#transforms" id="id1">Transforms</a></p>
+<ul>
+<li><p><a class="reference internal" href="#assignment" id="id2">Assignment</a></p>
+<ul>
+<li><p><a class="reference internal" href="#noop" id="id3">noOp</a></p></li>
+<li><p><a class="reference internal" href="#settovalue" id="id4">setToValue</a></p></li>
+<li><p><a class="reference internal" href="#settoindex" id="id5">setToIndex</a></p></li>
+<li><p><a class="reference internal" href="#settoref" id="id6">setToRef</a></p></li>
+<li><p><a class="reference internal" href="#settorandom" id="id7">setToRandom</a></p></li>
+<li><p><a class="reference internal" href="#settofrequencylist" id="id8">setToFrequencyList</a></p></li>
+<li><p><a class="reference internal" href="#lookup" id="id9">lookup</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#conditional" id="id10">Conditional</a></p>
+<ul>
+<li><p><a class="reference internal" href="#ifempty" id="id11">ifEmpty</a></p></li>
+<li><p><a class="reference internal" href="#ifnotempty" id="id12">ifNotEmpty</a></p></li>
+<li><p><a class="reference internal" href="#ifeq" id="id13">ifEq</a></p></li>
+<li><p><a class="reference internal" href="#ifnoteq" id="id14">ifNotEq</a></p></li>
+<li><p><a class="reference internal" href="#ifgte" id="id15">ifGte</a></p></li>
+<li><p><a class="reference internal" href="#ifnotgte" id="id16">ifNotGte</a></p></li>
+<li><p><a class="reference internal" href="#ifgt" id="id17">ifGt</a></p></li>
+<li><p><a class="reference internal" href="#ifnotgt" id="id18">ifNotGt</a></p></li>
+<li><p><a class="reference internal" href="#iflte" id="id19">ifLte</a></p></li>
+<li><p><a class="reference internal" href="#ifnotlte" id="id20">ifNotLte</a></p></li>
+<li><p><a class="reference internal" href="#iflt" id="id21">ifLt</a></p></li>
+<li><p><a class="reference internal" href="#ifnotlt" id="id22">ifNotLt</a></p></li>
+<li><p><a class="reference internal" href="#ifstreq" id="id23">ifStrEq</a></p></li>
+<li><p><a class="reference internal" href="#ifnotstreq" id="id24">ifNotStrEq</a></p></li>
+<li><p><a class="reference internal" href="#ifstrstarts" id="id25">ifStrStarts</a></p></li>
+<li><p><a class="reference internal" href="#ifnotstrstarts" id="id26">ifNotStrStarts</a></p></li>
+<li><p><a class="reference internal" href="#ifstrcontains" id="id27">ifStrContains</a></p></li>
+<li><p><a class="reference internal" href="#ifnotstrcontains" id="id28">ifNotStrContains</a></p></li>
+<li><p><a class="reference internal" href="#ifstrends" id="id29">ifStrEnds</a></p></li>
+<li><p><a class="reference internal" href="#ifnotstrends" id="id30">ifNotStrEnds</a></p></li>
+<li><p><a class="reference internal" href="#ifint" id="id31">ifInt</a></p></li>
+<li><p><a class="reference internal" href="#ifnotint" id="id32">ifNotInt</a></p></li>
+<li><p><a class="reference internal" href="#ifreal" id="id33">ifReal</a></p></li>
+<li><p><a class="reference internal" href="#ifnotreal" id="id34">ifNotReal</a></p></li>
+<li><p><a class="reference internal" href="#ifisodate" id="id35">ifISODate</a></p></li>
+<li><p><a class="reference internal" href="#ifnotisodate" id="id36">ifNotISODate</a></p></li>
+<li><p><a class="reference internal" href="#ifdateformat" id="id37">ifDateFormat</a></p></li>
+<li><p><a class="reference internal" href="#ifnotdateformat" id="id38">ifNotDateFormat</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#numeric" id="id39">Numeric</a></p>
+<ul>
+<li><p><a class="reference internal" href="#convertmainframenumber" id="id40">convertMainFrameNumber</a></p></li>
+<li><p><a class="reference internal" href="#round" id="id41">round</a></p></li>
+<li><p><a class="reference internal" href="#floor" id="id42">floor</a></p></li>
+<li><p><a class="reference internal" href="#ceiling" id="id43">ceiling</a></p></li>
+<li><p><a class="reference internal" href="#abs" id="id44">abs</a></p></li>
+<li><p><a class="reference internal" href="#negate" id="id45">negate</a></p></li>
+<li><p><a class="reference internal" href="#mult" id="id46">mult</a></p></li>
+<li><p><a class="reference internal" href="#div" id="id47">div</a></p></li>
+<li><p><a class="reference internal" href="#divfrom" id="id48">divFrom</a></p></li>
+<li><p><a class="reference internal" href="#add" id="id49">add</a></p></li>
+<li><p><a class="reference internal" href="#subtract" id="id50">subtract</a></p></li>
+<li><p><a class="reference internal" href="#subtractfrom" id="id51">subtractFrom</a></p></li>
+<li><p><a class="reference internal" href="#multbyref" id="id52">multByRef</a></p></li>
+<li><p><a class="reference internal" href="#divbyref" id="id53">divByRef</a></p></li>
+<li><p><a class="reference internal" href="#divfromref" id="id54">divFromRef</a></p></li>
+<li><p><a class="reference internal" href="#addbyref" id="id55">addByRef</a></p></li>
+<li><p><a class="reference internal" href="#subtractbyref" id="id56">subtractByRef</a></p></li>
+<li><p><a class="reference internal" href="#subtractfromref" id="id57">subtractFromRef</a></p></li>
+<li><p><a class="reference internal" href="#multrefs" id="id58">multRefs</a></p></li>
+<li><p><a class="reference internal" href="#addrefs" id="id59">addRefs</a></p></li>
+<li><p><a class="reference internal" href="#log" id="id60">log</a></p></li>
+<li><p><a class="reference internal" href="#ln" id="id61">ln</a></p></li>
+<li><p><a class="reference internal" href="#pow10" id="id62">pow10</a></p></li>
+<li><p><a class="reference internal" href="#powe" id="id63">powe</a></p></li>
+<li><p><a class="reference internal" href="#setdecimal" id="id64">setDecimal</a></p></li>
+<li><p><a class="reference internal" href="#convertfromexp" id="id65">convertFromExp</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#text" id="id66">Text</a></p>
+<ul>
+<li><p><a class="reference internal" href="#trim" id="id67">trim</a></p></li>
+<li><p><a class="reference internal" href="#ltrim" id="id68">ltrim</a></p></li>
+<li><p><a class="reference internal" href="#rtrim" id="id69">rtrim</a></p></li>
+<li><p><a class="reference internal" href="#tolower" id="id70">toLower</a></p></li>
+<li><p><a class="reference internal" href="#toupper" id="id71">toUpper</a></p></li>
+<li><p><a class="reference internal" href="#totitle" id="id72">toTitle</a></p></li>
+<li><p><a class="reference internal" href="#front" id="id73">front</a></p></li>
+<li><p><a class="reference internal" href="#before" id="id74">before</a></p></li>
+<li><p><a class="reference internal" href="#frontn" id="id75">frontN</a></p></li>
+<li><p><a class="reference internal" href="#end" id="id76">end</a></p></li>
+<li><p><a class="reference internal" href="#after" id="id77">after</a></p></li>
+<li><p><a class="reference internal" href="#endn" id="id78">endN</a></p></li>
+<li><p><a class="reference internal" href="#mid" id="id79">mid</a></p></li>
+<li><p><a class="reference internal" href="#midn" id="id80">midN</a></p></li>
+<li><p><a class="reference internal" href="#charat" id="id81">charAt</a></p></li>
+<li><p><a class="reference internal" href="#prepend" id="id82">prepend</a></p></li>
+<li><p><a class="reference internal" href="#append" id="id83">append</a></p></li>
+<li><p><a class="reference internal" href="#remove" id="id84">remove</a></p></li>
+<li><p><a class="reference internal" href="#replace" id="id85">replace</a></p></li>
+<li><p><a class="reference internal" href="#setlength" id="id86">setLength</a></p></li>
+<li><p><a class="reference internal" href="#encrypt" id="id87">encrypt</a></p></li>
+<li><p><a class="reference internal" href="#decrypt" id="id88">decrypt</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#date" id="id89">Date</a></p>
+<ul>
+<li><p><a class="reference internal" href="#settoisodate" id="id90">setToISODate</a></p></li>
+<li><p><a class="reference internal" href="#datetoiso" id="id91">dateToISO</a></p></li>
+<li><p><a class="reference internal" href="#exceldatenumbertoiso" id="id92">excelDateNumberToISO</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#examples" id="id93">Examples</a></p>
+<ul>
+<li><p><a class="reference internal" href="#populate-enrichment-field" id="id94">Populate Enrichment Field</a></p></li>
+<li><p><a class="reference internal" href="#correct-numeric-units" id="id95">Correct Numeric Units</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<p><strong>VerityDotNet</strong> transforms allow remediating and enriching source data into Normalized data with
+a higher level of quality, accuracy, and meaning to support demanding use cases. There are five
+kinds of transforms:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Assignment: assigns values to field as a fixed value, reference to another field in record, random number, list of categories via frequencies, lookup dictionaries</p></li>
+<li><p>Conditional: conditional tests of equality and inequality for numeric, string, and date values</p></li>
+<li><p>Numeric: numeric calculation functions including using other fields in record by reference</p></li>
+<li><p>Text: manipulate with slicing, adding, padding, replacing</p></li>
+<li><p>Date: Change date format to ISO 8601 including from special Excel format</p></li>
+</ol>
+</div></blockquote>
+<p>Transforms are objects with a list of child Op objects. These are described in the “objects” page. Each Op has properties for parameter settings titled
+param1, param2, param3. Their use and appropriate values are specific to each transform function which are described in this page.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<section id="assignment">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Assignment</a><a class="headerlink" href="#assignment" title="Link to this heading">#</a></h2>
+<section id="noop">
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">noOp</a><a class="headerlink" href="#noop" title="Link to this heading">#</a></h3>
+<p>No operation. Use to stop operations in conditional sequence</p>
+</section>
+<section id="settovalue">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">setToValue</a><a class="headerlink" href="#settovalue" title="Link to this heading">#</a></h3>
+<p>Assign a fixed value</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: Value to assign. Required</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="settoindex">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">setToIndex</a><a class="headerlink" href="#settoindex" title="Link to this heading">#</a></h3>
+<p>Assign a fixed value equal to the record’s index in output set which is supplied by application code to the transform execution module.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: Optional integer starting index which must be greater than or equal to 0. Default is 0.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="settoref">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">setToRef</a><a class="headerlink" href="#settoref" title="Link to this heading">#</a></h3>
+<p>Assigns the value of a referenced source field in the current record</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: field title to get its current value to assign. Required</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="settorandom">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">setToRandom</a><a class="headerlink" href="#settorandom" title="Link to this heading">#</a></h3>
+<p>Uses random number generator to produce a value scaled between the minimum and maximum values</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: optional as minimum. Default is 0</p></li>
+<li><p>Param2: optional as maximum. Default is 1. If this is &lt; min then set to min + 1</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="settofrequencylist">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">setToFrequencyList</a><a class="headerlink" href="#settofrequencylist" title="Link to this heading">#</a></h3>
+<p>Applies a value from a list using relative frequencies of occurrence</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: relative frequencies of occurrence. Can use any real &gt; 0 and will be scaled
+to sum. Since list, enter delimited by pipe such as 2|7|.5|9 where the second list item occurs 37.8% percent (7/18.5) of the time.</p></li>
+<li><p>Param2: list of values correlated to Param1 frequencies and entered with pipe delimiter like red|green|blue|orange</p></li>
+<li><p>Param3: Optional. If used, either a reference field title to use as source of base value, or a real number 0.0-1.0 .
+Otherwise, the default is to use a random number.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="lookup">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">lookup</a><a class="headerlink" href="#lookup" title="Link to this heading">#</a></h3>
+<p>Assigns a value from a lookup list based on matching values to keys where keys can use wildcards.
+The match can be made to one, two, or three source fields in the record with field 1 always
+the current value while fields 2 and 3 are optional if set in Param2.
+Leave Param2 empty to use only 1 field as the match value. All selected fields must match their
+respective conditions for a lookup result to be assigned.
+The lookup dictionary has records each with properties: key1, key2, key3, value
+depending on how many keys are used which is set by Param1 and Param2.
+Keys can use front and/or back wildcard (*) like top*, <em>night, *state</em> to allow token matching.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: title of list that has been pre-loaded into array of lists as part of initialization. Required.</p></li>
+<li><p>Param2: Optional. Field 2 title, or fields 2 and 3 titles. If both supplied use pipe to delimit such as ‘field2|field3’.</p></li>
+</ul>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+</section>
+<section id="conditional">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Conditional</a><a class="headerlink" href="#conditional" title="Link to this heading">#</a></h2>
+<section id="ifempty">
+<h3><a class="toc-backref" href="#id11" role="doc-backlink">ifEmpty</a><a class="headerlink" href="#ifempty" title="Link to this heading">#</a></h3>
+<p>If value is empty. Compares current value as string</p>
+</section>
+<section id="ifnotempty">
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">ifNotEmpty</a><a class="headerlink" href="#ifnotempty" title="Link to this heading">#</a></h3>
+<p>If value is not empty. Compares current value as string</p>
+</section>
+<section id="ifeq">
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">ifEq</a><a class="headerlink" href="#ifeq" title="Link to this heading">#</a></h3>
+<p>If equals. Compares current value as real number (converted from string) to Param1 (also converted) from string or one of the char_aliases for PI (math.pi) or E (math.e)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: Value to compare. Can be alias math.pi or math.e</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ifnoteq">
+<h3><a class="toc-backref" href="#id14" role="doc-backlink">ifNotEq</a><a class="headerlink" href="#ifnoteq" title="Link to this heading">#</a></h3>
+<p>If not equals. Compares current value as real number (converted from string) to Param1 (also converted) from string or one of the char_aliases for PI (math.pi) or E (math.e)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: Value to compare. Can be alias math.pi or math.e</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ifgte">
+<h3><a class="toc-backref" href="#id15" role="doc-backlink">ifGte</a><a class="headerlink" href="#ifgte" title="Link to this heading">#</a></h3>
+<p>If greater than or equals. Compares current value as real number (converted from string) to Param1 (also converted) from string or one of the char_aliases for PI (math.pi) or E (math.e)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: Value to compare. Can be alias math.pi or math.e</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ifnotgte">
+<h3><a class="toc-backref" href="#id16" role="doc-backlink">ifNotGte</a><a class="headerlink" href="#ifnotgte" title="Link to this heading">#</a></h3>
+<p>If not greater than or equals. Compares current value as real number (converted from string) to Param1 (also converted) from string or one of the char_aliases for PI (math.pi) or E (math.e)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: Value to compare. Can be alias math.pi or math.e</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ifgt">
+<h3><a class="toc-backref" href="#id17" role="doc-backlink">ifGt</a><a class="headerlink" href="#ifgt" title="Link to this heading">#</a></h3>
+<p>If greater than. Compares current value as real number (converted from string) to Param1 (also converted) from string or one of the char_aliases for PI (math.pi) or E (math.e)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: Value to compare. Can be alias math.pi or math.e</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ifnotgt">
+<h3><a class="toc-backref" href="#id18" role="doc-backlink">ifNotGt</a><a class="headerlink" href="#ifnotgt" title="Link to this heading">#</a></h3>
+<p>If not greater than. Compares current value as real number (converted from string) to Param1 (also converted) from string or one of the char_aliases for PI (math.pi) or E (math.e)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: Value to compare. Can be alias math.pi or math.e</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="iflte">
+<h3><a class="toc-backref" href="#id19" role="doc-backlink">ifLte</a><a class="headerlink" href="#iflte" title="Link to this heading">#</a></h3>
+<p>If lesser than or equals. Compares current value as real number (converted from string) to Param1 (also converted) from string or one of the char_aliases for PI (math.pi) or E (math.e)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: Value to compare. Can be alias math.pi or math.e</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ifnotlte">
+<h3><a class="toc-backref" href="#id20" role="doc-backlink">ifNotLte</a><a class="headerlink" href="#ifnotlte" title="Link to this heading">#</a></h3>
+<p>If not lesser than or equals. Compares current value as real number (converted from string) to Param1 (also converted) from string or one of the char_aliases for PI (math.pi) or E (math.e)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: Value to compare. Can be alias math.pi or math.e</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="iflt">
+<h3><a class="toc-backref" href="#id21" role="doc-backlink">ifLt</a><a class="headerlink" href="#iflt" title="Link to this heading">#</a></h3>
+<p>If lesser than. Compares current value as real number (converted from string) to Param1 (also converted) from string or one of the char_aliases for PI (math.pi) or E (math.e)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: Value to compare. Can be alias math.pi or math.e</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ifnotlt">
+<h3><a class="toc-backref" href="#id22" role="doc-backlink">ifNotLt</a><a class="headerlink" href="#ifnotlt" title="Link to this heading">#</a></h3>
+<p>If not lesser than. Compares current value as real number (converted from string) to Param1 (also converted) from string or one of the char_aliases for PI (math.pi) or E (math.e)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: Value to compare. Can be alias math.pi or math.e</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ifstreq">
+<h3><a class="toc-backref" href="#id23" role="doc-backlink">ifStrEq</a><a class="headerlink" href="#ifstreq" title="Link to this heading">#</a></h3>
+<p>If strings are equal. Compares current value to Param1 as string or one of the char_aliases. You can specify
+multiple test strings by delimiting with pipe (no spacing) as with Strong|strENGTH|power</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: Value to compare. Can be alias. Required</p></li>
+<li><p>Param2: optional boolean whether case sensitive. Default is false.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ifnotstreq">
+<h3><a class="toc-backref" href="#id24" role="doc-backlink">ifNotStrEq</a><a class="headerlink" href="#ifnotstreq" title="Link to this heading">#</a></h3>
+<p>If strings are not equal. Compares current value to Param1 as string or one of the char_aliases. You can specify
+multiple test strings by delimiting with pipe (no spacing) as with Strong|strENGTH|power</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: Value to compare. Can be alias. Required</p></li>
+<li><p>Param2: optional boolean whether case sensitive. Default is false.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ifstrstarts">
+<h3><a class="toc-backref" href="#id25" role="doc-backlink">ifStrStarts</a><a class="headerlink" href="#ifstrstarts" title="Link to this heading">#</a></h3>
+<p>If current value starts with Param1. You can specify multiple test strings by delimiting with pipe (no spacing) as with Strong|strENGTH|power</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: Value to compare. Can be alias. Required</p></li>
+<li><p>Param2: optional boolean whether case sensitive. Default is false.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ifnotstrstarts">
+<h3><a class="toc-backref" href="#id26" role="doc-backlink">ifNotStrStarts</a><a class="headerlink" href="#ifnotstrstarts" title="Link to this heading">#</a></h3>
+<p>If current value not starts with Param1. You can specify multiple test strings by delimiting with pipe (no spacing) as with Strong|strENGTH|power</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: Value to compare. Can be alias. Required</p></li>
+<li><p>Param2: optional boolean whether case sensitive. Default is false.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ifstrcontains">
+<h3><a class="toc-backref" href="#id27" role="doc-backlink">ifStrContains</a><a class="headerlink" href="#ifstrcontains" title="Link to this heading">#</a></h3>
+<p>If current value contains Param1. You can specify multiple test strings by delimiting with pipe (no spacing) as with Strong|strENGTH|power</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: Value to compare. Can be alias. Required</p></li>
+<li><p>Param2: optional boolean whether case sensitive. Default is false.</p></li>
+<li><p>Param3: optional boolean whether remove all spaces from current value before comparing so ‘this is me’ becomes ‘thisisme’. Default is false.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ifnotstrcontains">
+<h3><a class="toc-backref" href="#id28" role="doc-backlink">ifNotStrContains</a><a class="headerlink" href="#ifnotstrcontains" title="Link to this heading">#</a></h3>
+<p>If current value not contains Param1. You can specify multiple test strings by delimiting with pipe (no spacing) as with Strong|strENGTH|power</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: Value to compare. Can be alias. Required</p></li>
+<li><p>Param2: optional boolean whether case sensitive. Default is false.</p></li>
+<li><p>Param3: optional boolean whether remove all spaces from current value before comparing so ‘this is me’ becomes ‘thisisme’. Default is false.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ifstrends">
+<h3><a class="toc-backref" href="#id29" role="doc-backlink">ifStrEnds</a><a class="headerlink" href="#ifstrends" title="Link to this heading">#</a></h3>
+<p>If current value ends with Param1. You can specify multiple test strings by delimiting with pipe (no spacing) as with Strong|strENGTH|power</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: Value to compare. Can be alias. Required</p></li>
+<li><p>Param2: optional boolean whether case sensitive. Default is false.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ifnotstrends">
+<h3><a class="toc-backref" href="#id30" role="doc-backlink">ifNotStrEnds</a><a class="headerlink" href="#ifnotstrends" title="Link to this heading">#</a></h3>
+<p>If current value not ends with Param1. You can specify multiple test strings by delimiting with pipe (no spacing) as with Strong|strENGTH|power</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: Value to compare. Can be alias. Required</p></li>
+<li><p>Param2: optional boolean whether case sensitive. Default is false.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ifint">
+<h3><a class="toc-backref" href="#id31" role="doc-backlink">ifInt</a><a class="headerlink" href="#ifint" title="Link to this heading">#</a></h3>
+<p>If integer. Param1 specifies if must be positive integer, negative, or any</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: optional [‘any’,’positive’,’negative’] default=any</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ifnotint">
+<h3><a class="toc-backref" href="#id32" role="doc-backlink">ifNotInt</a><a class="headerlink" href="#ifnotint" title="Link to this heading">#</a></h3>
+<p>If not integer. Param1 specifies if must be positive integer, negative, or any</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: optional [‘any’,’positive’,’negative’] default=any</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ifreal">
+<h3><a class="toc-backref" href="#id33" role="doc-backlink">ifReal</a><a class="headerlink" href="#ifreal" title="Link to this heading">#</a></h3>
+<p>If real number. Param1 specifies if must be positive integer, negative, or any</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: optional [‘any’,’positive’,’negative’] default=any</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ifnotreal">
+<h3><a class="toc-backref" href="#id34" role="doc-backlink">ifNotReal</a><a class="headerlink" href="#ifnotreal" title="Link to this heading">#</a></h3>
+<p>If not real number. Param1 specifies if must be positive integer, negative, or any</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: optional [‘any’,’positive’,’negative’] default=any</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ifisodate">
+<h3><a class="toc-backref" href="#id35" role="doc-backlink">ifISODate</a><a class="headerlink" href="#ifisodate" title="Link to this heading">#</a></h3>
+<p>If in ISO DateTime format of yyyyMMdd with optional time suffix of Thhmmss.
+Date part may use delimiters / or - while time part may use : . Examples:
+2024-03-24T14:33:05, 20240324T143305, 20240324</p>
+</section>
+<section id="ifnotisodate">
+<h3><a class="toc-backref" href="#id36" role="doc-backlink">ifNotISODate</a><a class="headerlink" href="#ifnotisodate" title="Link to this heading">#</a></h3>
+<p>If not in ISO DateTime format of yyyyMMdd with optional time suffix of Thhmmss.
+Date part may use delimiters / or - while time part may use : . Examples:
+2024-03-24T14:33:05, 20240324T143305, 20240324</p>
+</section>
+<section id="ifdateformat">
+<h3><a class="toc-backref" href="#id37" role="doc-backlink">ifDateFormat</a><a class="headerlink" href="#ifdateformat" title="Link to this heading">#</a></h3>
+<p>If in supplied format possibly with delimiters / or -</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: format to check for. Required. MMM indicates month abbreviation like Jan or Aug,
+and MONTH indicates full name like January.
+Formats: mmddyy, mmdyy,mdyy,mmddyyyy,mmdyyyy,mdyyyy,ddmmyy,ddmyy,dmyy,ddmmyyyy,ddmyyyy,dmyyyy,
+yymmdd,yymmd,yymd,yyyymmdd,yyyymmd,yyyymd,yyyyddd,yyyyMMMdd,ddMMMyyyy,
+MONTHdd,yyyy,ddMONTH,yyyy,yyyyMONTHdd,ddMONTHyyyy,yyMONTHdd,ddMONTHyy</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="ifnotdateformat">
+<h3><a class="toc-backref" href="#id38" role="doc-backlink">ifNotDateFormat</a><a class="headerlink" href="#ifnotdateformat" title="Link to this heading">#</a></h3>
+<p>If not in supplied format possibly with delimiters / or -</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: format to check for. Required. MMM indicates month abbreviation like Jan or Aug,
+and MONTH indicates full name like January.
+Formats: mmddyy, mmdyy,mdyy,mmddyyyy,mmdyyyy,mdyyyy,ddmmyy,ddmyy,dmyy,ddmmyyyy,ddmyyyy,dmyyyy,
+yymmdd,yymmd,yymd,yyyymmdd,yyyymmd,yyyymd,yyyyddd,yyyyMMMdd,ddMMMyyyy,
+MONTHdd,yyyy,ddMONTH,yyyy,yyyyMONTHdd,ddMONTHyyyy,yyMONTHdd,ddMONTHyy</p></li>
+</ul>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+</section>
+<section id="numeric">
+<h2><a class="toc-backref" href="#id39" role="doc-backlink">Numeric</a><a class="headerlink" href="#numeric" title="Link to this heading">#</a></h2>
+<section id="convertmainframenumber">
+<h3><a class="toc-backref" href="#id40" role="doc-backlink">convertMainFrameNumber</a><a class="headerlink" href="#convertmainframenumber" title="Link to this heading">#</a></h3>
+<p>Converts a number in string representation in coded main frame format to string of real number.
+Encoded last character is indicator of this formatting including sign reversal if necessary.
+Always makes last 2 digits into decimal portion so no further divide by 100 is necessary.
+If special char is within input string it becomes the end char and the
+remaining suffix is discarded. Leading zeros are truncated so 000.12 becomes 0.12 . Codes are:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">=</span> <span class="mi">0</span>
+<span class="p">}</span><span class="o">=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">negate</span>
+<span class="n">a</span><span class="o">=</span> <span class="mi">1</span>
+<span class="n">j</span><span class="o">=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">negate</span>
+<span class="n">b</span><span class="o">=</span> <span class="mi">2</span>
+<span class="n">k</span><span class="o">=</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">negate</span>
+<span class="n">c</span><span class="o">=</span> <span class="mi">3</span>
+<span class="n">l</span><span class="o">=</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">negate</span>
+<span class="n">d</span><span class="o">=</span> <span class="mi">4</span>
+<span class="n">m</span><span class="o">=</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">negate</span>
+<span class="n">e</span><span class="o">=</span> <span class="mi">5</span>
+<span class="n">n</span><span class="o">=</span> <span class="mi">5</span> <span class="ow">and</span> <span class="n">negate</span>
+<span class="n">f</span><span class="o">=</span> <span class="mi">6</span>
+<span class="n">o</span><span class="o">=</span> <span class="mi">6</span> <span class="ow">and</span> <span class="n">negate</span> <span class="p">(</span><span class="n">this</span> <span class="ow">is</span> <span class="n">letter</span><span class="p">)</span>
+<span class="n">g</span><span class="o">=</span> <span class="mi">7</span>
+<span class="n">p</span><span class="o">=</span> <span class="mi">7</span> <span class="ow">and</span> <span class="n">negate</span>
+<span class="n">h</span><span class="o">=</span> <span class="mi">8</span>
+<span class="n">q</span><span class="o">=</span> <span class="mi">8</span> <span class="ow">and</span> <span class="n">negate</span>
+<span class="n">i</span><span class="o">=</span> <span class="mi">9</span>
+<span class="n">r</span><span class="o">=</span> <span class="mi">9</span> <span class="ow">and</span> <span class="n">negate</span>
+</pre></div>
+</div>
+</section>
+<section id="round">
+<h3><a class="toc-backref" href="#id41" role="doc-backlink">round</a><a class="headerlink" href="#round" title="Link to this heading">#</a></h3>
+<p>Rounds number to specified number of decimal digits. If number digits=0 (default) then nearest integer made (real datatype ends .00).
+Midpoint goes to even number</p>
+</section>
+<section id="floor">
+<h3><a class="toc-backref" href="#id42" role="doc-backlink">floor</a><a class="headerlink" href="#floor" title="Link to this heading">#</a></h3>
+<p>Returns the largest integral value less than or equal to number. Real datatype ends .00</p>
+</section>
+<section id="ceiling">
+<h3><a class="toc-backref" href="#id43" role="doc-backlink">ceiling</a><a class="headerlink" href="#ceiling" title="Link to this heading">#</a></h3>
+<p>Returns the smallest integral value greater than or equal to number. Real datatype ends .00</p>
+</section>
+<section id="abs">
+<h3><a class="toc-backref" href="#id44" role="doc-backlink">abs</a><a class="headerlink" href="#abs" title="Link to this heading">#</a></h3>
+<p>Returns the absolute value.</p>
+</section>
+<section id="negate">
+<h3><a class="toc-backref" href="#id45" role="doc-backlink">negate</a><a class="headerlink" href="#negate" title="Link to this heading">#</a></h3>
+<p>Inverts sign.</p>
+</section>
+<section id="mult">
+<h3><a class="toc-backref" href="#id46" role="doc-backlink">mult</a><a class="headerlink" href="#mult" title="Link to this heading">#</a></h3>
+<p>Multiply current value by supplied number. May use special notations</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: number to use. Required.</p></li>
+<li><p>Param2: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="div">
+<h3><a class="toc-backref" href="#id47" role="doc-backlink">div</a><a class="headerlink" href="#div" title="Link to this heading">#</a></h3>
+<p>Divide current value by supplied number (current/x). May use special notations</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: number to use. Required. If 0, then result = 9.99 x 10^10</p></li>
+<li><p>Param2: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="divfrom">
+<h3><a class="toc-backref" href="#id48" role="doc-backlink">divFrom</a><a class="headerlink" href="#divfrom" title="Link to this heading">#</a></h3>
+<p>Divide current value from supplied number (x/current). May use special notations</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: number to use. Required. If Param1=0 then result=0 while if current value=0 then result= 9.99 x 10^10</p></li>
+<li><p>Param2: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="add">
+<h3><a class="toc-backref" href="#id49" role="doc-backlink">add</a><a class="headerlink" href="#add" title="Link to this heading">#</a></h3>
+<p>Add current value by supplied number. May use special notations</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: number to use. Required.</p></li>
+<li><p>Param2: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="subtract">
+<h3><a class="toc-backref" href="#id50" role="doc-backlink">subtract</a><a class="headerlink" href="#subtract" title="Link to this heading">#</a></h3>
+<p>Subtract current value by supplied number (current-x). May use special notations</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: number to use. Required.</p></li>
+<li><p>Param2: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="subtractfrom">
+<h3><a class="toc-backref" href="#id51" role="doc-backlink">subtractFrom</a><a class="headerlink" href="#subtractfrom" title="Link to this heading">#</a></h3>
+<p>Subtract current value from supplied number (x-current). May use special notations</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: number to use. Required.</p></li>
+<li><p>Param2: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="multbyref">
+<h3><a class="toc-backref" href="#id52" role="doc-backlink">multByRef</a><a class="headerlink" href="#multbyref" title="Link to this heading">#</a></h3>
+<p>Multiply current value by value of referenced field.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: title of reference field. Required.</p></li>
+<li><p>Param2: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="divbyref">
+<h3><a class="toc-backref" href="#id53" role="doc-backlink">divByRef</a><a class="headerlink" href="#divbyref" title="Link to this heading">#</a></h3>
+<p>Divide current value by value of referenced field (current/ref).</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: title of reference field. Required. If reference value=0 then result = 9.99 x 10^10</p></li>
+<li><p>Param2: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="divfromref">
+<h3><a class="toc-backref" href="#id54" role="doc-backlink">divFromRef</a><a class="headerlink" href="#divfromref" title="Link to this heading">#</a></h3>
+<p>Divide current value from value of referenced field (ref/current).</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: title of reference field. Required. If current value=0 then result = 9.99 x 10^10</p></li>
+<li><p>Param2: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="addbyref">
+<h3><a class="toc-backref" href="#id55" role="doc-backlink">addByRef</a><a class="headerlink" href="#addbyref" title="Link to this heading">#</a></h3>
+<p>Add current value by value of referenced field.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: title of reference field. Required.</p></li>
+<li><p>Param2: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="subtractbyref">
+<h3><a class="toc-backref" href="#id56" role="doc-backlink">subtractByRef</a><a class="headerlink" href="#subtractbyref" title="Link to this heading">#</a></h3>
+<p>Subtract current value by value of referenced field (current-ref).</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: title of reference field. Required.</p></li>
+<li><p>Param2: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="subtractfromref">
+<h3><a class="toc-backref" href="#id57" role="doc-backlink">subtractFromRef</a><a class="headerlink" href="#subtractfromref" title="Link to this heading">#</a></h3>
+<p>Subtract current value from value of referenced field (ref-current).</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: title of reference field. Required.</p></li>
+<li><p>Param2: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="multrefs">
+<h3><a class="toc-backref" href="#id58" role="doc-backlink">multRefs</a><a class="headerlink" href="#multrefs" title="Link to this heading">#</a></h3>
+<p>Multiply referenced fields.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: first reference field. Required.</p></li>
+<li><p>Param2: second field title or multiple field titles separated by commas like title2,title3,title4. Required.</p></li>
+<li><p>Param3: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="addrefs">
+<h3><a class="toc-backref" href="#id59" role="doc-backlink">addRefs</a><a class="headerlink" href="#addrefs" title="Link to this heading">#</a></h3>
+<p>Add referenced fields.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: first reference field. Required.</p></li>
+<li><p>Param2: second field title or multiple field titles separated by commas like title2,title3,title4. Required.</p></li>
+<li><p>Param3: optional boolean whether to clean number of non-numeric prefix and suffix characters. Default is true.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="log">
+<h3><a class="toc-backref" href="#id60" role="doc-backlink">log</a><a class="headerlink" href="#log" title="Link to this heading">#</a></h3>
+<p>Base 10 log of current value. If value &lt; 0 then result= -10^10. If datatype is int then result uses FLOOR</p>
+</section>
+<section id="ln">
+<h3><a class="toc-backref" href="#id61" role="doc-backlink">ln</a><a class="headerlink" href="#ln" title="Link to this heading">#</a></h3>
+<p>Base E log of current value. If value &lt; 0 then result= -10^10. If datatype is int then result uses FLOOR</p>
+</section>
+<section id="pow10">
+<h3><a class="toc-backref" href="#id62" role="doc-backlink">pow10</a><a class="headerlink" href="#pow10" title="Link to this heading">#</a></h3>
+<p>Base 10 exponential of current value.</p>
+</section>
+<section id="powe">
+<h3><a class="toc-backref" href="#id63" role="doc-backlink">powe</a><a class="headerlink" href="#powe" title="Link to this heading">#</a></h3>
+<p>Base E exponential of current value.</p>
+</section>
+<section id="setdecimal">
+<h3><a class="toc-backref" href="#id64" role="doc-backlink">setDecimal</a><a class="headerlink" href="#setdecimal" title="Link to this heading">#</a></h3>
+<p>Sets number of decimal places for number. If &lt;= 0 then value is truncated to integer.
+If less than number’s decimals, excess digits cut. If greater, decimal places padded right with 0</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: integer number decimal places greater than or equal to 0</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="convertfromexp">
+<h3><a class="toc-backref" href="#id65" role="doc-backlink">convertFromExp</a><a class="headerlink" href="#convertfromexp" title="Link to this heading">#</a></h3>
+<p>Convert a string representing exponential number into non-exponential number.
+String will be checked for format n.nnEsnn where n is integer digit,
+and s is an optional + or -. String can also have front - or be enclosed in parentheses. Examples:
+1.3E05 converted to 130000, -1.23e-1 converted to -0.123</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+</section>
+<section id="text">
+<h2><a class="toc-backref" href="#id66" role="doc-backlink">Text</a><a class="headerlink" href="#text" title="Link to this heading">#</a></h2>
+<section id="trim">
+<h3><a class="toc-backref" href="#id67" role="doc-backlink">trim</a><a class="headerlink" href="#trim" title="Link to this heading">#</a></h3>
+<p>Remove whitespace left (i.e. front) and right (i.e. back)</p>
+</section>
+<section id="ltrim">
+<h3><a class="toc-backref" href="#id68" role="doc-backlink">ltrim</a><a class="headerlink" href="#ltrim" title="Link to this heading">#</a></h3>
+<p>Remove whitespace left (i.e. front)</p>
+</section>
+<section id="rtrim">
+<h3><a class="toc-backref" href="#id69" role="doc-backlink">rtrim</a><a class="headerlink" href="#rtrim" title="Link to this heading">#</a></h3>
+<p>Remove whitespace right (i.e. back)</p>
+</section>
+<section id="tolower">
+<h3><a class="toc-backref" href="#id70" role="doc-backlink">toLower</a><a class="headerlink" href="#tolower" title="Link to this heading">#</a></h3>
+<p>Set to lower case</p>
+</section>
+<section id="toupper">
+<h3><a class="toc-backref" href="#id71" role="doc-backlink">toUpper</a><a class="headerlink" href="#toupper" title="Link to this heading">#</a></h3>
+<p>Set to upper case</p>
+</section>
+<section id="totitle">
+<h3><a class="toc-backref" href="#id72" role="doc-backlink">toTitle</a><a class="headerlink" href="#totitle" title="Link to this heading">#</a></h3>
+<p>Set to title case</p>
+</section>
+<section id="front">
+<h3><a class="toc-backref" href="#id73" role="doc-backlink">front</a><a class="headerlink" href="#front" title="Link to this heading">#</a></h3>
+<p>Take characters from front of string. Matching part is found in current value and then cut after its first occurrence so it is inclusive of match,
+such as Param1= ‘r’ for current value= ‘horse’ yields ‘hor’.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: string to find match. Required.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="before">
+<h3><a class="toc-backref" href="#id74" role="doc-backlink">before</a><a class="headerlink" href="#before" title="Link to this heading">#</a></h3>
+<p>Take characters from front of string before the matching part is found in current value so it is exclusive of match,
+such as Param1= ‘r’ for current value= ‘horse’ yields ‘ho’.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: string to find match. Required.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="frontn">
+<h3><a class="toc-backref" href="#id75" role="doc-backlink">frontN</a><a class="headerlink" href="#frontn" title="Link to this heading">#</a></h3>
+<p>Take N characters from front of string</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: integer number of characters. Required.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="end">
+<h3><a class="toc-backref" href="#id76" role="doc-backlink">end</a><a class="headerlink" href="#end" title="Link to this heading">#</a></h3>
+<p>Take characters from end of string. Matching part is found in current value and then cut at its first occurrence to end so it is inclusive of match,
+such as Param1= ‘r’ for current value= ‘horse’ yields ‘rse’.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: string to find match. Required.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="after">
+<h3><a class="toc-backref" href="#id77" role="doc-backlink">after</a><a class="headerlink" href="#after" title="Link to this heading">#</a></h3>
+<p>Take characters from end of string after the matching part is found in current value so it is exclusive of match,
+such as Param1= ‘r’ for current value= ‘horse’ yields ‘se’.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: string to find match. Required.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="endn">
+<h3><a class="toc-backref" href="#id78" role="doc-backlink">endN</a><a class="headerlink" href="#endn" title="Link to this heading">#</a></h3>
+<p>Take N characters from end of string</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: integer number of characters. Required.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="mid">
+<h3><a class="toc-backref" href="#id79" role="doc-backlink">mid</a><a class="headerlink" href="#mid" title="Link to this heading">#</a></h3>
+<p>Take characters from middle of string. Matching part is found in current value and then cut after its first occurrence.
+If Param2 not used, result is after cutting with Param1. If Param2 is used, then initial result is again cut after finding Param2’s occurrence
+meaning result is string including Param1 and Param2. Examples: value= ‘Semantics’ with Param1=’m’ and Param2=’c’ yields ‘mantic’;
+value= ‘mishmash’ with Param1=’ma’ and Param2=’s’ yields ‘mas’</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: string to find match. Required.</p></li>
+<li><p>Param2: optional second string to find ending match</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="midn">
+<h3><a class="toc-backref" href="#id80" role="doc-backlink">midN</a><a class="headerlink" href="#midn" title="Link to this heading">#</a></h3>
+<p>Take N characters from middle of string. Result is after cutting at Param1 character index from front of string.
+If Param2 not used or less than 1, then result goes to end of string. If Param2 is used, then initial result is again cut after Param2’s number
+of characters. Examples: value= ‘Semantics’ with Param1=’2’ and Param2=’6’ yields ‘mantic’ ;
+for value= ‘mishmash’ with Param1=’4’ and Param2=’3’ yields ‘mas’.”</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: integer starting position using 0-based indexing</p></li>
+<li><p>Param2: optional second integer for number of characters to take</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="charat">
+<h3><a class="toc-backref" href="#id81" role="doc-backlink">charAt</a><a class="headerlink" href="#charat" title="Link to this heading">#</a></h3>
+<p>Take 1 character at position (0-based)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: integer character position 0-n. Required</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="prepend">
+<h3><a class="toc-backref" href="#id82" role="doc-backlink">prepend</a><a class="headerlink" href="#prepend" title="Link to this heading">#</a></h3>
+<p>Add string to front of value</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: string to add. Required</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="append">
+<h3><a class="toc-backref" href="#id83" role="doc-backlink">append</a><a class="headerlink" href="#append" title="Link to this heading">#</a></h3>
+<p>Add string to back of value</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: string to add. Required</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="remove">
+<h3><a class="toc-backref" href="#id84" role="doc-backlink">remove</a><a class="headerlink" href="#remove" title="Link to this heading">#</a></h3>
+<p>Remove all instances of string from value</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: string to remove. Required</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="replace">
+<h3><a class="toc-backref" href="#id85" role="doc-backlink">replace</a><a class="headerlink" href="#replace" title="Link to this heading">#</a></h3>
+<p>Replace all instances of string from value with new string part</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: string to remove. Required</p></li>
+<li><p>Param2: string to insert as replacement. Required</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="setlength">
+<h3><a class="toc-backref" href="#id86" role="doc-backlink">setLength</a><a class="headerlink" href="#setlength" title="Link to this heading">#</a></h3>
+<p>Sets value to specific length by cutting or padding characters as needed</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: integer character length. Required</p></li>
+<li><p>Param2: optional side to act on (left, right)</p></li>
+<li><p>Param3: optional character to pad with if needed. Default is x. If longer than 1 char only first used.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="encrypt">
+<h3><a class="toc-backref" href="#id87" role="doc-backlink">encrypt</a><a class="headerlink" href="#encrypt" title="Link to this heading">#</a></h3>
+<p>Encrypts value using key supplied in param1 or system default if none supplied</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: string key. optional</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="decrypt">
+<h3><a class="toc-backref" href="#id88" role="doc-backlink">decrypt</a><a class="headerlink" href="#decrypt" title="Link to this heading">#</a></h3>
+<p>Decrypts value using key supplied in param1 or system default if none supplied. Key must exactly match key used to encrypt original value.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: string key. optional</p></li>
+</ul>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+</section>
+<section id="date">
+<h2><a class="toc-backref" href="#id89" role="doc-backlink">Date</a><a class="headerlink" href="#date" title="Link to this heading">#</a></h2>
+<section id="settoisodate">
+<h3><a class="toc-backref" href="#id90" role="doc-backlink">setToISODate</a><a class="headerlink" href="#settoisodate" title="Link to this heading">#</a></h3>
+<p>Creates an ISO 8601 DateTime string yyyyMMdd[Thhmmss] with time part depending on Param1</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: ‘today’ for current date as yyyyMMdd, ‘now’ for current date and time, or an ISO formatted dateTime.</p></li>
+<li><p>Param2: optional for either ‘today’ or ‘now’. Ignored when Param1 is ISO dateTime. The number hours timezone offset from UTC (e.g. Dallas TX is -5, Kolkata India is +5.5, New York NY is -4),
+otherwise the computer’s time zone is used so depends on server settings.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="datetoiso">
+<h3><a class="toc-backref" href="#id91" role="doc-backlink">dateToISO</a><a class="headerlink" href="#datetoiso" title="Link to this heading">#</a></h3>
+<p>Converts data in specified format to ISO 8601 date yyyyMMdd</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Param1: Required. format with MMM for month abbreviation like Jan or Aug,
+and MONTH for full name like January.
+Formats: mmddyy, mmdyy,mdyy,mmddyyyy,mmdyyyy,mdyyyy,ddmmyy,ddmyy,dmyy,ddmmyyyy,ddmyyyy,dmyyyy,
+yymmdd,yymmd,yymd,yyyymmdd,yyyymmd,yyyymd,yyyyddd,yyyyMMMdd,ddMMMyyyy,
+MONTHdd,yyyy,ddMONTH,yyyy,yyyyMONTHdd,ddMONTHyyyy,yyMONTHdd,ddMONTHyy</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="exceldatenumbertoiso">
+<h3><a class="toc-backref" href="#id92" role="doc-backlink">excelDateNumberToISO</a><a class="headerlink" href="#exceldatenumbertoiso" title="Link to this heading">#</a></h3>
+<p>Converts a date in numeric excel format into ISO8601 yyyymmdd format with fractional days removed. Excel uses
+number days since January 1, 1900 as its counting base. Example: 44416 = 20210808, 42855 = 20170430</p>
+<div class="line-block">
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+</section>
+</section>
+<section id="examples">
+<h2><a class="toc-backref" href="#id93" role="doc-backlink">Examples</a><a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
+<section id="populate-enrichment-field">
+<h3><a class="toc-backref" href="#id94" role="doc-backlink">Populate Enrichment Field</a><a class="headerlink" href="#populate-enrichment-field" title="Link to this heading">#</a></h3>
+<p>Enrichment fields are key to improving and maintaining data accuracy, trust, integrity and pedigree for
+any use case needing managed control of data assets and which has a strong dependency of outcomes
+on even small quantities of data errors and variability. They are fields added to the output data
+set that are not in the source data. Essentially, they are in-record metadata.</p>
+<p>In this example, we have an enrichment field titled ‘useAGI’ that is defined to be a boolean datatype
+indicating whether the output record should be used for aggregating records into groups with subtotals
+of their field ‘AGI’ values. This is real-world data from the IRS Migration data set where AGI is the
+Adjusted Gross Income from tax returns. The problem is there are records in the source data that cannot be
+used for subtotal calculations because they are either already subtotals or have faulty data. There are
+two ways to detect these situations based on IRS documentation:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>faulty data: AGI will have value = -1</p></li>
+<li><p>is a subtotal: field ‘y1_state_name’ contains words [“total”,”non-“,”migrants”,”Migration”,”Foreign”,”-US”,”Same State”].
+Of these, the most consistent is the word part ‘migra’ when case insensitive</p></li>
+</ol>
+</div></blockquote>
+<p>These data characteristics were discovered using <strong>VerityDotNet</strong> analysis function and reviewing the
+errors (e.g. the words noted are not correct state names, and -1 is not a valid AGI value from real tax returns)
+and unique value distributions.</p>
+<p>While this business logic may seem complicated, it is easily represented in <strong>VerityDotNet</strong> transforms
+in the following steps:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>setToRef(“AGI”)</p></li>
+<li><p>ifNotEq(“-1”)</p></li>
+<li><p>setToValue(“false”)</p></li>
+<li><p>setToRef(“y1_state_name”)</p></li>
+<li><p>ifStrContains(“migra”)</p></li>
+<li><p>setToValue(“true”)</p></li>
+<li><p>setToValue(“false”)</p></li>
+</ol>
+</div></blockquote>
+<p>The action flow of this transform depends on the values of the fields ‘AGI’ and ‘y1_state_name’
+in the record being processed. Consider three situations:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>AGI = -1, y1_state_name= ‘AL’ :
+Step 1 assigns -1 to the working value. Step 2 tests if the value
+is NOT equal to -1 since IF conditions flow as IF –&gt; action when false then stop else action when true then continue.
+In this case, the IF condition is FALSE since the value is -1 meaning NOT EQUAL is FALSE. Thus,
+step 3 is executed assigning ‘false’ as the final value and the transform ends.</p></li>
+<li><p>AGI = 5400, y1_state_name = ‘AL Total Migration-US and Foreign’ :
+Step 1 assigns 5400 to the working value. Step 2 tests if the value
+is NOT equal to -1. In this case, the IF condition is TRUE since the value is not -1.
+Thus, step 3 is ignored and step 4 assigns ‘AL Total Migration-US and Foreign’ as the working value.
+Step 5 tests if the working value contains ‘migra’ case insensitive (since that is default for function)
+with this result being TRUE. Consequently, step 6 is ignored (since it is for FALSE result from IF)
+and step 7 is executed assigning final value ‘false’. Note that if step 5 was instead
+ifStrContains(“migra”,”true”) making it case sensitive then its result would be FALSE and
+step 6 executed assigning final value of ‘true’.</p></li>
+<li><p>AGI = 5400, y1_state_name = ‘AL’ :
+Step 1 assigns 5400 to the working value. Step 2 tests if the value
+is NOT equal to -1. In this case, the IF condition is TRUE since the value is not -1.
+Thus, step 3 is ignored and step 4 assigns ‘AL’ as the working value.
+Step 5 tests if the working value contains ‘migra’ case insensitive (since that is default for function)
+with this result being FALSE. Consequently, step 6 executed assigning final value of ‘true’.</p></li>
+</ul>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="correct-numeric-units">
+<h3><a class="toc-backref" href="#id95" role="doc-backlink">Correct Numeric Units</a><a class="headerlink" href="#correct-numeric-units" title="Link to this heading">#</a></h3>
+<p>In this example, we again use real-world data from the IRS Migration data set where AGI is the
+Adjusted Gross Income from tax returns in thousands of US dollars. We want to transform the
+value into actual dollars to support downstream analytics.
+The problem is there are records in the source data that cannot be
+used for subtotal calculations because they are faulty data. These are
+denoted by AGI = -1.</p>
+<p>We use business logic to multiply by 1000 unless the AGI is faulty in the following steps:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>setToRef(“AGI”)</p></li>
+<li><p>ifNotEq(“-1”)</p></li>
+<li><p>noOp()</p></li>
+<li><p>mult(“1000”)</p></li>
+</ol>
+</div></blockquote>
+<p>The action flow of this transform depends on the value of the field ‘AGI’.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>AGI = -1:
+Step 1 assigns -1 to the working value. Step 2 tests if the value
+is NOT equal to -1 since IF conditions flow as IF –&gt; action when false then stop else action when true then continue.
+In this case, the IF condition is FALSE since the value is -1 meaning NOT EQUAL is FALSE. Thus,
+step 3 is executed which is the special noOp function (no operation meaning do nothing) and the transform ends.</p></li>
+<li><p>AGI = 123.45:
+Step 1 assigns 123.45 to the working value. Step 2 tests if the value
+is NOT equal to -1 which is TRUE.
+In this case, step 3 is ignored and step 4 is executed multiplying the working value by 1000 and
+assigning this as final value.</p></li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="installation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Installation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="objects.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Objects</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment">Assignment</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#noop">noOp</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#settovalue">setToValue</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#settoindex">setToIndex</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#settoref">setToRef</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#settorandom">setToRandom</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#settofrequencylist">setToFrequencyList</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lookup">lookup</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional">Conditional</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ifempty">ifEmpty</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ifnotempty">ifNotEmpty</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ifeq">ifEq</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ifnoteq">ifNotEq</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ifgte">ifGte</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ifnotgte">ifNotGte</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ifgt">ifGt</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ifnotgt">ifNotGt</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iflte">ifLte</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ifnotlte">ifNotLte</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iflt">ifLt</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ifnotlt">ifNotLt</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ifstreq">ifStrEq</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ifnotstreq">ifNotStrEq</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ifstrstarts">ifStrStarts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ifnotstrstarts">ifNotStrStarts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ifstrcontains">ifStrContains</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ifnotstrcontains">ifNotStrContains</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ifstrends">ifStrEnds</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ifnotstrends">ifNotStrEnds</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ifint">ifInt</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ifnotint">ifNotInt</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ifreal">ifReal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ifnotreal">ifNotReal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ifisodate">ifISODate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ifnotisodate">ifNotISODate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ifdateformat">ifDateFormat</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ifnotdateformat">ifNotDateFormat</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numeric">Numeric</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convertmainframenumber">convertMainFrameNumber</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#round">round</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#floor">floor</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ceiling">ceiling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#abs">abs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#negate">negate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mult">mult</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#div">div</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#divfrom">divFrom</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add">add</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subtract">subtract</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subtractfrom">subtractFrom</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multbyref">multByRef</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#divbyref">divByRef</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#divfromref">divFromRef</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#addbyref">addByRef</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subtractbyref">subtractByRef</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subtractfromref">subtractFromRef</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multrefs">multRefs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#addrefs">addRefs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#log">log</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ln">ln</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pow10">pow10</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#powe">powe</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setdecimal">setDecimal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convertfromexp">convertFromExp</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#text">Text</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trim">trim</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ltrim">ltrim</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rtrim">rtrim</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tolower">toLower</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#toupper">toUpper</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#totitle">toTitle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#front">front</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#before">before</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frontn">frontN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#end">end</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#after">after</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#endn">endN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mid">mid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#midn">midN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#charat">charAt</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prepend">prepend</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#append">append</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remove">remove</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#replace">replace</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setlength">setLength</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encrypt">encrypt</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decrypt">decrypt</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#date">Date</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#settoisodate">setToISODate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#datetoiso">dateToISO</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exceldatenumbertoiso">excelDateNumberToISO</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#populate-enrichment-field">Populate Enrichment Field</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correct-numeric-units">Correct Numeric Units</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Technik Interlytics.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><!--show release-->
+20240811</div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

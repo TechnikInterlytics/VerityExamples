@@ -1,0 +1,574 @@
+Objects
++++++++
+
+.. contents:: 
+    :depth: 3
+
+
+Summary
+=========
+
+C# DotNet objects are used in several ways in this library. There are object classes to define the portfolio of transform functions organized by categories, to load and use lookup dictionaries to encode/decode values, to define transforms and their multiple operations per source and enrichment field, and to collate the settings and results from analyzing data records.
+
+
+OpTypes Class
+=====================
+
+OpCat
+-----------
+
+Description
+^^^^^^^^^^^^
+
+Category for transform operations grouped by either type of action performed or datatype it is applied to. Categories include: assignment, conditional, numeric, text, date. 
+
+Members
+^^^^^^^^
+
+* category: string title of this category
+* funcs: list of OpFunc objects for this category
+
+Constructor
+^^^^^^^^^^^
+
+.. code-block:: 
+
+  public OpCat(string title = "") {
+    this.category = title;
+    this.funcs = new List<OpFunc>();
+  }
+
+
+
+OpFunc
+--------
+
+Description
+^^^^^^^^^^^^
+
+Function definition for defining transform operations. This is intended to be used for the specification of available transform operations.
+
+Members
+^^^^^^^^^^^
+
+* title: string name of function such as ifEq
+* desc: string description
+* param1Req: bool true/false whether param1 is required to be set
+* param1Typ: string datatype of param1 if it is restricted to one type
+* param2Req: bool true/false whether param2 is required to be set
+* param2Typ: string datatype of param2 if it is restricted to one type
+* param3Req: bool true/false whether param3 is required to be set
+* param3Typ: string datatype of param3 if it is restricted to one type
+
+Constructor
+^^^^^^^^^^^
+
+.. code-block:: 
+
+  public OpFunc(string title = "") {
+    this.title = title;
+    this.desc = "";
+    this.param1Typ = "";
+    this.param2Typ = "";
+    this.param3Typ = "";
+    this.param1Req = false;
+    this.param2Req = false;
+    this.param3Req = false;
+  }
+
+
+
+
+Transform Class
+==================
+
+Transform
+----------
+
+Description
+^^^^^^^^^^^^
+
+Transform object for modifying source or enrichment field value. A transform contains a sequence of operations that may include conditional testing of values and referenced fields. It operates on the field whose name is the title of the transform. This field may be a source data field or an enrichment field added to the output record.
+
+Members
+^^^^^^^^^^^
+
+* title: string name of field transform operates on
+* ops: list of Op objects
+
+Constructor
+^^^^^^^^^^^
+
+.. code-block:: 
+
+  public Transform(string title) {
+    this.title = title;
+    this.ops = new();
+  }
+
+
+
+Methods
+^^^^^^^^
+
+**GetJSON(bool addLf=false, bool addQuote=false)**
+
+Get JSON string of transform properties. 
+
+* addLf: whether to add line feed at ends of each JSON property (default false)
+* addQuote: whether to enclose keys and values in double quotes (default false)
+
+
+
+Op
+------
+
+Description
+^^^^^^^^^^^^
+
+Operation (Op) for transforms. Each Op has a title which is the name of the function. It specifies the function and its category along with several possible parameters (param1, param2, param3) that depend on the specific function. 
+
+Members
+^^^^^^^^^^^
+
+* title: string name of function to be performed
+* category: string name of function category
+* param1: string parameter value which be unused, optional or required depending on specific function
+* param2: string parameter value which be unused, optional or required depending on specific function
+* param3: string parameter value which be unused, optional or required depending on specific function
+* order: integer value to order execution of operations for this transform. Default is -1 with system assigning values at runtime after sorting values which can be discontinuous
+* p1List: list for internal use only
+* p2List: list for internal use only
+* p3List: list for internal use only
+
+Constructor
+^^^^^^^^^^^
+
+.. sourcecode:: 
+
+  public Op(string title) { 
+    this.title = title;
+    this.category = "";
+    this.param1 = "";
+    this.param2 = "";
+    this.param3 = "";
+    this.order = -1;
+    this.p1List = new();
+    this.p2List = new();
+    this.p3List = new();
+  }
+
+
+
+
+LookUp Class
+================
+
+Lookup dictionary for transform processing. Transforms have an operation (Op) that allows assigning a value based on looking up the current value in a dictionary. 1, 2, 3 keys are allowed with the replacement value coming from the following column. This Op is in transform_types for category=assignment, function=lookup. 
+
+The description of this function and how it uses the lookup is:
+
+Assigns a value from a lookup list based on matching values to keys where keys can use wildcards. The match can be made to one, two, or three source fields in the record with field 1 always the current value while fields 2 and 3 are optional if set in Param2. Leave Param2 empty to use only 1 field as the match value. All selected fields must match their respective conditions for a lookup result to be assigned. The conditions and the result to assign are in an object for each list entry with properties: key1, key2, key3, value defined as example {'key1':'top\*','key2':'\*blue\*','key3':'\*left','value':'Orange'}. Conditions can use front and/or back wildcard (\*) like top\*, \*night, \*state\* to allow token matching. To use multiple conditions for the same replacement value ( OR condition ), enter them as separate list entries. To use AND and NOT conditions, use special notations as delimiters: top\*-and-\*night-not-\*blue\* which means a match requires both top\* and \*night be true as well as no instances of the token blue. 
+
+* Param1: title of list that has been pre-loaded into array of lists as part of initialization. 
+* Param2: Fields 2 and 3 both of which are optional and if both supplied use pipe to delimit as with color|position. For this example, current value must start with top (key1 condition), the field color must contain blue, and the field position must end with left. All of these must be true for a match in which case the value of Orange is assigned.
+
+
+LookUpDict
+--------------
+
+Description
+^^^^^^^^^^^^
+
+Dictionary with keys (either 1,2,3 field values) mapped to replacement value. The keys can use wild cards and also special notations for AND and NOT conditions. 
+In practice, this is made with a convenience method **MakeLookUpFromFile** such as:
+
+.. sourcecode:: 
+
+  lookUpDict = Lookup.MakeLookUpFromFile(title, fileUri, delimDict, isCaseSens, nKeys);
+
+
+Members
+^^^^^^^^^^^^
+
+* title: string used in function 'lookup' to select which LookUpDict to use
+* fileURI: URI for reading from file
+* delim: delimiter (comma, pipe, tab, colon)
+* isCaseSens: if false then all text changed to lowercase
+* numKeys: integer number of keys used 1-3
+* fields: list of field titles which must correspond to columns in data set
+* recs:list of LookUpRec objects
+
+
+Constructor
+^^^^^^^^^^^^
+
+.. sourcecode:: 
+
+  public LookUpDict() {
+    this.title = "";
+    this.fileURI = "";
+    this.delim = "";
+    this.numKeys = 0;
+    this.fields = new();
+    this.recs = new();
+  }
+
+
+
+LookUpRec
+--------------
+
+Description
+^^^^^^^^^^^^
+
+Record within a lookup dictionary. Each lookup record has 1-3 keys with matching conditions. Each key value can use wildcards at front and/or back. In addition, each key can have a combined condition using more than one token joined using special notation for boolean AND and NOT conditions. For example, a key might be top\*-and-\*food\*-not-\*juice which means the field value being checked must statisfy starting with 'top', containing 'food', and not ending with 'juice'. Therefore, each key is parsed into lists that are aligned: AND tokens and for each corresponding front_wild and back_wild lists. Similarly, NOT tokens and wild lists. After parsing, key1And is a list of tokens minus front and back wildcards if they were supplied, and if so, they are in correlated lists key1AndFrontWild and key1AndBackWild.
+
+
+Members
+^^^^^^^^^^^^
+
+* key1: single or combined value(s) to check
+* key2: optional. single or combined value(s) to check
+* key3: optional. single or combined value(s) to check
+* key1And: list of AND conditions for key1 (at least 1). System made.
+* key1Not: list of NOT conditions for key1 (0 or more). System made.
+* key2And: optional. list of AND conditions for key2 (at least 1 if used). System made.
+* key2Not: optional. list of NOT conditions for key2 (0 or more). System made.
+* key3And: optional. list of AND conditions for key3 (at least 1 if used). System made.
+* key3Not: optional. list of NOT conditions for key3 (0 or more). System made.
+* key1AndFrontWild: bool for key1And entry if it had front wildcard \*. System made.
+* key1AndBackWild: bool for key1And entry if it had back wildcard \*. System made.
+* key1NotFrontWild: bool for key1Not entry if it had front wildcard \*. System made.
+* key1NotBackWild: bool for key1Not entry if it had back wildcard \*. System made.
+* key2AndFrontWild: bool for key2And entry if it had front wildcard \*. System made.
+* key2AndBackWild: bool for key2And entry if it had back wildcard \*. System made.
+* key2NotFrontWild: bool for key2Not entry if it had front wildcard \*. System made.
+* key2NotBackWild: bool for key2Not entry if it had back wildcard \*. System made.
+* key3AndFrontWild: bool for key3And entry if it had front wildcard \*. System made.
+* key3AndBackWild: bool for key3And entry if it had back wildcard \*. System made.
+* key3NotFrontWild: bool for key3Not entry if it had front wildcard \*. System made.
+* key3NotBackWild: bool for key3Not entry if it had back wildcard \*. System made.
+* result: string final value. System made.
+
+Constructor
+^^^^^^^^^^^^
+
+.. sourcecode:: 
+
+  public LookUpRec() {
+    this.key1 = "";
+    this.key1And = new List<string>();
+    this.key1Not = new List<string>();
+    this.key1AndFrontWild = new List<bool>();
+    this.key1AndBackWild = new List<bool>();
+    this.key1NotFrontWild = new List<bool>();
+    this.key1NotBackWild = new List<bool>();
+    this.key2 = "";
+    this.key2And = new List<string>();
+    this.key2Not = new List<string>();
+    this.key2AndFrontWild = new List<bool>();
+    this.key2AndBackWild = new List<bool>();
+    this.key2NotFrontWild = new List<bool>();
+    this.key2NotBackWild = new List<bool>();
+    this.key3 = "";
+    this.key3And = new List<string>();
+    this.key3Not = new List<string>();
+    this.key3AndFrontWild = new List<bool>();
+    this.key3AndBackWild = new List<bool>();
+    this.key3NotFrontWild = new List<bool>();
+    this.key3NotBackWild = new List<bool>();
+    this.result = "";
+  }
+
+
+
+
+QualityAnalysis Class
+========================
+
+
+QualityAnalysis
+----------------
+
+Description
+^^^^^^^^^^^^
+Packaging object for both settings used and results from an analysis of data records.
+
+Members
+^^^^^^^^^^^^
+
+* title: name for this object usually the name of the job run to make it
+* status: system assigned value which will be notok:reason if there is an error
+* numRecs: integer count of records used
+* numRecsCur: integer count of records used as mutable in threads
+* maxuv: maximum number of unique values to collect per field with remainder into category '-other-'. Default=50
+* isCaseSens: bool whether values are case sensitive. Default=False
+* isQuoted: bool whether source records can have quoted values. Default= False
+* hasHeader: bool whether source records have header line as first non-empty, non-comment line. Default= True
+* extractFields: bool whether fields should be extracted from header line instead of supplied in 'fields' list. Default= False
+* debug: level as '', info, trace
+* delim: name of delimiter to parse source records (comma, tab, pipe, colon, caret)
+* delimChar: character for delim used in code
+* fields: list of Field objects which have attributes for title, datatype, and formatting
+* fieldNamesLower: list of field titles in lower case
+* hashFields: dictionary key= field title lower case with value= list index
+* fieldDatatypeDist: list of field datatype distributions correlated to fields list. Each field has counts for detected datatypes (int, real, bool, date, string, empty).
+* fieldUniqVals: list correlated to fields. Each entry is a descending sorted list of 
+        uniquevalue tuples with each tuple (uv,count) where uv= string of unique value 
+        and count= integer number of instances. A maximum number of values are kept (default=50) with additional 
+        grouped into -other-
+* hashFieldUVs: working hash map per field of unique values
+* fieldQuality: list correlated to fields. String of an integer 0-100 as a quality metric computed from discovered field characteristics
+* fieldsOut: list of Field objects which have attributes for title, datatype, and formatting used in output records
+* fieldOutNamesLower: list of output field titles in lower case
+* hashFieldsOut: dictionary key= output field title lower case with value= list index
+* fieldOutDatatypeDist: list of output field datatype distributions correlated to fields list. Each field has counts for detected datatypes (int, real, bool, date, string, empty).
+* fieldOutUniqVals: list correlated to output fields. Each entry is a descending sorted list of 
+        uniquevalue tuples with each tuple (uv,count) where uv= string of unique value 
+        and count= integer number of instances. A maximum number of values are kept (default=50) with additional 
+        grouped into -other-
+* hashOutFieldUVs: working hash map per output field of unique values
+* fieldOutQuality: list correlated to output fields. String of an integer 0-100 as a quality metric computed from discovered field characteristics
+* recSizeDist: dictionary of record sizes (byte lengths) to counts. Max 100 sizes.
+* recParseErrs: dictionary of parsing errors (number fields after parsing relative to defined fields) by type as small1 (1 too few fields), small2 (2 or more missing fields), big (1 or more too many fields).
+* recParseErrsExamples: dictionary of parsing errors example records by type as small1 (1 too few fields), small2 (2 or more missing fields), big (1 or more too many fields).
+* recParseDist: dictionary of number of parsed fields to count
+* specCharDist: dictionary of special characters and their counts. 
+        Special characters are (some use aliases as dictionary keys): 
+        tab, !, doublequote, #, <, >, [, ], backslash, ^, {, }, ~, ascii_[0-31, 127-255], 
+        unicode_[256-65535]
+* specCharDistField: list correlated to fields[] with each being a dictionary 
+        of special characters to their counts for that specific field. Same organization 
+        as in spec_char_dist
+* specCharExamples: list of examples of discovered special characters. Each entry is 
+        (nline)[sp char list]record with nline being the number line read from source data 
+        (excluding empty and comments lines) and is therefore 1 larger than the line's index 
+        in the list (i.e. nline is 1 based while lists are 0-based).
+        [sp char list] comma delimited string of each special character 
+        found in the record such as [spchar1,spchar2]lineIn. A single field can have  
+        more than 1 special character. For example, input line (pipe delimited) as record line 
+        #5 (although actual file line number could be larger due to comments and empty lines) and data =
+        = !dog|{House}|123^456 will be stored as an example as 
+        (5)[!,{,},^]!dog|{House}|123^456
+* coValues: list of dictionaries of field combinations to collect unique value information. Each entry is for one covalue with keys- field1, field2, field3 (optional), number (number of fields either 2 or 3), title = field1,field2,field3
+* coValueUniqVals: correlated to covalues array. Similar to field unique values.
+* hashCoValueUVs: working hash map per coValue of unique values
+* errStats: dictionary of properties and counts. 
+      * numrecsErr: number records with any kind of error
+      * numrecsErrDatatype: number records with datatype error
+      * numrecsErrFmt: number records with format error
+* fieldsErrDatatypeCount: correlated to fields. List of number datatype errors per field
+* fieldsErrDatatypeReasons: correlated to fields. dictionary of datatype error reasons to count per field
+* fieldsErrFmtCount: correlated to fields. List of number format errors per field
+* fieldsErrFmtReasons: correlated to fields. dictionary of format error reasons to count per field
+* errDatatypeExamples: list of delimited fields within records with datatype errors. 
+        Syntax is: (nline)[fieldinfo]|[fieldinfo].....  where [fieldinfo] is 
+        fieldTitle:reason:fieldValue  . fieldValue will be set to -empty- if the actual value is 
+        empty. nline is the number line read from source data 
+        (excluding empty and comments lines) and is therefore 1 larger than the line's index 
+        in the list (i.e. nline is 1 based while lists are 0-based).
+* errFmtExamples: list of delimited fields within records with format errors. 
+        Syntax is: (nline)[fieldinfo]|[fieldinfo].....  where [fieldinfo] is 
+        fieldTitle:reason:fieldValue  . fieldValue will be set to -empty- if the actual value is 
+        empty. nline is the number line read from source data 
+        (excluding empty and comments lines) and is therefore 1 larger than the line's index 
+        in the list (i.e. nline is 1 based while lists are 0-based).
+* logMsgs: list of messages
+
+
+
+Constructor
+^^^^^^^^^^^^
+
+.. sourcecode:: 
+
+  public QualityAnalysis() {
+    this.title = "";
+    this.status = "";
+    this.delim = "comma";
+    this.delimChar = ",";
+    this.maxuv = 50;
+    this.isCaseSens = false;
+    this.isQuoted = false;
+    this.hasHeader = true;
+    this.extractFields = false;
+    this.fields = new();
+    this.fieldNamesLower = new();
+    this.hashFields = new();
+    this.fieldDatatypeDist=new();
+    this.fieldUniqVals=new();
+    this.hashFieldUVs = new();
+    this.fieldQuality = new();
+    this.fieldsOut = new();
+    this.fieldOutNamesLower = new();
+    this.hashFieldsOut = new();
+    this.fieldOutDatatypeDist = new();
+    this.fieldOutUniqVals = new();
+    this.hashOutFieldUVs = new();
+    this.fieldOutQuality = new();
+    this.recSizeDist = new();
+    this.recParseDist = new();
+    this.recParseErrs=new(){
+      {"small1",0 },
+      {"small2",0 },
+      {"big",0 }
+    };
+    this.recParseErrsExamples = new(){
+      {"small1", new List<string>() },
+      {"small2",new List<string>() },
+      {"big",new List<string>() }
+    };
+    this.coValues = new();
+    this.coValueUniqVals = new();
+    this.errStats = new(){
+      { "numrecserr", 0 },
+      { "numrecserrdatatype", 0 },
+      { "numrecserrfmt", 0 },
+    };
+    this.fieldsErrDatatypeCount = new();
+    this.fieldsErrDatatypeReasons = new();
+    this.fieldsErrFmtCount = new();
+    this.fieldsErrFmtReasons = new();
+    this.numRecs = 0;
+    this.numRecsCur = 0;
+    this.specCharDist = new();
+    this.specCharDistField = new();
+    this.specCharExamples = new();
+    this.errDatatypeExamples = new();
+    this.errFmtExamples = new();
+    this.hashCoValueUVs = new();
+    this.logMsgs = new();
+    this.debug = "";
+  }
+
+
+
+Methods
+^^^^^^^^^^^^
+
+**public List<string> GetJSON(bool addLF)**
+
+Constructs array of JSON strings for components of this object. 
+
+* addLf: if True then line feed added at end of each entry. This is unnecessary if returned array is printed as line per entry. 
+* Returns string list with first entry starting with 'notok:'' if error
+
+
+
+Field Class
+=============
+
+Field
+----------
+
+Description
+^^^^^^^^^^^^
+
+Field Object containing attributes for title, datatype, formatting
+
+Members
+^^^^^^^^^^^^
+
+* title: field's title
+* datatype: if used specifies datatype (int, real, date, bool, string)
+* fmt_strcase: for datatype=string, optionally specifies a value is upper or lower case. (upper,lower,"") 
+* fmt_strlen: for datatype=string, optionally specifies a required integer length (1-n). If value \< 1 then this is ignored.
+* fmt_strcut: for datatype= string when strlen\>0 and value length larger then chars removed from either front or back. Default is back (front,back)
+* fmt_strpad: for datatype= string when strlen\>0 and value length shorter then chars added to either front or back. Default is back (front,back)
+* fmt_strpadchar: for datatype= string when padding uses this character. Must be 1 character or use one of names (space, fslash, bslash, tab). Default is _
+* fmt_decimal: for datatype=real, optionally specifies a required integer number of decimal places (0-n)
+* fmt_date: for datatype=date, optionally specifies a required date format as one of
+    - mmddyy, mmdyy, mdyy, mmddyyyy, mmdyyyy, mdyyyy, 
+    - ddmmyy, ddmyy, dmyy, ddmmyyyy, ddmyyyy, dmyyyy,
+    - yymmdd, yymmd, yymd, yyyymmdd, yyyymmd, yyyymd, 
+    - yyyyddd (3 digit day number within year), 
+    - yyyyMMMdd, ddMMMyyyy (MMM = 3 letter month title like 'JAN'),
+    - 'MONTHdd,yyyy', 'ddMONTH,yyyy', yyyyMONTHdd, ddMONTHyyyy, yyMONTHdd, ddMONTHyy (MONTH full title),
+    - \*dmmyyyy, mm\*dyyyy, \*mddyyyy, dd\*myyyy (\*= can be 1 or 2 characters)
+* mapto: when using this Field as an output (i.e. target) field then this specifies if it is 
+    mapped to a source field which enables both renaming source fields and adding enrichment fields
+* parseErrorAction: Handle empty field values due to parsing errors. Used in Refining Data as: 
+    - value to assign like 'NA' to denote parse error
+    - set to '-ignore-' which causes the field value to remain as empty since 
+        no transform nor normalize will be done
+    - set to either '-use-' or '' which causes the empty field value to continue to 
+        transform and normalization routines. Note the transform function ifEmpty and ifNotEmpty can be used to set field specific values.
+
+
+Constructor
+^^^^^^^^^^^^
+
+.. sourcecode:: 
+
+  public Field() {
+    this.title = "";
+    this.datatype = "";
+    this.fmt_strcase = "";
+    this.fmt_strlen = -1;
+    this.fmt_strcut = "back";
+    this.fmt_strpad = "back";
+    this.fmt_strpadchar = "_";
+    this.fmt_decimal = -1;
+    this.fmt_date = "";
+    this.mapto = "";
+    this.parseErrorAction = "";
+  }
+
+
+
+Methods
+^^^^^^^^^^^^
+
+**GetJSON()**
+
+Constructs JSON string for this object. 
+
+
+
+CoValue
+----------
+
+Description
+^^^^^^^^^^^^
+
+CoValue object to define 2 or 3 fields for joint value analysis
+
+Members
+^^^^^^^^^^^^
+
+* title: title which is concantenation of field titles using _ to join them
+* field1: required first field title
+* field2: required second field title
+* field3: optional third field title
+* field1_index: first field's array index assigned by function
+* field2_index: second field's array index assigned by function
+* field3_index: third field's array index assigned by function
+* numfields: number of fields to use either 2 or 3
+
+
+Constructor
+^^^^^^^^^^^^
+
+.. sourcecode:: 
+
+  public CoValue(){
+    this.title = "";
+    this.field1 = "";
+    this.field2 = "";
+    this.field3 = "";
+    this.field1_index = -1;
+    this.field2_index = -1;
+    this.field3_index = -1;
+    this.numfields = 0;
+  }
+
+
+
+Methods
+^^^^^^^^^^^^
+
+**GetJSON()**
+
+Constructs JSON string for this object. 
+

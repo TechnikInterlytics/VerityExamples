@@ -1,0 +1,5 @@
+=========
+Functions
+=========
+
+See `API <_static/html/index.html>`_
