@@ -18,6 +18,13 @@ normalize data across sources, and enrich data for AI/ML, Data Science, scenario
 
 |
 
+Guides
+--------------
+
+See the folders for the respective library guides. In each, open index.html in a browser.
+
+|
+
 Example Data Files
 -------------------------
 
