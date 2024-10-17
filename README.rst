@@ -33,7 +33,7 @@ type of errors that the libraries handle and which are usually beyond the functi
 These source files can be used to compare different tools and coding methods to identify and characterize errors, 
 anomalies, and actual versus documented data syntax and semantics.
 
-**THERE IS NO WARRANTY OR GUARANTEE, IMPLICT OR EXPLICIT, THAT THE DATA IS ACCURATE, USABLE IN YOUR 
+**THERE IS NO WARRANTY OR GUARANTEE, IMPLICIT OR EXPLICIT, THAT THE DATA IS ACCURATE, USABLE IN YOUR 
 DATA SYSTEMS, OR FREE FROM HARMFUL EFFECTS WHETHER UNINTENTIONAL OR INTENTIONAL. USE AT YOUR OWN DISCRETION.**
 
 |
